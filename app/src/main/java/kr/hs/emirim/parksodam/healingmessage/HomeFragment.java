@@ -80,8 +80,12 @@ public class HomeFragment extends BaseFragment {
         if (context instanceof MessageFragment.OnFragmentInteractionListener) {
             mListener = (MessageFragment.OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            try {
+                throw new RuntimeException(context.toString()
+                        + " must implement OnFragmentInteractionListener");
+            }catch(Exception e){
+
+            }
         }
     }
 
