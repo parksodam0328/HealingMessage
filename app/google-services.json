@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "307009565801",
+    "firebase_url": "https://healingmessage-2b131.firebaseio.com",
+    "project_id": "healingmessage-2b131",
+    "storage_bucket": "healingmessage-2b131.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307009565801:android:5ac8d7c13726099c",
+        "android_client_info": {
+          "package_name": "kr.hs.emirim.parksodam.healingmessage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307009565801-tf65d6bpbnch4tv1r19p4kc08k4l79h7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.hs.emirim.parksodam.healingmessage",
+            "certificate_hash": "297aa0b2497df55f5e1110defc7a9536b57825df"
+          }
+        },
+        {
+          "client_id": "307009565801-qo4cd3a8u26f2td3lbmo8igr8hfd0ll7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDccxZteYEigsPBgIivB07sv61mKAJ6S7k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307009565801-qo4cd3a8u26f2td3lbmo8igr8hfd0ll7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

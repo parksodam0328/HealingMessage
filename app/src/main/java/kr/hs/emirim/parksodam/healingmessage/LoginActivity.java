@@ -1,10 +1,29 @@
 package kr.hs.emirim.parksodam.healingmessage;
 
+import android.content.Intent;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import java.util.Iterator;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -14,11 +33,13 @@ public class LoginActivity extends AppCompatActivity {
             "넌 꼭 성공할거야", "지금 안된 건 더 좋은 일이 있을거라는거야", "괜찮아", "고개숙이지마, 똑바로 정면으로 바라봐", "우리는 행복하기 위해 세상에 왔어 -류시화",
             "힘들땐 모두 울어서 떠내려보내는 것도 좋아", "내가 너의 이야기를 들어줄게", "걱정마", "너의 나무는 아직 자라는 중이야", "수고했어! 고마워!",
             "힘내 너는 아름다우니까"};
-
+    private DatabaseReference databaseReference;
     int word_random;
     TextView word_text;
     Handler handler = new Handler();
-
+    EditText checkId;
+    Button login;
+    Button register;
     String TAG = "Handler";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +47,44 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         word_text = (TextView) findViewById(R.id.word_text);
         word_text.setText(word[word_random]);
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        checkId = (EditText) findViewById(R.id.checkId);
+
+        login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 클릭시
+
+            @Override
+            public void onClick(View v) {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
+                        while (child.hasNext()) {
+                            if (child.next().getKey().equals(checkId.getText().toString())) {
+                                Toast.makeText(getApplicationContext(), "로그인되었습니다.", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        }
+                        Toast.makeText(getApplicationContext(), "존재하지 않는 아이디입니다.", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+
+                });
+            }
+        });
+
+        register = (Button)findViewById(R.id.register);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
+                startActivity(intent);
+              }
+         });
     }
 
     @Override
