@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (child.next().getKey().equals(checkId.getText().toString())) {
                                 Toast.makeText(getApplicationContext(), "로그인되었습니다.", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(),BarActivity.class);
+                                startActivity(intent);
                                 return;
                             }
                         }

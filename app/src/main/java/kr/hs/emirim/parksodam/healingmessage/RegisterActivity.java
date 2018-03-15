@@ -64,7 +64,6 @@ import java.util.Iterator;
 
 
             databaseReference = FirebaseDatabase.getInstance().getReference("users");
-            editEmail = (EditText) findViewById(R.id.email);
             Button check = (Button) findViewById(R.id.submit);
             check.setOnClickListener(new View.OnClickListener() {
                 @Override
