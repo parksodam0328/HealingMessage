@@ -15,11 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-
-        <activity android:name=".MainActivity" />
-=======
->>>>>>> master
         <activity android:name=".BarActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".RegisterActivity"></activity>
