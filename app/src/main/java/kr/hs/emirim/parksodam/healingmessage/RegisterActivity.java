@@ -25,6 +25,7 @@ import java.util.Iterator;
         private ValueEventListener checkRegister = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                editEmail= (EditText) findViewById(R.id.email);
                 Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
                 while (child.hasNext()) {
                     if (editEmail.getText().toString().equals(child.next().getKey())) {
