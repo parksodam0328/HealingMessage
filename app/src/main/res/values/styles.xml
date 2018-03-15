@@ -10,7 +10,7 @@
     </style>
 
     <style name="DeleteAlarmDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">#000076</item>
+        <item name="colorAccent">#666666</item>
     </style>
 
     <style name="CustomTabWidgetText"

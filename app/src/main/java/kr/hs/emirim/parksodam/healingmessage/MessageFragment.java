@@ -21,30 +21,6 @@ public class MessageFragment extends BaseFragment {
     }
 
 
-<<<<<<< HEAD
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            try {
-                throw new RuntimeException(context.toString()
-                        + " must implement OnFragmentInteractionListener");
-            }catch(Exception e){
-
-            }
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-=======
->>>>>>> master
-
     @Override
     public String getTitle() {
         return "메세지";

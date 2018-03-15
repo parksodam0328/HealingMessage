@@ -19,17 +19,19 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Date;
 import java.util.Iterator;
 
-    public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
         private DatabaseReference databaseReference;
         private EditText editEmail;
+        private EditText editPw;
         private ValueEventListener checkRegister = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 editEmail= (EditText) findViewById(R.id.email);
+                editPw= (EditText) findViewById(R.id.pw);
                 Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
                 while (child.hasNext()) {
-                    if (editEmail.getText().toString().equals(child.next().getKey())) {
-                        Toast.makeText(getApplicationContext(), "존재하는 아이디 입니다.", Toast.LENGTH_LONG).show();
+                    if (editEmail.getText().toString().equals(child.next().getKey())&&editPw.getText().toString().equals(child.next().getKey())) {
+                        Toast.makeText(getApplicationContext(), "이미 존재하는 회원 정보 입니다.", Toast.LENGTH_LONG).show();
                         databaseReference.removeEventListener(this);
                         return;
                     }
@@ -76,7 +78,7 @@ import java.util.Iterator;
 
         void makeNewId() {
             Date date = new Date(System.currentTimeMillis());
-            databaseReference.child(editEmail.getText().toString()).child("가입일").setValue(date.toString());
+            databaseReference.child(editEmail.getText().toString()).child(editPw.getText().toString()).child("가입일").setValue(date.toString());
             Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
         }
 

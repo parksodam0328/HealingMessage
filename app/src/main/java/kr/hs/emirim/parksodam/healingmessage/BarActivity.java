@@ -1,6 +1,5 @@
 package kr.hs.emirim.parksodam.healingmessage;
 
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -42,7 +41,7 @@ public class BarActivity extends AppCompatActivity {
 
         for (int i = 0; i < layout.getTabCount(); i++) {
             if(i==0) {
-                layout.getTabAt(i).setText("홈").setIcon(R.drawable.home);
+                layout.getTabAt(i).setText("홈").setIcon(R.drawable.home_click);
                 getSupportActionBar().setTitle("힐링쪽지");
             }
             else if(i==1) {
@@ -94,24 +93,24 @@ public class BarActivity extends AppCompatActivity {
 
                 if(tab.getPosition()==0) {
                     myTitleText.setText("홈");
-                    tab.setIcon(R.drawable.home);
-                    layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#f38722"));
+                    tab.setIcon(R.drawable.home_click);
+                    layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000076"));
                 }
 
                 else if(tab.getPosition()==1) {
                     myTitleText.setText("메세지");
-                    tab.setIcon(R.drawable.message);
-                    layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#f38722"));
+                    tab.setIcon(R.drawable.message_click);
+                    layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000076"));
                 }
                 else if(tab.getPosition()==2) {
                     myTitleText.setText("내정보");
-                    tab.setIcon(R.drawable.profile);
-                    layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#f38722"));
+                    tab.setIcon(R.drawable.profile_click);
+                    layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000076"));
                 }
                 else{
                     myTitleText.setText("도움말");
-                    tab.setIcon(R.drawable.settings);
-                    layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#f38722"));
+                    tab.setIcon(R.drawable.settings_click);
+                    layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000076"));
                 }
             }
 
@@ -120,22 +119,22 @@ public class BarActivity extends AppCompatActivity {
                 if(tab.getPosition()==0) {
                     myTitleText.setText("홈");
                     tab.setIcon(R.drawable.home);
-                    layout.setTabTextColors(Color.parseColor("#f38722"), Color.parseColor("#666666"));
+                    layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#666666"));
                 }
                 else if(tab.getPosition()==1) {
                     myTitleText.setText("메세지");
                     tab.setIcon(R.drawable.message);
-                    layout.setTabTextColors(Color.parseColor("#f38722"), Color.parseColor("#666666"));
+                    layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#666666"));
                 }
                 else if(tab.getPosition()==2) {
                     myTitleText.setText("내정보");
                     tab.setIcon(R.drawable.profile);
-                    layout.setTabTextColors(Color.parseColor("#f38722"), Color.parseColor("#666666"));
+                    layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#666666"));
                 }
                 else{
                     myTitleText.setText("도움말");
                     tab.setIcon(R.drawable.settings);
-                    layout.setTabTextColors(Color.parseColor("#f38722"), Color.parseColor("#666666"));
+                    layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#666666"));
                 }
             }
 

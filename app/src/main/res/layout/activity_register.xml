@@ -45,7 +45,7 @@
     </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="330dp"
             android:gravity="center"
             android:orientation="vertical">
             <LinearLayout
@@ -56,7 +56,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="아이디"
+                    android:text="이메일"
                     android:textSize="20sp"/>
 
                 <EditText
@@ -64,15 +64,32 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/email"
                     android:gravity="center"
-                    android:hint="고유아이디를 입력해주세요."
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="#356a4c"
+                    android:textColor="#356a4c"/>
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="비밀번호"
+                    android:layout_marginTop="10dp"
+                android:textSize="20sp"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pw"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
                     android:textColorHint="#356a4c"
                     android:textColor="#356a4c"/>
             </LinearLayout>
+            </LinearLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/submit"
-                android:text="확인"/>
-        </LinearLayout>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/submit"
+        android:layout_gravity="center"
+        android:text="확인"/>
     </LinearLayout>
