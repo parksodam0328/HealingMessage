@@ -1,13 +1,11 @@
 package kr.hs.emirim.parksodam.healingmessage;
 
 import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import java.util.logging.LogRecord;
 
 public class LoginActivity extends AppCompatActivity {
     String[] word = {"삶이 있는 한 희망은 있어 -키케로", "잘했어", "오늘 하루도 수고했어", "힘내!", "오늘은 내일을 위한 첫걸음",
@@ -28,10 +26,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         word_text = (TextView) findViewById(R.id.word_text);
         word_text.setText(word[word_random]);
-
-        //TextChangeThread thread = new TextChangeThread();
-        // thread.setDaemon(true);
-        //thread.start();
     }
 
     @Override
