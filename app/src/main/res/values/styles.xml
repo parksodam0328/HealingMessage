@@ -6,11 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">#ff6f00</item>
+        <item name="android:statusBarColor">#000055</item>
     </style>
 
     <style name="DeleteAlarmDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">#f38722</item>
+        <item name="colorAccent">#000076</item>
     </style>
 
     <style name="CustomTabWidgetText"

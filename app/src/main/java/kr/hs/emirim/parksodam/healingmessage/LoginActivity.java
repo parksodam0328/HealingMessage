@@ -1,13 +1,29 @@
 package kr.hs.emirim.parksodam.healingmessage;
 
 import android.content.Intent;
+<<<<<<< HEAD
+=======
+import android.os.Bundle;
+>>>>>>> master
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+<<<<<<< HEAD
+=======
+import android.widget.EditText;
+>>>>>>> master
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Iterator;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -16,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
             "넌 말이야 네 생각보다 괜찮은 사람이야", "누가 뭐라하던 너는 너야", "무엇보다 중요한건 네 자신을 사랑하는 거야",
             "넌 꼭 성공할거야", "지금 안된 건 더 좋은 일이 있을거라는거야", "괜찮아", "고개숙이지마, 똑바로 정면으로 바라봐", "우리는 행복하기 위해 세상에 왔어 -류시화",
             "힘들땐 모두 울어서 떠내려보내는 것도 좋아", "내가 너의 이야기를 들어줄게", "걱정마", "너의 나무는 아직 자라는 중이야", "수고했어! 고마워!",
+<<<<<<< HEAD
             "힘내 너는 아름다우니까", "불안해 한다는 건 가능성이 있기 때문에 불안한거야 -민주리선생님", "넌 정말 소중한 존재야", "네가 가고자 하는 길은 꽃길일거야",
             "꽃길만 걷게 해 줄게요 -김세정", "너는 멋진 존재야", "난 용감해, 난 당당해, 난 내가 자랑스러워 이게 나야 -this is me", "내 앞에선 다 괜찮아 울어도 돼",
             "고마워", "사랑해", "너는 특별해"};
@@ -25,6 +42,16 @@ public class LoginActivity extends AppCompatActivity {
     Handler handler = new Handler();
     int flag;
 
+=======
+            "힘내 너는 아름다우니까"};
+    private DatabaseReference databaseReference;
+    int word_random;
+    TextView word_text;
+    Handler handler = new Handler();
+    EditText checkId;
+    Button login;
+    Button register;
+>>>>>>> master
     String TAG = "Handler";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         word_text = (TextView) findViewById(R.id.word_text);
         word_text.setText(word[word_random]);
+<<<<<<< HEAD
 
 //        Button btn_login = (Button)findViewById(R.id.btn_login);
 //        btn_login.setOnClickListener(new Button.OnClickListener() {
@@ -43,6 +71,48 @@ public class LoginActivity extends AppCompatActivity {
 //            }
 //        }) ;
 
+=======
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        checkId = (EditText) findViewById(R.id.checkId);
+
+        login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 클릭시
+
+            @Override
+            public void onClick(View v) {
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
+                        while (child.hasNext()) {
+                            if (child.next().getKey().equals(checkId.getText().toString())) {
+                                Toast.makeText(getApplicationContext(), "로그인되었습니다.", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(getApplicationContext(),BarActivity.class);
+                                startActivity(intent);
+                                return;
+                            }
+                        }
+                        Toast.makeText(getApplicationContext(), "존재하지 않는 아이디입니다.", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+
+                });
+            }
+        });
+
+        register = (Button)findViewById(R.id.register);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
+                startActivity(intent);
+              }
+         });
+>>>>>>> master
     }
 
     @Override
@@ -61,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void run() {
 
                                 word_text.setText(word[word_random]);
-                                Log.e("dkssud", word[word_random]);
+                                Log.e(TAG, word[word_random]);
                                 //word_text.setText("");
                             }
                         });

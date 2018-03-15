@@ -12,19 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentTop="true"
-        android:background="#ffffff"
+        android:background="#000076"
         android:minHeight="48dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignBottom="@+id/my_toolbar"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="12dp" />
 
         <TextView
             android:id="@+id/title"
@@ -34,8 +25,8 @@
             android:text=""
             android:textSize="13sp"
             android:textColor="@color/colorPrimary"
-            android:layout_marginLeft="23dp"
-            android:layout_marginStart="23dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_above="@+id/vp_main"
             android:layout_toRightOf="@+id/logo"
             android:layout_toEndOf="@+id/logo" />
@@ -48,7 +39,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@android:color/white"
-        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabSelectedTextColor="#000076"
         app:tabTextColor="#666666"
         app:tabMode="fixed"
         app:tabGravity="fill"
