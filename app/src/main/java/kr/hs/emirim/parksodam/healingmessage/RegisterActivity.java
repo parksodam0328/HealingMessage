@@ -2,9 +2,11 @@ package kr.hs.emirim.parksodam.healingmessage;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Iterator;
 
     public class RegisterActivity extends AppCompatActivity {
@@ -45,6 +47,22 @@ import java.util.Iterator;
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_register);
+
+            //초기화
+            Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+
+            //툴바 설정
+            setSupportActionBar(toolbar); //툴바를 액션바와 같게 만들어 준다.
+            ImageView backimg = (ImageView) findViewById(R.id.back_icon);
+            backimg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
             databaseReference = FirebaseDatabase.getInstance().getReference("users");
             editEmail = (EditText) findViewById(R.id.email);
             Button check = (Button) findViewById(R.id.submit);

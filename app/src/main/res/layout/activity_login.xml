@@ -32,7 +32,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="안녕"
         android:ems="10"
         android:id="@+id/checkId"
         android:layout_gravity="center"
