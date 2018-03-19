@@ -56,13 +56,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="이메일"
+                    android:text="아이디"
                     android:textSize="20sp"/>
 
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/email"
+                    android:id="@+id/id"
                     android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:textColorHint="#356a4c"
