@@ -1,3 +1,4 @@
+
 package kr.hs.emirim.parksodam.healingmessage;
 
 import android.content.Intent;
@@ -140,3 +141,4 @@ public class LoginActivity extends AppCompatActivity {
 
 
 }
+

@@ -1,11 +1,18 @@
 package kr.hs.emirim.parksodam.healingmessage;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +22,11 @@ import java.util.List;
  */
 
 public class SearchActivity extends AppCompatActivity {
+
+    ImageButton emo_btn1;
+    ImageButton emo_btn2;
+    ImageButton emo_btn3;
+    ImageButton emo_btn4;
     private List<String> list;          // 데이터를 넣은 리스트변수
     private ListView listView;          // 검색을 보여줄 리스트변수
     private EditText editSearch;        // 검색어를 입력할 Input 창
@@ -26,7 +38,41 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        editSearch = (EditText) findViewById(R.id.edit_search);
+        final ImageButton img_btn = (ImageButton)findViewById(R.id.search_btn);
+        emo_btn1 = (ImageButton)findViewById(R.id.emo_btn1);
+        emo_btn2 = (ImageButton)findViewById(R.id.emo_btn2);
+        emo_btn3 = (ImageButton)findViewById(R.id.emo_btn3);
+        emo_btn4 = (ImageButton)findViewById(R.id.emo_btn4);
+
+        emo_btn1.setVisibility(View.INVISIBLE);
+        emo_btn2.setVisibility(View.INVISIBLE);
+        emo_btn3.setVisibility(View.INVISIBLE);
+        emo_btn4.setVisibility(View.INVISIBLE);
+
+        img_btn.setOnClickListener(new View.OnClickListener() {
+            int count = 1;
+            @Override
+            public void onClick(View v) {
+                count++;
+                if(count % 2 == 0){
+                    emo_btn1.setVisibility(View.VISIBLE);
+                    emo_btn2.setVisibility(View.VISIBLE);
+                    emo_btn3.setVisibility(View.VISIBLE);
+                    emo_btn4.setVisibility(View.VISIBLE);
+                    count = 0;
+                }
+                else{
+                    emo_btn1.setVisibility(View.INVISIBLE);
+                    emo_btn2.setVisibility(View.INVISIBLE);
+                    emo_btn3.setVisibility(View.INVISIBLE);
+                    emo_btn4.setVisibility(View.INVISIBLE);
+                }
+                if (count != 0) {
+                    list.addAll(arraylist);
+                }
+            }
+        });
+
         listView = (ListView) findViewById(R.id.listView);
 
         // 리스트를 생성한다.
@@ -45,68 +91,79 @@ public class SearchActivity extends AppCompatActivity {
         // 리스트뷰에 아답터를 연결한다.
         listView.setAdapter(adapter);
 
-        // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
-        editSearch.addTextChangedListener(new TextWatcher() {
+        emo_btn1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onClick(View v) {
+                list.clear();
+                for(int i = 0;i < arraylist.size(); i++) {
+                    //happy
+                    if (arraylist.get(i).toLowerCase().equals("happy")) {
+                        // 검색된 데이터를 리스트에 추가한다
+                        adapter.notifyDataSetChanged();
+                        list.add(arraylist.get(i));
+                    }
+                }
             }
+        });
 
+        emo_btn2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+            public void onClick(View v) {
+                list.clear();
+                for(int i = 0;i < arraylist.size(); i++) {
+                    //happy
+                    if (arraylist.get(i).toLowerCase().equals("sad")) {
+                        // 검색된 데이터를 리스트에 추가한다
+                        adapter.notifyDataSetChanged();
+                        list.add(arraylist.get(i));
+                    }
+                }
             }
+        });
 
+        emo_btn3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void afterTextChanged(Editable editable) {
-                // input창에 문자를 입력할때마다 호출된다.
-                // search 메소드를 호출한다.
-                String text = editSearch.getText().toString();
-                search(text);
+            public void onClick(View v) {
+                list.clear();
+                for(int i = 0;i < arraylist.size(); i++) {
+                    //happy
+                    if (arraylist.get(i).toLowerCase().equals("soso")) {
+                        // 검색된 데이터를 리스트에 추가한다
+                        adapter.notifyDataSetChanged();
+                        list.add(arraylist.get(i));
+                    }
+                }
+            }
+        });
+
+        emo_btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.clear();
+                for(int i = 0;i < arraylist.size(); i++) {
+                    //happy
+                    if (arraylist.get(i).toLowerCase().equals("depressed")) {
+                        // 검색된 데이터를 리스트에 추가한다
+                        adapter.notifyDataSetChanged();
+                        list.add(arraylist.get(i));
+                    }
+                }
             }
         });
     }
-    // 검색을 수행하는 메소드
-    public void search(String charText) {
-
-        // 문자 입력시마다 리스트를 지우고 새로 뿌려준다.
-        list.clear();
-
-        // 문자 입력이 없을때는 모든 데이터를 보여준다.
-        if (charText.length() == 0) {
-            list.addAll(arraylist);
-        }
-        // 문자 입력을 할때..
-        else
-        {
-            // 리스트의 모든 데이터를 검색한다.
-            for(int i = 0;i < arraylist.size(); i++)
-            {
-                // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
-                if (arraylist.get(i).toLowerCase().contains(charText))
-                {
-                    // 검색된 데이터를 리스트에 추가한다.
-                    list.add(arraylist.get(i));
-                }
-            }
-        }
-        // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
-        adapter.notifyDataSetChanged();
-    }
-
     //검색에 사용될 데이터를 리스트에 추가한다.
     //test
     private void settingList(){
 
         list.add("happy");
+        list.add("happy");
+        list.add("sad");
         list.add("sad");
         list.add("soso");
-        list.add("happy?");
-        list.add("sad??");
-        list.add("soso??");
-        list.add("haappapy");
-        list.add("saaassd");
-        list.add("sssosoosoos");
-        list.add("happyyyy");
+        list.add("soso");
+        list.add("depressed");
+        list.add("depressed");
+        list.add("depressed");
 //        list.add("슬플때");
 //        list.add("행복할때");
 //        list.add("우울할때");
@@ -114,3 +171,4 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 }
+
