@@ -60,7 +60,7 @@ public class SearchAdapter extends BaseAdapter{
             viewHolder = new ViewHolder();
 
             viewHolder.name = (TextView)convertView.findViewById(R.id.list_text_feel);
-            viewHolder.image = (ImageView)convertView.findViewById(R.id.list_img);
+            viewHolder.image = (ImageView)convertView.findViewById(R.id.list_image);
 
             convertView.setTag(viewHolder);
         }else{
