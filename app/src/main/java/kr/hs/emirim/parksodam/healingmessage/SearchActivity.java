@@ -49,10 +49,19 @@ public class SearchActivity extends AppCompatActivity {
         emo_btn3.setVisibility(View.INVISIBLE);
         emo_btn4.setVisibility(View.INVISIBLE);
 
+
+
         img_btn.setOnClickListener(new View.OnClickListener() {
             int count = 1;
             @Override
             public void onClick(View v) {
+                list.clear();
+                for(int i = 0;i < arraylist.size(); i++) {
+                        // 검색된 데이터를 리스트에 추가한다
+                        adapter.notifyDataSetChanged();
+                        list.add(arraylist.get(i));
+                }
+
                 count++;
                 if(count % 2 == 0){
                     emo_btn1.setVisibility(View.VISIBLE);
@@ -67,9 +76,7 @@ public class SearchActivity extends AppCompatActivity {
                     emo_btn3.setVisibility(View.INVISIBLE);
                     emo_btn4.setVisibility(View.INVISIBLE);
                 }
-                if (count != 0) {
-                    list.addAll(arraylist);
-                }
+
             }
         });
 
@@ -161,9 +168,19 @@ public class SearchActivity extends AppCompatActivity {
         list.add("sad");
         list.add("soso");
         list.add("soso");
+        list.add("sad");
+        list.add("soso");
+        list.add("soso");
+        list.add("sad");
         list.add("depressed");
         list.add("depressed");
         list.add("depressed");
+        list.add("happy");
+        list.add("happy");
+        list.add("depressed");
+        list.add("depressed");
+        list.add("depressed");
+
 //        list.add("슬플때");
 //        list.add("행복할때");
 //        list.add("우울할때");
