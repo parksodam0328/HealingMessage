@@ -8,18 +8,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
         private DatabaseReference mDatabase;
         private EditText editId;
         private EditText editPw;
+        String TAG = "Handler";
 
 
-
-        @Override
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_register);
@@ -42,14 +45,35 @@ public class RegisterActivity extends AppCompatActivity {
 
             mDatabase = FirebaseDatabase.getInstance().getReference();
             Button check = (Button) findViewById(R.id.submit);
-            check.setOnClickListener(new View.OnClickListener() {
+            check.setOnClickListener(new View.OnClickListener() {   //가입버튼누르면
                 @Override
                 public void onClick(View v) {
-                    writeNewUser(editId.getText().toString(), editPw.getText().toString());
-                    //mDatabase.child("users").child().setValue(editPw);
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
-
+                    if(editId.getText().toString().length()>8) {    //아이디 길이 판별
+                        Toast.makeText(RegisterActivity.this, "아이디 길이는 8자 이내입니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else {
+                        if(editPw.getText().toString().length()>16){    //비밀번호 길이 판별
+                            Toast.makeText(RegisterActivity.this, "비밀번호 길이는 16자 이내입니다.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }else {
+                            if (!Pattern.matches("^[a-zA-Z][a-zA-Z0-9]*$", editId.getText().toString())) {  //아이디 형식 판별  //숫자가 아이디의 첫문자가 되면 안됌
+                                Toast.makeText(RegisterActivity.this, "아이디 형식을 지켜주세요.", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else {
+                                if (!Pattern.matches("^[a-zA-Z][a-zA-Z0-9]*$", editPw.getText().toString())) {  //비밀번호 형식 판별  //숫자가 비밀번호의 첫문자가 되면 안됌
+                                    Toast.makeText(RegisterActivity.this, "비밀번호 형식을 지켜주세요.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else {
+                                    writeNewUser(editId.getText().toString(), editPw.getText().toString());     //회원가입 완료
+                                    //mDatabase.child("users").child().setValue(editPw);
+                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                    Toast.makeText(RegisterActivity.this, "회원가입되었습니다", Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
+                                }
+                            }
+                        }
+                    }
                 }
             });
         }
