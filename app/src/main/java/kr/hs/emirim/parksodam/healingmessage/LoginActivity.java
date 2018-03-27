@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Iterator;
+import java.util.regex.Pattern;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -34,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
             "고마워", "사랑해", "너는 특별해"};
 
     private DatabaseReference databaseReference;
+    //private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     int word_random;
     TextView word_text;
     Handler handler = new Handler();
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     Button register;
     String TAG = "Handler";
     private FirebaseAuth mAuth;
-
+    public static final Pattern VALID_PASSWOLD_REGEX_ALPHA_NUM = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{4,16}$"); // 4자리 ~ 16자리까지 가능
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,42 +53,46 @@ public class LoginActivity extends AppCompatActivity {
         checkPw = (EditText) findViewById(R.id.checkPw);
         word_text.setText(word[word_random]);
 
+
+
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
 
         login = (Button) findViewById(R.id.login);
+            login.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 클릭시
+                @Override
+                public void onClick(View v) {
 
-        login.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 클릭시
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
 
-            @Override
-            public void onClick(View v) {
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
-                        //users의 모든 자식들의 key값과 value 값들을 iterator로 참조합니다.
-
-                        while(child.hasNext())
-                        {
-                            //찾고자 하는 ID값은 key로 존재하는 값
-                            if(child.next().getKey().equals(checkId.getText().toString()))
-                            {
-                                Toast.makeText(getApplicationContext(),"로그인!",Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(getApplicationContext(), BarActivity.class);
-                                startActivity(intent);
-                                return;
+                                // dataSnapshot is the "issue" node with all children with id 0
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    //for (DataSnapshot idSnapshot : dataSnapshot.child("id").getChildren()) {
+                                    String userName = snapshot.getKey();
+                                        Log.e("q", snapshot.child("/"+userName+"/").getValue().toString());
+                                        Log.e("g", userName);
+                                    //}
+                                    if (!snapshot.getKey().equals(checkId.getText().toString())) {
+                                        //Toast.makeText(getApplicationContext(), "존재하지 않는 회원정보입니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
                         }
-                        Toast.makeText(getApplicationContext(),"존재하지 않는 아이디입니다.",Toast.LENGTH_LONG).show();
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
-            }
-        });
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
+
+            });
+
 
         register = (Button)findViewById(R.id.register);
         register.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +103,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    public void checkUser() {
+        //Matcher matcher = VALID_PASSWOLD_REGEX_ALPHA_NUM.matcher(pwStr);
 
+        //return matcher.matches();
+    }
 
 
     @Override
