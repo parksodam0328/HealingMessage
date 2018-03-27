@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -66,20 +67,30 @@ public class LoginActivity extends AppCompatActivity {
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-
                                 // dataSnapshot is the "issue" node with all children with id 0
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    //for (DataSnapshot idSnapshot : dataSnapshot.child("id").getChildren()) {
-                                    String userName = snapshot.getKey();
-                                        Log.e("q", snapshot.child("/"+userName+"/").getValue().toString());
-                                        Log.e("g", userName);
-                                    //}
-                                    if (!snapshot.getKey().equals(checkId.getText().toString())) {
-                                        //Toast.makeText(getApplicationContext(), "존재하지 않는 회원정보입니다.", Toast.LENGTH_SHORT).show();
+                                    if (checkId.getText().toString().equals("")) {
+                                        Toast.makeText(getApplicationContext(), "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                        checkId.requestFocus();
+                                        return;
+                                    }
+                                    if (checkPw.getText().toString().equals("")) {
+                                        Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                        checkPw.requestFocus();
+                                        return;
+                                    }
+                                    String userName = snapshot.child("id").getValue().toString();
+                                    String userPw = snapshot.child("pw").getValue().toString();
+                                    if (userName.equals(checkId.getText().toString()) && userPw.equals(checkPw.getText().toString())) {
+                                        Log.e("TAG",userName);
+                                        Log.e("TAG",userPw);
+                                        Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), BarActivity.class);
+                                        startActivity(intent);
+                                        return;
                                     }
                                 }
-                            }
+                                    Toast.makeText(getApplicationContext(), "존재하지 않는 회원정보입니다.", Toast.LENGTH_SHORT).show();
                         }
 
 
