@@ -23,9 +23,6 @@ public class SearchAdapter extends BaseAdapter{
     private List<String> list;
     private LayoutInflater inflate;
     private ViewHolder viewHolder;
-    TextView name;
-    TextView feel;
-    ImageView image;
 
     public SearchAdapter(List<String> list, Context context){
         this.list = list;
