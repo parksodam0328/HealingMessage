@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/register_image"
-    tools:context="kr.hs.emirim.parksodam.healingmessage.LoginActivity">
+    tools:context="kr.hs.emirim.parksodam.healingmessage.user.LoginActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -26,18 +26,18 @@
 
                 <ImageView
                     android:id="@+id/back_icon"
-                    android:layout_width="25dp"
-                    android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="left"
-                    app:srcCompat="@drawable/back_icon" />
+                    app:srcCompat="@drawable/back_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="28dp" />
             <ImageView
                 android:id="@+id/register"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
                 android:layout_gravity="left"
-                app:srcCompat="@drawable/register" />
+                app:srcCompat="@drawable/register"
+                android:layout_width="65dp"
+                android:layout_height="25dp" />
 
         </android.support.v7.widget.Toolbar>
 
@@ -56,8 +56,8 @@
             android:id="@+id/id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="92dp"
-            android:layout_marginTop="190dp"
+            android:layout_marginLeft="84dp"
+            android:layout_marginTop="204dp"
             android:hint="아이디"
             android:textColor="#356a4c"
             android:textColorHint="#356a4c"
@@ -67,8 +67,7 @@
             android:id="@+id/pw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="92dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginLeft="84dp"
             android:hint="비밀번호"
             android:textColor="#356a4c"
             android:textColorHint="#356a4c"
@@ -78,6 +77,7 @@
             android:id="@+id/nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="84dp"
             android:hint="닉네임"
             android:textColor="#356a4c"
             android:textColorHint="#356a4c"
@@ -86,10 +86,9 @@
 
         <Button
             android:id="@+id/submit"
-            android:layout_width="210dp"
+            android:layout_width="235dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="7dp"
             android:layout_marginTop="20dp"
             android:background="#000076"
             android:text="확인"

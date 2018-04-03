@@ -1,4 +1,4 @@
-package kr.hs.emirim.parksodam.healingmessage;
+package kr.hs.emirim.parksodam.healingmessage.adapter;
 
 /**
  * Created by Mirim on 2018-03-14.

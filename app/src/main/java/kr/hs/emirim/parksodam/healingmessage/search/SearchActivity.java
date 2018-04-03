@@ -1,21 +1,14 @@
-package kr.hs.emirim.parksodam.healingmessage;
+package kr.hs.emirim.parksodam.healingmessage.search;
 
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,11 +17,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.hs.emirim.parksodam.healingmessage.R;
 import kr.hs.emirim.parksodam.healingmessage.adapter.SearchAdapter;
 
 /**
@@ -56,12 +48,23 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        if(!calledAlerady){
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            //다른 인스턴스 보다 먼저 실행되어야한다.
-            calledAlerady = true;
-        }
-
+//        if(!calledAlerady){
+//            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+//            //다른 인스턴스 보다 먼저 실행되어야한다.
+//            calledAlerady = true;
+//        }
+        //초기화
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //툴바 설정
+        setSupportActionBar(toolbar); //툴바를 액션바와 같게 만들어 준다.
+        ImageView backimg = (ImageView) findViewById(R.id.back_icon);
+        backimg.setOnClickListener(new View.OnClickListener() { // 뒤로 가기
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         final ImageButton img_btn = (ImageButton)findViewById(R.id.search_btn);
         emo_btn1 = (ImageButton)findViewById(R.id.emo_btn1);
         emo_btn2 = (ImageButton)findViewById(R.id.emo_btn2);

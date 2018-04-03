@@ -1,4 +1,4 @@
-package kr.hs.emirim.parksodam.healingmessage;
+package kr.hs.emirim.parksodam.healingmessage.search;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import kr.hs.emirim.parksodam.healingmessage.R;
-import kr.hs.emirim.parksodam.healingmessage.SearchItem;
 import kr.hs.emirim.parksodam.healingmessage.adapter.SearchAdapter;
 
 /**

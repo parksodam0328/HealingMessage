@@ -1,4 +1,4 @@
-package kr.hs.emirim.parksodam.healingmessage;
+package kr.hs.emirim.parksodam.healingmessage.search;
 
 /**
  * Created by 민경 on 2018-03-19.

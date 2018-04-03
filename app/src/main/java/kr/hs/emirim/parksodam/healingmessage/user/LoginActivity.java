@@ -1,5 +1,5 @@
 
-package kr.hs.emirim.parksodam.healingmessage;
+package kr.hs.emirim.parksodam.healingmessage.user;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import kr.hs.emirim.parksodam.healingmessage.BarActivity;
+import kr.hs.emirim.parksodam.healingmessage.R;
 
 
 public class LoginActivity extends AppCompatActivity {

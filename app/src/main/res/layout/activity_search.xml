@@ -22,21 +22,23 @@
 
 
             <ImageView
-                android:id="@+id/back_icon_s"
-                android:layout_width="25dp"
-                android:layout_height="40dp"
+                android:id="@+id/back_icon"
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="left"
-                app:srcCompat="@drawable/back_icon" />
+                app:srcCompat="@drawable/back_icon"
+                android:layout_width="16dp"
+                android:layout_height="28dp" />
             <ImageView
-                android:id="@+id/register_s"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="15dp"
+                android:id="@+id/search"
+                android:layout_marginLeft="12dp"
                 android:layout_gravity="left"
-                app:srcCompat="@drawable/register" />
+                app:srcCompat="@drawable/search_letter"
+                android:layout_width="38dp"
+                android:layout_height="17dp" />
 
         </android.support.v7.widget.Toolbar>
+
+
     </LinearLayout>
 
     <LinearLayout

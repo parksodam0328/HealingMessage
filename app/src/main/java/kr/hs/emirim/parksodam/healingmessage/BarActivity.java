@@ -1,5 +1,6 @@
 package kr.hs.emirim.parksodam.healingmessage;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,7 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import kr.hs.emirim.parksodam.healingmessage.adapter.FragmentPagerAdapter;
+import kr.hs.emirim.parksodam.healingmessage.search.SearchActivity;
 
 
 public class BarActivity extends AppCompatActivity {
@@ -18,6 +24,7 @@ public class BarActivity extends AppCompatActivity {
     private String TAG ="myreceiver : ";
     private Toolbar toolbar;
     private TextView myTitleText;
+    private ImageView mSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -28,11 +35,20 @@ public class BarActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         myTitleText = (TextView) findViewById(R.id.title);
         myTitleText.setText("힐링쪽지");
+        mSearch = (ImageView)findViewById(R.id.search);
+
         setSupportActionBar(toolbar); //툴바를 액션바와 같게 만들어 준다.getSupportActionBar().setTitle("지도");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mSearch.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        vp = (ViewPager) findViewById(R.id.vp_main);
+            vp = (ViewPager) findViewById(R.id.vp_main);
         setupViewPager(vp);
         layout = (TabLayout) findViewById(R.id.tl_main);
         layout.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF")); // 밑줄색

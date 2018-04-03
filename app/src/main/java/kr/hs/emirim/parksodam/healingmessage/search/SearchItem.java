@@ -1,4 +1,4 @@
-package kr.hs.emirim.parksodam.healingmessage;
+package kr.hs.emirim.parksodam.healingmessage.search;
 
 import android.graphics.drawable.Drawable;
 
