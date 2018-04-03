@@ -39,6 +39,7 @@ public class SearchActivity extends AppCompatActivity {
     private EditText editSearch;        // 검색어를 입력할 Input 창
     private SearchAdapter adapter;      // 리스트뷰에 연결할 아답터
     private ArrayList<String> arraylist;
+    SearchItem sItem = new SearchItem();
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
     static boolean calledAlerady = false;
@@ -112,101 +113,107 @@ public class SearchActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listView);
 
-        // 리스트를 생성한다.
-        list = new ArrayList<String>();
+        try {
+            // 리스트를 생성한다.
+            list = new ArrayList<String>();
 
-        // 검색에 사용할 데이터을 미리 저장한다.
-        settingList();
+            // 검색에 사용할 데이터을 미리 저장한다.
+            settingList();
 
-        // 리스트의 모든 데이터를 arraylist에 복사한다.// list 복사본을 만든다.
-        arraylist = new ArrayList<String>();
-        arraylist.addAll(list);
+            // 리스트의 모든 데이터를 arraylist에 복사한다.// list 복사본을 만든다.
+            arraylist = new ArrayList<String>();
+            arraylist.addAll(list);
 
-        // 리스트에 연동될 아답터를 생성한다.
-        adapter = new SearchAdapter(list, this);
+            // 리스트에 연동될 아답터를 생성한다.
+            adapter = new SearchAdapter(list, this);
 
-        // 리스트뷰에 아답터를 연결한다.
-        listView.setAdapter(adapter);
+            // 리스트뷰에 아답터를 연결한다.
+            listView.setAdapter(adapter);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseRef = database.getReference("users");
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference databaseRef = database.getReference("users");
 
-        databaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot searchSnapshot : dataSnapshot.getChildren()){
-                    String str = searchSnapshot.child("id").getValue(String.class);
-                    Log.e("name값 불러오기", "성공?");
-                    list.add(str);
+            databaseRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot searchSnapshot : dataSnapshot.getChildren()) {
+                        String str1 = searchSnapshot.child("name").getValue(String.class);
+                        Log.e("name값 불러오기", "성공?");
+                        String str2 = searchSnapshot.child("feel").getValue(String.class);
+                        Log.e("feel값 불러오기", "???");
+                     
+                    }
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("TAG: ", "Failed to read value", databaseError.toException());
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w("TAG: ", "Failed to read value", databaseError.toException());
+                }
+            });
 
-        emo_btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                list.clear();
-                for(int i = 0;i < arraylist.size(); i++) {
-                    //happy
-                    if (arraylist.get(i).toLowerCase().equals("happy")) {
-                        // 검색된 데이터를 리스트에 추가한다
-                        adapter.notifyDataSetChanged();
-                        list.add(arraylist.get(i));
+            emo_btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    list.clear();
+                    for (int i = 0; i < arraylist.size(); i++) {
+                        //happy
+                        if (arraylist.get(i).toLowerCase().equals("Happy")) {
+                            // 검색된 데이터를 리스트에 추가한다
+                            adapter.notifyDataSetChanged();
+                            list.add(arraylist.get(i));
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        emo_btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                list.clear();
-                for(int i = 0;i < arraylist.size(); i++) {
-                    //happy
-                    if (arraylist.get(i).toLowerCase().equals("sad")) {
-                        // 검색된 데이터를 리스트에 추가한다
-                        adapter.notifyDataSetChanged();
-                        list.add(arraylist.get(i));
+            emo_btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    list.clear();
+                    for (int i = 0; i < arraylist.size(); i++) {
+                        //happy
+                        if (arraylist.get(i).toLowerCase().equals("Sad")) {
+                            // 검색된 데이터를 리스트에 추가한다
+                            adapter.notifyDataSetChanged();
+                            list.add(arraylist.get(i));
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        emo_btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                list.clear();
-                for(int i = 0;i < arraylist.size(); i++) {
-                    //happy
-                    if (arraylist.get(i).toLowerCase().equals("soso")) {
-                        // 검색된 데이터를 리스트에 추가한다
-                        adapter.notifyDataSetChanged();
-                        list.add(arraylist.get(i));
+            emo_btn3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    list.clear();
+                    for (int i = 0; i < arraylist.size(); i++) {
+                        //happy
+                        if (arraylist.get(i).toLowerCase().equals("Angry")) {
+                            // 검색된 데이터를 리스트에 추가한다
+                            adapter.notifyDataSetChanged();
+                            list.add(arraylist.get(i));
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        emo_btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                list.clear();
-                for(int i = 0;i < arraylist.size(); i++) {
-                    //happy
-                    if (arraylist.get(i).toLowerCase().equals("depressed")) {
-                        // 검색된 데이터를 리스트에 추가한다
-                        adapter.notifyDataSetChanged();
-                        list.add(arraylist.get(i));
+            emo_btn4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    list.clear();
+                    for (int i = 0; i < arraylist.size(); i++) {
+                        //happy
+                        if (arraylist.get(i).toLowerCase().equals("Shyness")) {
+                            // 검색된 데이터를 리스트에 추가한다
+                            adapter.notifyDataSetChanged();
+                            list.add(arraylist.get(i));
+                        }
                     }
                 }
-            }
-        });
+            });
+        }catch (Exception e){
+
+        }
     }
     //검색에 사용될 데이터를 리스트에 추가한다.
     //test
