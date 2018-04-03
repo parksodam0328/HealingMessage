@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 
 
@@ -39,7 +40,8 @@ public class BarActivity extends AppCompatActivity {
 
         layout.setupWithViewPager(vp);
 
-        for (int i = 0; i < layout.getTabCount(); i++) {
+        for (int i = 0; i < 4; i++) {
+            Log.e("", String.valueOf(layout.getTabCount()));
             if(i==0) {
                 layout.getTabAt(i).setText("홈").setIcon(R.drawable.home_click);
                 getSupportActionBar().setTitle("힐링쪽지");
@@ -52,7 +54,7 @@ public class BarActivity extends AppCompatActivity {
                 layout.getTabAt(i).setText("내정보").setIcon(R.drawable.profile);
                 getSupportActionBar().setTitle("힐링쪽지");
             }
-            else {
+            else if(i==3) {
                 layout.getTabAt(i).setText("도움말").setIcon(R.drawable.settings);
                 getSupportActionBar().setTitle("힐링쪽지");
             }
@@ -76,7 +78,7 @@ public class BarActivity extends AppCompatActivity {
                 {
                     myTitleText.setText("내정보");
                 }
-                else {
+                else if (position == 3){
                     myTitleText.setText("도움말");
                 }
             }
@@ -107,7 +109,7 @@ public class BarActivity extends AppCompatActivity {
                     tab.setIcon(R.drawable.profile_click);
                     layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000076"));
                 }
-                else{
+                else if(tab.getPosition()==3) {
                     myTitleText.setText("도움말");
                     tab.setIcon(R.drawable.settings_click);
                     layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000076"));
@@ -131,7 +133,7 @@ public class BarActivity extends AppCompatActivity {
                     tab.setIcon(R.drawable.profile);
                     layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#666666"));
                 }
-                else{
+                else if(tab.getPosition()==3) {
                     myTitleText.setText("도움말");
                     tab.setIcon(R.drawable.settings);
                     layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#666666"));

@@ -1,21 +1,16 @@
 package kr.hs.emirim.parksodam.healingmessage;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import kr.hs.emirim.parksodam.healingmessage.adapter.SearchAdapter;
 
 /**
  * Created by 민경 on 2018-03-16.

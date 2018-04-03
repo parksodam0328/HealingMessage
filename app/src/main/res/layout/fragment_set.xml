@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffffff">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
     <Button
         android:id="@+id/how_to_use"
@@ -12,7 +13,7 @@
         android:gravity="left|center_vertical"
         android:paddingLeft="10dp"
         android:text="사용방법"
-        />
+        tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry" />
 
     <Button
         android:id="@+id/to_healing"
@@ -20,7 +21,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_setting"
         android:gravity="left|center_vertical"
+        android:layout_marginTop="47dp"
         android:paddingLeft="10dp"
-        android:text="문의하기" />
+        android:text="문의하기"
+        tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry" />
 
-</LinearLayout>
+</FrameLayout>

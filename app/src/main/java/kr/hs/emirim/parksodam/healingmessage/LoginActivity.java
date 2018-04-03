@@ -20,8 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.regex.Pattern;
-
 
 public class LoginActivity extends AppCompatActivity {
     String[] word = {"삶이 있는 한 희망은 있어 -키케로", "잘했어", "오늘 하루도 수고했어", "힘내!", "오늘은 내일을 위한 첫걸음",
@@ -34,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
             "고마워", "사랑해", "너는 특별해"};
 
     private DatabaseReference databaseReference;
-    //private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     int word_random;
     TextView word_text;
     Handler handler = new Handler();
@@ -44,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
     Button register;
     String TAG = "Handler";
     private FirebaseAuth mAuth;
-    public static final Pattern VALID_PASSWOLD_REGEX_ALPHA_NUM = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{4,16}$"); // 4자리 ~ 16자리까지 가능
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                        public void onDataChange(DataSnapshot dataSnapshot) { // 회원정보 체크
                                 // dataSnapshot is the "issue" node with all children with id 0
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                     if (checkId.getText().toString().equals("")) {
@@ -106,18 +102,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
         register = (Button)findViewById(R.id.register);
-        register.setOnClickListener(new View.OnClickListener() {
+        register.setOnClickListener(new View.OnClickListener() { // 화원이 아닐 시 회원가입 액티비티로 이동
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
                 startActivity(intent);
             }
         });
-    }
-    public void checkUser() {
-        //Matcher matcher = VALID_PASSWOLD_REGEX_ALPHA_NUM.matcher(pwStr);
-
-        //return matcher.matches();
     }
 
 

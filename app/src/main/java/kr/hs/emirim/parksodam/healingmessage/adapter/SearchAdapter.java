@@ -1,20 +1,17 @@
-package kr.hs.emirim.parksodam.healingmessage;
+package kr.hs.emirim.parksodam.healingmessage.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v7.widget.ListViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import kr.hs.emirim.parksodam.healingmessage.R;
 
 /**
  * Created by 민경 on 2018-03-15.

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffffff"
+    android:background="@drawable/register_image"
     tools:context="kr.hs.emirim.parksodam.healingmessage.LoginActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,53 +43,45 @@
 
 
     </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="330dp"
-            android:gravity="center"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="아이디"
-                    android:textSize="20sp"/>
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/id"
-                    android:gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:textColorHint="#356a4c"
-                    android:textColor="#356a4c"/>
-                <TextView
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호"
-                    android:layout_marginTop="10dp"
-                android:textSize="20sp"/>
+                android:id="@+id/id"
+                android:textSize="13sp"
+                android:textColorHint="#356a4c"
+                android:hint="아이디"
+                android:layout_marginTop="190dp"
+                android:layout_marginLeft="92dp"
+                android:textColor="#356a4c"/>
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/pw"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:textColorHint="#356a4c"
-                    android:textColor="#356a4c"/>
-            </LinearLayout>
-            </LinearLayout>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pw"
+                android:textColorHint="#356a4c"
+                android:hint="비밀번호"
+                android:textColor="#356a4c"
+                android:layout_marginLeft="92dp"
+                android:layout_marginTop="3dp"
+                android:textSize="13sp"/>
 
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/submit"
-        android:layout_gravity="center"
-        android:text="확인"/>
+            <Button
+                android:text="확인"
+                android:textColor="#ffffff"
+                android:background="#000076"
+                android:layout_marginTop="20dp"
+                android:layout_width="210dp"
+                android:layout_gravity="center"
+                android:layout_height="35dp"
+                android:layout_marginLeft="7dp"
+                android:id="@+id/submit" />
     </LinearLayout>
+</LinearLayout>
