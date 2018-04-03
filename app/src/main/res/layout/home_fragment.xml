@@ -8,6 +8,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="200dp">
+
             <kr.hs.emirim.parksodam.healingmessage.slider.SliderView
                 android:id="@+id/sliderView"
                 android:layout_width="match_parent"
@@ -27,5 +28,21 @@
             android:layout_marginBottom="8dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+            </LinearLayout>
         </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView_h"
+        android:layout_width="match_parent"
+        android:layout_height="283dp"
+        android:divider="#999999"
+        android:layout_gravity="bottom"
+        android:dividerHeight="1dp"></ListView>
+
 </FrameLayout>
