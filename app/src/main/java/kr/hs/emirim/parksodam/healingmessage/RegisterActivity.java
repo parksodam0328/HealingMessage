@@ -19,7 +19,7 @@ public class RegisterActivity extends AppCompatActivity {
         private DatabaseReference mDatabase;
         private EditText editId;
         private EditText editPw;
-        String TAG = "Handler";
+        private EditText editName;
 
 
     @Override
@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
             setContentView(R.layout.activity_register);
             editId = (EditText)findViewById(R.id.id);
             editPw = (EditText)findViewById(R.id.pw);
+            editName = (EditText)findViewById(R.id.nickname);
             //초기화
             Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
 
@@ -65,10 +66,10 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "비밀번호 형식을 지켜주세요.", Toast.LENGTH_SHORT).show();
                                     return;
                                 } else {
-                                    writeNewUser(editId.getText().toString(), editPw.getText().toString());     //회원가입 완료
+                                    writeNewUser(editId.getText().toString(), editPw.getText().toString(), editName.getText().toString());     //회원가입 완료
                                     //mDatabase.child("users").child().setValue(editPw);
                                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                    Toast.makeText(RegisterActivity.this, "회원가입되었습니다", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegisterActivity.this, editName.getText().toString()+"님 회원가입되었습니다", Toast.LENGTH_SHORT).show();
                                     startActivity(intent);
                                 }
                             }
@@ -78,8 +79,8 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }
 
-    private void writeNewUser(String userId, String pw) {
-        User user = new User(userId, pw);
+    private void writeNewUser(String userId, String pw, String name) {
+        User user = new User(userId, pw, name);
 
         mDatabase.child("users").child(userId).setValue(user);
     }
