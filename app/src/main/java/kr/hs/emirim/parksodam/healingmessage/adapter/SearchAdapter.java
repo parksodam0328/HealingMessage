@@ -56,7 +56,7 @@ public class SearchAdapter extends BaseAdapter{
             Log.e("제발","인정또르띠?");
             viewHolder = new ViewHolder();
 
-            viewHolder.name = (TextView)convertView.findViewById(R.id.list_text_feel);
+            viewHolder.name = (TextView)convertView.findViewById(R.id.list_text_name);
             viewHolder.image = (ImageView)convertView.findViewById(R.id.list_image);
 
             convertView.setTag(viewHolder);
