@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/list_text_name"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
                 android:textSize="13sp"
                 android:hint="닉네임" />

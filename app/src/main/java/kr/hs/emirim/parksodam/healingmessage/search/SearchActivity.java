@@ -141,7 +141,7 @@ public class SearchActivity extends AppCompatActivity {
                         Log.e("name값 불러오기", "성공?");
                         String str2 = searchSnapshot.child("feel").getValue(String.class);
                         Log.e("feel값 불러오기", "???");
-                     
+
                     }
                     adapter.notifyDataSetChanged();
                 }

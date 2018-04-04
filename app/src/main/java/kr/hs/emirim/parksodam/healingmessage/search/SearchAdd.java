@@ -29,11 +29,11 @@ public class SearchAdd extends SearchAdapter {
         View listViewItem = inflater.inflate(R.layout.row_listview, null, true);
 
         TextView nameTxt = (TextView)listViewItem.findViewById(R.id.list_text_name);
-        TextView feelTxt = (TextView)listViewItem.findViewById(R.id.list_text_feel);
+      //  TextView feelTxt = (TextView)listViewItem.findViewById(R.id.list_text_feel);
 
         SearchItem searchAdd = searchList.get(position);
         nameTxt.setText(searchAdd.getName());
-        feelTxt.setText(searchAdd.getFeel());
+      //  feelTxt.setText(searchAdd.getFeel());
 
         return listViewItem;
     }

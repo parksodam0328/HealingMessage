@@ -10,6 +10,25 @@ public class SearchItem {
     private Drawable image;
     private String name;
     private String feel;
+    private String pw;
+    private String id;
+
+
+    public String getPw() {
+        return pw;
+    }
+
+    public void setPw(String pw) {
+        this.pw = pw;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Drawable getImage() {
         return image;

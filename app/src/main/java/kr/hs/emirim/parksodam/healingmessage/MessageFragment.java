@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,7 +66,6 @@ public class MessageFragment extends BaseFragment {
 
         // 리스트에 연동될 아답터를 생성한다.
         adapter_m = new SearchAdapter(list, getActivity());
-
         // 리스트뷰에 아답터를 연결한다.
         listView_m.setAdapter(adapter_m);
 
@@ -79,27 +79,9 @@ public class MessageFragment extends BaseFragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot searchSnapshot : dataSnapshot.getChildren()){
                     String str_n = searchSnapshot.child("name").getValue(String.class);
-                    Log.e("name값 불러오기", "성공?");
-                    list.add(str_n);
-                }
-                adapter_m.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("TAG: ", "Failed to read value", databaseError.toException());
-            }
-        });
-
-
-        databaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot searchSnapshot : dataSnapshot.getChildren()){
                     String str_f = searchSnapshot.child("feel").getValue(String.class);
-                    Log.e("feel값 불러오기", "성공?");
-                    list.add(str_f);
-
+                    list.add(str_n);
+                    //Log.e("TAG",list.get);
                 }
                 adapter_m.notifyDataSetChanged();
             }
@@ -109,6 +91,7 @@ public class MessageFragment extends BaseFragment {
                 Log.w("TAG: ", "Failed to read value", databaseError.toException());
             }
         });
+
 
 
         return view;

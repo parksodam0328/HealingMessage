@@ -37,7 +37,7 @@ public class SearchAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return i;
     }
 
     @Override
@@ -50,13 +50,10 @@ public class SearchAdapter extends BaseAdapter{
         View v = convertView;
         if(convertView == null){
             convertView = inflate.inflate(R.layout.row_listview,null);
-            Log.e("제발","인정또르띠?");
-            Log.e("제발","인정또르띠?");
             viewHolder = new ViewHolder();
 
             viewHolder.name = (TextView)convertView.findViewById(R.id.list_text_name);
-            viewHolder.image = (ImageView)convertView.findViewById(R.id.list_image);
-          //  viewHolder.feel = (TextView)convertView.findViewById(R.id.list_text_feel);
+            //viewHolder.feel = (TextView)convertView.findViewById(R.id.list_text_feel);
 
             convertView.setTag(viewHolder);
         }else{
@@ -65,28 +62,17 @@ public class SearchAdapter extends BaseAdapter{
 
         // 리스트에 있는 데이터를 리스트뷰 셀에 뿌린다.
         viewHolder.name.setText(list.get(position));
-        int name = 1;
-        int feel = 2;
-       // viewHolder.feel.setText(list.get(position));
-       // viewHolder.img.setImageResource(list.get(position).getImage());
-//        viewHolder.img.setImageResource();
+        //viewHolder.feel.setText(list.get(position));
+
 
 
 
         return convertView;
-    }
-    public void addItem(String name, String feel){
-        SearchItem item = new SearchItem();
-
-        item.setName(name);
-        item.setFeel(feel);
-
     }
 
 
     class ViewHolder{
         TextView name;
         TextView feel;
-        ImageView image;
     }
 }
