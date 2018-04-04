@@ -33,9 +33,10 @@
     <ListView
     android:id="@+id/m_listView"
     android:layout_width="match_parent"
-    android:layout_height="366dp"
+    android:layout_height="match_parent"
     android:divider="#999999"
-        android:layout_marginTop="199dp"
+    android:layout_marginTop="199dp"
+    android:layout_marginBottom="56dp"
     android:dividerHeight="1dp"></ListView>
 
 
