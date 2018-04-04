@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,73 +26,81 @@ import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
 
 
 public class MessageFragment extends BaseFragment {
-    private List<String> list;          // 데이터를 넣은 리스트변수
-    private ListView listView_m;          // 검색을 보여줄 리스트변수
-    private SearchAdapter adapter_m;      // 리스트뷰에 연결할 아답터
-    private ArrayList<String> arraylist;
+
+    ArrayList<SearchItem> list_data = new ArrayList<>();
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-    static boolean calledAlerady = false;
-    TextView feel;
+    ListView lv;
+    SearchAdapter m_adapter;
+
 
     public MessageFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//
-//        if(!calledAlerady){
-//            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-//            //다른 인스턴스 보다 먼저 실행되어야한다.
-//            calledAlerady = true;
-//        }
 
         View view = inflater.inflate(R.layout.fragment_message, container, false);
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
-        mAuth = FirebaseAuth.getInstance();
-
-        listView_m = (ListView) view.findViewById(R.id.m_listView);
-
-        // 리스트를 생성한다.
-        list = new ArrayList<String>();
-
-        // 리스트의 모든 데이터를 arraylist에 복사한다.// list 복사본을 만든다.
-        arraylist = new ArrayList<String>();
-        arraylist.addAll(list);
-
-        // 리스트에 연동될 아답터를 생성한다.
-        adapter_m = new SearchAdapter(list, getActivity());
-        // 리스트뷰에 아답터를 연결한다.
-        listView_m.setAdapter(adapter_m);
-
-
+        list_data = new ArrayList<SearchItem>();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseRef = database.getReference("users");
+        databaseReference = database.getReference("users");
+        mAuth = FirebaseAuth.getInstance();
 
-        databaseRef.addValueEventListener(new ValueEventListener() {
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot searchSnapshot : dataSnapshot.getChildren()){
-                    String str_n = searchSnapshot.child("name").getValue(String.class);
-                    String str_f = searchSnapshot.child("feel").getValue(String.class);
-                    list.add(str_n);
-                    //Log.e("TAG",list.get);
-                }
-                adapter_m.notifyDataSetChanged();
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                SearchItem value = dataSnapshot.getValue(SearchItem.class); // 괄호 안 : 꺼낼 자료 형태
+               list_data.add(value);
+                m_adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w("TAG: ", "Failed to read value", databaseError.toException());
+
             }
         });
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for(DataSnapshot searchSnapshot : dataSnapshot.getChildren()){
+//                    String str_n = searchSnapshot.child("name").getValue(String.class);
+//                    String str_f = searchSnapshot.child("feel").getValue(String.class);
+//                    list.add(str_n);
+//                    //Log.e("TAG",list.get);
+//                }
+//                adapter_m.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Log.w("TAG: ", "Failed to read value", databaseError.toException());
+//            }
+//        });
 
+        m_adapter = new SearchAdapter(getActivity(), list_data);
+        lv = (ListView)view.findViewById(R.id.m_listView);
+        lv.setAdapter(m_adapter);
+        //lv.setOnItemClickListener(this);
 
 
         return view;

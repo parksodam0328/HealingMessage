@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,26 +35,25 @@ public class SearchActivity extends AppCompatActivity {
     ImageButton emo_btn3;
     ImageButton emo_btn4;
 
-    private List<String> list;          // 데이터를 넣은 리스트변수
-    private ListView listView;          // 검색을 보여줄 리스트변수
-    private EditText editSearch;        // 검색어를 입력할 Input 창
-    private SearchAdapter adapter;      // 리스트뷰에 연결할 아답터
-    private ArrayList<String> arraylist;
-    SearchItem sItem = new SearchItem();
+    ArrayList<SearchItem> list_data = new ArrayList<>();
+    ArrayList<SearchItem> result_data = new ArrayList<>();
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-    static boolean calledAlerady = false;
+    ListView lv;
+    SearchAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+
 //        if(!calledAlerady){
 //            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 //            //다른 인스턴스 보다 먼저 실행되어야한다.
 //            calledAlerady = true;
 //        }
+        try {
         //초기화
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //툴바 설정
@@ -78,19 +78,52 @@ public class SearchActivity extends AppCompatActivity {
         emo_btn4.setVisibility(View.INVISIBLE);
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        list_data = new ArrayList<SearchItem>();
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("users");
         mAuth = FirebaseAuth.getInstance();
+
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                SearchItem value = dataSnapshot.getValue(SearchItem.class); // 괄호 안 : 꺼낼 자료 형태
+                list_data.add(value);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         img_btn.setOnClickListener(new View.OnClickListener() {
             int count = 1;
             @Override
             public void onClick(View v) {
-                list.clear();
-                for(int i = 0;i < arraylist.size(); i++) {
+                list_data.clear();
+                for(int i = 0;i < list_data.size(); i++) {
                     // 검색된 데이터를 리스트에 추가한다
                     adapter.notifyDataSetChanged();
-                    list.add(arraylist.get(i));
+                    list_data.add(list_data.get(i));
                 }
 
                 count++;
@@ -111,57 +144,19 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        listView = (ListView) findViewById(R.id.listView);
-
-        try {
-            // 리스트를 생성한다.
-            list = new ArrayList<String>();
-
-            // 검색에 사용할 데이터을 미리 저장한다.
-            settingList();
-
-            // 리스트의 모든 데이터를 arraylist에 복사한다.// list 복사본을 만든다.
-            arraylist = new ArrayList<String>();
-            arraylist.addAll(list);
-
-            // 리스트에 연동될 아답터를 생성한다.
-            adapter = new SearchAdapter(list, this);
-
-            // 리스트뷰에 아답터를 연결한다.
-            listView.setAdapter(adapter);
-
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference databaseRef = database.getReference("users");
-
-            databaseRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot searchSnapshot : dataSnapshot.getChildren()) {
-                        String str1 = searchSnapshot.child("name").getValue(String.class);
-                        Log.e("name값 불러오기", "성공?");
-                        String str2 = searchSnapshot.child("feel").getValue(String.class);
-                        Log.e("feel값 불러오기", "???");
-
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.w("TAG: ", "Failed to read value", databaseError.toException());
-                }
-            });
-
             emo_btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    list.clear();
-                    for (int i = 0; i < arraylist.size(); i++) {
-                        //happy
-                        if (arraylist.get(i).toLowerCase().equals("Happy")) {
-                            // 검색된 데이터를 리스트에 추가한다
-                            adapter.notifyDataSetChanged();
-                            list.add(arraylist.get(i));
+//                    list_data.clear();
+//                    for(int i=0;i<list_data.size();i++){ //리스트 데이터 검색
+//                        SearchItem item = list_data.get(i);
+//                        if(item.getName().equals("Happy")){ //해당 타이틀에 키워드가 검색된다면
+//                            result_data.add(item);  //해당 데이터를 검색결과에 추가
+//                        }
+//                    }
+                    for(SearchItem item : result_data){
+                        if(item.getFeel().toUpperCase().equals("Happy")){
+                            list_data.add(item);
                         }
                     }
                 }
@@ -170,13 +165,11 @@ public class SearchActivity extends AppCompatActivity {
             emo_btn2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    list.clear();
-                    for (int i = 0; i < arraylist.size(); i++) {
-                        //happy
-                        if (arraylist.get(i).toLowerCase().equals("Sad")) {
-                            // 검색된 데이터를 리스트에 추가한다
-                            adapter.notifyDataSetChanged();
-                            list.add(arraylist.get(i));
+                    list_data.clear();
+                    for(int i=0;i<list_data.size();i++){ //리스트 데이터 검색
+                        SearchItem item = list_data.get(i);
+                        if(item.getName().equals("Happy")){ //해당 타이틀에 키워드가 검색된다면
+                            result_data.add(item);  //해당 데이터를 검색결과에 추가
                         }
                     }
                 }
@@ -185,13 +178,11 @@ public class SearchActivity extends AppCompatActivity {
             emo_btn3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    list.clear();
-                    for (int i = 0; i < arraylist.size(); i++) {
-                        //happy
-                        if (arraylist.get(i).toLowerCase().equals("Angry")) {
-                            // 검색된 데이터를 리스트에 추가한다
-                            adapter.notifyDataSetChanged();
-                            list.add(arraylist.get(i));
+                    list_data.clear();
+                    for(int i=0;i<list_data.size();i++){ //리스트 데이터 검색
+                        SearchItem item = list_data.get(i);
+                        if(item.getName().equals("Happy")){ //해당 타이틀에 키워드가 검색된다면
+                            result_data.add(item);  //해당 데이터를 검색결과에 추가
                         }
                     }
                 }
@@ -200,17 +191,23 @@ public class SearchActivity extends AppCompatActivity {
             emo_btn4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    list.clear();
-                    for (int i = 0; i < arraylist.size(); i++) {
-                        //happy
-                        if (arraylist.get(i).toLowerCase().equals("Shyness")) {
-                            // 검색된 데이터를 리스트에 추가한다
-                            adapter.notifyDataSetChanged();
-                            list.add(arraylist.get(i));
+                    list_data.clear();
+                    for(int i=0;i<list_data.size();i++){ //리스트 데이터 검색
+                        SearchItem item = list_data.get(i);
+                        if(item.getName().equals("Happy")){ //해당 타이틀에 키워드가 검색된다면
+                            result_data.add(item);  //해당 데이터를 검색결과에 추가
                         }
                     }
                 }
             });
+
+            adapter = new SearchAdapter(this, list_data);
+            lv = (ListView)findViewById(R.id.listView);
+            lv.setTextFilterEnabled(true);
+            lv.setAdapter(adapter);
+
+            //l
+
         }catch (Exception e){
 
         }

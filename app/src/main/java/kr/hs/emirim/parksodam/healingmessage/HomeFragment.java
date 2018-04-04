@@ -65,7 +65,7 @@ public class HomeFragment extends BaseFragment {
         arraylist.addAll(list);
 
         // 리스트에 연동될 아답터를 생성한다.
-        adapter_m = new SearchAdapter(list, getActivity());
+       // adapter_m = new SearchAdapter(list, getActivity());
 
         // 리스트뷰에 아답터를 연결한다.
         listView_m.setAdapter(adapter_m);
@@ -81,7 +81,7 @@ public class HomeFragment extends BaseFragment {
                     Log.e("name값 불러오기", "성공?");
                     list.add(str_n);
                 }
-                adapter_m.notifyDataSetChanged();
+               // adapter_m.notifyDataSetChanged();
             }
 
             @Override

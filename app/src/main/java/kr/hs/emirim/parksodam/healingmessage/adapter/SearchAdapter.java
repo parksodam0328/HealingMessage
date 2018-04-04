@@ -1,6 +1,9 @@
 package kr.hs.emirim.parksodam.healingmessage.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.hs.emirim.parksodam.healingmessage.R;
@@ -19,60 +23,44 @@ import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
  */
 
 public class SearchAdapter extends BaseAdapter{
-
     private Context context;
-    private List<String> list;
-    private LayoutInflater inflate;
-    private ViewHolder viewHolder;
+    private ArrayList<SearchItem> list_data;
 
-    public SearchAdapter(List<String> list, Context context){
-        this.list = list;
+    public SearchAdapter(Context context, ArrayList<SearchItem> list_data){
         this.context = context;
-        this.inflate = LayoutInflater.from(context);
+        this.list_data = list_data;
     }
+
     @Override
     public int getCount() {
-        return list.size();
+        return list_data.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return i;
+    public Object getItem(int position) {
+        return list_data.get(position).getName();
     }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup viewGroup) {
-        View v = convertView;
-        if(convertView == null){
-            convertView = inflate.inflate(R.layout.row_listview,null);
-            viewHolder = new ViewHolder();
-
-            viewHolder.name = (TextView)convertView.findViewById(R.id.list_text_name);
-            //viewHolder.feel = (TextView)convertView.findViewById(R.id.list_text_feel);
-
-            convertView.setTag(viewHolder);
-        }else{
-            viewHolder = (ViewHolder)convertView.getTag();
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+        if(convertView == null)
+        {
+            convertView = inflater.inflate(R.layout.row_listview,null);
         }
 
-        // 리스트에 있는 데이터를 리스트뷰 셀에 뿌린다.
-        viewHolder.name.setText(list.get(position));
-        //viewHolder.feel.setText(list.get(position));
+        SearchItem searchItem = list_data.get(position);
+        TextView tvName = (TextView)convertView.findViewById(R.id.list_text_name);
+        TextView tvFeel = (TextView)convertView.findViewById(R.id.list_text_feel);
 
-
-
+        tvName.setText(searchItem.getName());
+        tvFeel.setText(searchItem.getFeel());
 
         return convertView;
-    }
-
-
-    class ViewHolder{
-        TextView name;
-        TextView feel;
     }
 }

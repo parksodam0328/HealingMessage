@@ -7,35 +7,14 @@ import android.graphics.drawable.Drawable;
  */
 
 public class SearchItem {
-    private Drawable image;
     private String name;
     private String feel;
-    private String pw;
-    private String id;
 
+    public SearchItem(){}
 
-    public String getPw() {
-        return pw;
-    }
-
-    public void setPw(String pw) {
-        this.pw = pw;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Drawable getImage() {
-        return image;
-    }
-
-    public void setImage(Drawable image) {
-        this.image = image;
+    public SearchItem(String name, String feel){
+        this.name = name;
+        this.feel = feel;
     }
 
     public String getName() {
@@ -53,4 +32,5 @@ public class SearchItem {
     public void setFeel(String feel) {
         this.feel = feel;
     }
+
 }
