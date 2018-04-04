@@ -68,11 +68,16 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "비밀번호 형식을 지켜주세요.", Toast.LENGTH_SHORT).show();
                                     return;
                                 } else {
-                                    writeNewUser(editId.getText().toString(), editPw.getText().toString(), editName.getText().toString());     //회원가입 완료
-                                    //mDatabase.child("users").child().setValue(editPw);
-                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                    Toast.makeText(RegisterActivity.this, editName.getText().toString()+"님 회원가입되었습니다", Toast.LENGTH_SHORT).show();
-                                    startActivity(intent);
+                                    if(!Pattern.matches("^[ㄱ-ㅎ가-힣a-zA-Z0-9]*$ ", editName.getText().toString())){
+                                        Toast.makeText(RegisterActivity.this, "닉네임 형식을 지켜주세요", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }else{
+                                        writeNewUser(editId.getText().toString(), editPw.getText().toString(), editName.getText().toString());     //회원가입 완료
+                                        //mDatabase.child("users").child().setValue(editPw);
+                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                        Toast.makeText(RegisterActivity.this, editName.getText().toString()+"님 회원가입되었습니다", Toast.LENGTH_SHORT).show();
+                                        startActivity(intent);
+                                    }
                                 }
                             }
                         }
