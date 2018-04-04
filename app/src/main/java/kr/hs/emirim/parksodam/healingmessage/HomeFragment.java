@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment {
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
 
-        listView_m = (ListView) view.findViewById(R.id.listView_h);
+        listView_m = (ListView) view.findViewById(R.id.m_listView);
 
         // 리스트를 생성한다.
         list = new ArrayList<String>();
