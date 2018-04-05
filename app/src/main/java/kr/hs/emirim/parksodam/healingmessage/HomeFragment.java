@@ -118,8 +118,7 @@ public class HomeFragment extends BaseFragment {
         adapter = new SearchAdapter(getActivity(), list_data_home);
         lv = (ListView)view.findViewById(R.id.m_listView);
         lv.setAdapter(adapter);
-
-
+        
         return view;
     }
 
