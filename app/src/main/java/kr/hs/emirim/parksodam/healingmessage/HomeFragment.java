@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.hs.emirim.parksodam.healingmessage.adapter.SearchAdapter;
+import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
 import kr.hs.emirim.parksodam.healingmessage.slider.FragmentSlider;
 import kr.hs.emirim.parksodam.healingmessage.slider.SliderIndicator;
 import kr.hs.emirim.parksodam.healingmessage.slider.SliderPagerAdapter;
@@ -43,6 +45,10 @@ public class HomeFragment extends BaseFragment {
     private FirebaseAuth mAuth;
     static boolean calledAlerady = false;
     TextView feel;
+    ArrayList<SearchItem> list_data_home = new ArrayList<>();
+    ArrayList<SearchItem> result_data = new ArrayList<>();
+    ListView lv;
+    SearchAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,8 +58,8 @@ public class HomeFragment extends BaseFragment {
 
         setupSlider();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
-        mAuth = FirebaseAuth.getInstance();
+        //databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        //mAuth = FirebaseAuth.getInstance();
 
         listView_m = (ListView) view.findViewById(R.id.m_listView);
 
@@ -70,25 +76,50 @@ public class HomeFragment extends BaseFragment {
         // 리스트뷰에 아답터를 연결한다.
         listView_m.setAdapter(adapter_m);
 
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference databaseRef = database.getReference("users");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseRef = database.getReference("users");
+        databaseReference = database.getReference("users");
+        mAuth = FirebaseAuth.getInstance();
 
-        databaseRef.addValueEventListener(new ValueEventListener() {
+
+        //
+        list_data_home = new ArrayList<SearchItem>();
+
+
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot searchSnapshot : dataSnapshot.getChildren()){
-                    String str_n = searchSnapshot.child("name").getValue(String.class);
-                    Log.e("name값 불러오기", "성공?");
-                    list.add(str_n);
-                }
-               // adapter_m.notifyDataSetChanged();
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                SearchItem value = dataSnapshot.getValue(SearchItem.class); // 괄호 안 : 꺼낼 자료 형태
+                list_data_home.add(value);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w("TAG: ", "Failed to read value", databaseError.toException());
+
             }
         });
+        adapter = new SearchAdapter(getActivity(), list_data_home);
+        lv = (ListView)view.findViewById(R.id.m_listView);
+        lv.setAdapter(adapter);
+
+
         return view;
     }
 
