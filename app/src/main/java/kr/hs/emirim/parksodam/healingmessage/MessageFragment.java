@@ -1,14 +1,12 @@
 package kr.hs.emirim.parksodam.healingmessage;
 
+
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Filterable;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -16,10 +14,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import kr.hs.emirim.parksodam.healingmessage.adapter.SearchAdapter;
 import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
@@ -32,7 +28,7 @@ public class MessageFragment extends BaseFragment {
     private FirebaseAuth mAuth;
     ListView lv;
     SearchAdapter m_adapter;
-
+    Button button;
 
     public MessageFragment() {
         // Required empty public constructor
@@ -49,6 +45,7 @@ public class MessageFragment extends BaseFragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("users");
         mAuth = FirebaseAuth.getInstance();
+
 
 
         databaseReference.addChildEventListener(new ChildEventListener() {
