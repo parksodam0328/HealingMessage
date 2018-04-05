@@ -2,6 +2,7 @@ package kr.hs.emirim.parksodam.healingmessage;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +18,20 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import kr.hs.emirim.parksodam.healingmessage.adapter.MessageAdapter;
 import kr.hs.emirim.parksodam.healingmessage.adapter.SearchAdapter;
 import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
 
 
 public class MessageFragment extends BaseFragment {
 
-    ArrayList<SearchItem> list_data = new ArrayList<>();
-    private DatabaseReference databaseReference;
+    ArrayList<MessageItem> list_data_message = new ArrayList<>();
+    private DatabaseReference databaseReference1;
+    private DatabaseReference databaseReference2;
     private FirebaseAuth mAuth;
     ListView lv;
-    SearchAdapter m_adapter;
-    Button button;
+    MessageAdapter m_adapter;
+    String check;
 
     public MessageFragment() {
         // Required empty public constructor
@@ -40,20 +43,22 @@ public class MessageFragment extends BaseFragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_message, container, false);
-        list_data = new ArrayList<SearchItem>();
+        list_data_message = new ArrayList<MessageItem>();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("users");
+        databaseReference1 = database.getReference("message");
+        databaseReference2 = database.getReference("users");
+        check = databaseReference2.toString();
         mAuth = FirebaseAuth.getInstance();
 
-
-
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        Log.e("aaaaa", check);
+        databaseReference1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                SearchItem value = dataSnapshot.getValue(SearchItem.class); // 괄호 안 : 꺼낼 자료 형태
-               list_data.add(value);
-                m_adapter.notifyDataSetChanged();
+                    Log.e("ggggggg", check);
+                    MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
+                    list_data_message.add(value);
+                    m_adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -76,28 +81,10 @@ public class MessageFragment extends BaseFragment {
 
             }
         });
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for(DataSnapshot searchSnapshot : dataSnapshot.getChildren()){
-//                    String str_n = searchSnapshot.child("name").getValue(String.class);
-//                    String str_f = searchSnapshot.child("feel").getValue(String.class);
-//                    list.add(str_n);
-//                    //Log.e("TAG",list.get);
-//                }
-//                adapter_m.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.w("TAG: ", "Failed to read value", databaseError.toException());
-//            }
-//        });
 
-        m_adapter = new SearchAdapter(getActivity(), list_data);
+        m_adapter = new MessageAdapter(getActivity(), list_data_message);
         lv = (ListView)view.findViewById(R.id.m_listView);
         lv.setAdapter(m_adapter);
-        //lv.setOnItemClickListener(this);
 
 
         return view;

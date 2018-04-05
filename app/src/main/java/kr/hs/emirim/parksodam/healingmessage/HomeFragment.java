@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.hs.emirim.parksodam.healingmessage.adapter.HomeAdapter;
 import kr.hs.emirim.parksodam.healingmessage.adapter.SearchAdapter;
 import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
 import kr.hs.emirim.parksodam.healingmessage.slider.FragmentSlider;
@@ -36,19 +37,17 @@ public class HomeFragment extends BaseFragment {
     private SliderPagerAdapter mAdapter;
     private SliderIndicator mIndicator;
     private SliderView sliderView;
+
     private LinearLayout mLinearLayout;
-    private List<String> list;          // 데이터를 넣은 리스트변수
-    private ListView listView_m;          // 검색을 보여줄 리스트변수
-    private SearchAdapter adapter_m;      // 리스트뷰에 연결할 아답터
-    private ArrayList<String> arraylist;
+
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
-    static boolean calledAlerady = false;
-    TextView feel;
+
     ArrayList<SearchItem> list_data_home = new ArrayList<>();
     ArrayList<SearchItem> result_data = new ArrayList<>();
     ListView lv;
-    SearchAdapter adapter;
+    HomeAdapter h_adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,32 +57,10 @@ public class HomeFragment extends BaseFragment {
 
         setupSlider();
 
-        //databaseReference = FirebaseDatabase.getInstance().getReference("users");
-        //mAuth = FirebaseAuth.getInstance();
-
-        listView_m = (ListView) view.findViewById(R.id.m_listView);
-
-        // 리스트를 생성한다.
-        list = new ArrayList<String>();
-
-        // 리스트의 모든 데이터를 arraylist에 복사한다.// list 복사본을 만든다.
-        arraylist = new ArrayList<String>();
-        arraylist.addAll(list);
-
-        // 리스트에 연동될 아답터를 생성한다.
-       // adapter_m = new SearchAdapter(list, getActivity());
-
-        // 리스트뷰에 아답터를 연결한다.
-        listView_m.setAdapter(adapter_m);
-
-        //FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //DatabaseReference databaseRef = database.getReference("users");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("users");
         mAuth = FirebaseAuth.getInstance();
 
-
-        //
         list_data_home = new ArrayList<SearchItem>();
 
 
@@ -92,7 +69,7 @@ public class HomeFragment extends BaseFragment {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 SearchItem value = dataSnapshot.getValue(SearchItem.class); // 괄호 안 : 꺼낼 자료 형태
                 list_data_home.add(value);
-                adapter.notifyDataSetChanged();
+                h_adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -115,9 +92,10 @@ public class HomeFragment extends BaseFragment {
 
             }
         });
-        adapter = new SearchAdapter(getActivity(), list_data_home);
-        lv = (ListView)view.findViewById(R.id.m_listView);
-        lv.setAdapter(adapter);
+
+        h_adapter = new HomeAdapter(getActivity(), list_data_home);
+        lv = (ListView)view.findViewById(R.id.h_listView);
+        lv.setAdapter(h_adapter);
         
         return view;
     }
