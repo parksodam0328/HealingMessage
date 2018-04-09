@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< Updated upstream
 import android.widget.Button;
+=======
+>>>>>>> Stashed changes
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,7 +23,6 @@ import java.util.ArrayList;
 
 import kr.hs.emirim.parksodam.healingmessage.adapter.MessageAdapter;
 import kr.hs.emirim.parksodam.healingmessage.adapter.SearchAdapter;
-import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
 
 
 public class MessageFragment extends BaseFragment {
@@ -54,6 +56,7 @@ public class MessageFragment extends BaseFragment {
         Log.e("aaaaa", check);
         databaseReference1.addChildEventListener(new ChildEventListener() {
             @Override
+<<<<<<< Updated upstream
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     Log.e("ggggggg", check);
                     MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
@@ -74,6 +77,17 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
+=======
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot searchSnapshot : dataSnapshot.getChildren()){
+                    String str_n = searchSnapshot.child("name").getValue(String.class);
+                    String str_f = searchSnapshot.child("feel").getValue(String.class);
+                    Log.e("name값 불러오기", "성공?");
+                    list.add(str_n);
+                    list.add(str_f);
+                }
+                adapter_m.notifyDataSetChanged();
+>>>>>>> Stashed changes
             }
 
             @Override
@@ -82,11 +96,14 @@ public class MessageFragment extends BaseFragment {
             }
         });
 
+<<<<<<< Updated upstream
         m_adapter = new MessageAdapter(getActivity(), list_data_message);
         lv = (ListView)view.findViewById(R.id.m_listView);
         lv.setAdapter(m_adapter);
 
 
+=======
+>>>>>>> Stashed changes
         return view;
     }
 
