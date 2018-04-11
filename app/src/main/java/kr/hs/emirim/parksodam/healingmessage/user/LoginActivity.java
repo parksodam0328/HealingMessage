@@ -94,13 +94,12 @@ public class LoginActivity extends AppCompatActivity {
                                         Log.e("TAG", id);
                                         Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), BarActivity.class);
-<<<<<<< Updated upstream
+                                        //값 넘기기
                                         intent.putExtra("id",userName);
-=======
                                         Bundle bundle = new Bundle(); // 파라미터는 전달할 데이터 개수
                                         bundle.putString("userId", id); // key , value
                                         intent.putExtras(bundle);
->>>>>>> Stashed changes
+                                        //
                                         startActivity(intent);
                                     }
                                 }

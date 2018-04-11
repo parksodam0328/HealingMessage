@@ -54,12 +54,6 @@ public class BarActivity extends AppCompatActivity {
         layout = (TabLayout) findViewById(R.id.tl_main);
         layout.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF")); // 밑줄색
         vp.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(layout));
-        Bundle bundle = new Bundle();
-        MyProfileFragment myProfileFragment = new MyProfileFragment();
-        Intent intent = getIntent();
-        String userId = intent.getStringExtra("id");
-        bundle.putString("id",userId);
-        myProfileFragment.setArguments(bundle);
         layout.setupWithViewPager(vp);
 
         for (int i = 0; i < 4; i++) {

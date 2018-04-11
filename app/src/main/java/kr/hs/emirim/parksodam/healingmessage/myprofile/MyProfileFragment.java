@@ -50,10 +50,13 @@ public class MyProfileFragment extends BaseFragment {
         send_message = (ImageView)  view.findViewById(R.id.send_message);
         fortune_cookie = (ImageView)  view.findViewById(R.id.fortune_cookie);
         word_random = (int) (Math.random() * word.length);
-        if (getArguments() != null) {
-            id = getArguments().getString("id");
-            Log.e("tag", id);
-        }
+
+        Bundle bundle = getActivity().getIntent().getExtras();
+        if (bundle != null) {
+            id = bundle.getString("userId");
+            Log.e("tag",id);
+        } else Log.e("sorry"," null");
+
         received_message.setOnClickListener(new View.OnClickListener() { // 받은 메세지함으로 이동
             @Override
             public void onClick(View v) {

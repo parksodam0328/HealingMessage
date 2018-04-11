@@ -54,21 +54,15 @@ public class MessageFragment extends BaseFragment {
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        databaseReference1 = database.getReference("message").child(id);
+        databaseReference1 = database.getReference("message");
         mAuth = FirebaseAuth.getInstance();
 
         databaseReference1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-<<<<<<< Updated upstream
                 MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
                 list_data_message.add(value);
                 m_adapter.notifyDataSetChanged();
-=======
-                    MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
-                    list_data_message.add(value);
-                    m_adapter.notifyDataSetChanged();
->>>>>>> Stashed changes
             }
 
             @Override
