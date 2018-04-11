@@ -10,9 +10,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import kr.hs.emirim.parksodam.healingmessage.MessageItem;
+import kr.hs.emirim.parksodam.healingmessage.message.MessageItem;
 import kr.hs.emirim.parksodam.healingmessage.R;
-import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
 
 /**
  * Created by 민경 on 2018-04-05.

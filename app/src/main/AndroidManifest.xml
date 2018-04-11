@@ -11,16 +11,15 @@
         <activity android:name=".user.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".BarActivity" />
-        <activity android:name=".search.SearchActivity">
-
-        </activity>
-        <activity android:name=".user.RegisterActivity"></activity>
-
+        <activity android:name=".search.SearchActivity" />
+        <activity android:name=".user.RegisterActivity" />
+        <activity android:name=".myprofile.ReceivedMessage" />
+        <activity android:name=".myprofile.SendMessage"></activity>
     </application>
 
 </manifest>

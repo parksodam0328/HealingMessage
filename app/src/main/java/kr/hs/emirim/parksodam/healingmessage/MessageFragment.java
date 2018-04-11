@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 import kr.hs.emirim.parksodam.healingmessage.adapter.MessageAdapter;
+import kr.hs.emirim.parksodam.healingmessage.message.MessageItem;
 
 
 public class MessageFragment extends BaseFragment {

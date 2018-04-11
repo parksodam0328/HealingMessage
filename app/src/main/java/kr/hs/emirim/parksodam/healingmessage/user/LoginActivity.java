@@ -44,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
     Button register;
     String TAG = "Handler";
     private FirebaseAuth mAuth;
+    String userName;
+    String userPw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         checkId = (EditText) findViewById(R.id.checkId);
         checkPw = (EditText) findViewById(R.id.checkPw);
         word_text.setText(word[word_random]);
-
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
@@ -78,15 +79,15 @@ public class LoginActivity extends AppCompatActivity {
                                         checkPw.requestFocus();
                                         return;
                                     }
-                                    String userName = snapshot.child("id").getValue().toString();
-                                    String userPw = snapshot.child("pw").getValue().toString();
+                                    userName = snapshot.child("id").getValue().toString();
+                                    userPw = snapshot.child("pw").getValue().toString();
                                     if (userName.equals(checkId.getText().toString()) && userPw.equals(checkPw.getText().toString())) {
                                         Log.e("TAG",userName);
                                         Log.e("TAG",userPw);
                                         Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), BarActivity.class);
+                                        intent.putExtra("id",userName);
                                         startActivity(intent);
-                                        return;
                                     }
                                 }
                                     Toast.makeText(getApplicationContext(), "존재하지 않는 회원정보입니다.", Toast.LENGTH_SHORT).show();
