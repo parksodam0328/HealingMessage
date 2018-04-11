@@ -1,6 +1,8 @@
 
 package kr.hs.emirim.parksodam.healingmessage.user;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import kr.hs.emirim.parksodam.healingmessage.BarActivity;
+import kr.hs.emirim.parksodam.healingmessage.MessageFragment;
 import kr.hs.emirim.parksodam.healingmessage.R;
 
 
@@ -43,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     Button register;
     String TAG = "Handler";
+    String id;
+
     private FirebaseAuth mAuth;
     String userName;
     String userPw;
@@ -82,11 +87,20 @@ public class LoginActivity extends AppCompatActivity {
                                     userName = snapshot.child("id").getValue().toString();
                                     userPw = snapshot.child("pw").getValue().toString();
                                     if (userName.equals(checkId.getText().toString()) && userPw.equals(checkPw.getText().toString())) {
+                                        id = checkId.getText().toString();
                                         Log.e("TAG",userName);
                                         Log.e("TAG",userPw);
+
+                                        Log.e("TAG", id);
                                         Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), BarActivity.class);
+<<<<<<< Updated upstream
                                         intent.putExtra("id",userName);
+=======
+                                        Bundle bundle = new Bundle(); // 파라미터는 전달할 데이터 개수
+                                        bundle.putString("userId", id); // key , value
+                                        intent.putExtras(bundle);
+>>>>>>> Stashed changes
                                         startActivity(intent);
                                     }
                                 }
@@ -105,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
             });
 
 
+
         register = (Button)findViewById(R.id.register);
         register.setOnClickListener(new View.OnClickListener() { // 화원이 아닐 시 회원가입 액티비티로 이동
             @Override
@@ -113,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
 

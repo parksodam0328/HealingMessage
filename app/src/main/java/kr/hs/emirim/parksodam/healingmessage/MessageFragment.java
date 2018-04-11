@@ -28,8 +28,9 @@ public class MessageFragment extends BaseFragment {
     private DatabaseReference databaseReference2;
     private FirebaseAuth mAuth;
     ListView lv;
+    private String id;
     MessageAdapter m_adapter;
-    String check;
+
 
     public MessageFragment() {
         // Required empty public constructor
@@ -39,23 +40,35 @@ public class MessageFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Bundle bundle = getActivity().getIntent().getExtras();
+        if (bundle != null) {
+            id = bundle.getString("userId");
+            Log.e("tag",id);
+        } else Log.e("sorry"," null");
+
+
 
         View view = inflater.inflate(R.layout.fragment_message, container, false);
         list_data_message = new ArrayList<MessageItem>();
 
+
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        databaseReference1 = database.getReference("message");
-        databaseReference2 = database.getReference("users");
-        check = databaseReference2.toString();
+        databaseReference1 = database.getReference("message").child(id);
         mAuth = FirebaseAuth.getInstance();
 
-        Log.e("aaaaa", check);
         databaseReference1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+<<<<<<< Updated upstream
                 MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
                 list_data_message.add(value);
                 m_adapter.notifyDataSetChanged();
+=======
+                    MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
+                    list_data_message.add(value);
+                    m_adapter.notifyDataSetChanged();
+>>>>>>> Stashed changes
             }
 
             @Override
