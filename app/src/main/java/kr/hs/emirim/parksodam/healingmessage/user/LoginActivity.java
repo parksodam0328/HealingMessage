@@ -98,9 +98,10 @@ public class LoginActivity extends AppCompatActivity {
                                         intent.putExtras(bundle);
                                         //
                                         startActivity(intent);
+                                        return;
                                     }
                                 }
-                                    Toast.makeText(getApplicationContext(), "존재하지 않는 회원정보입니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "존재하지 않는 회원정보입니다.", Toast.LENGTH_SHORT).show();
                         }
 
 
