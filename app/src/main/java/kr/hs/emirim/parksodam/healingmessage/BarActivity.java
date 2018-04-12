@@ -26,6 +26,7 @@ public class BarActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView myTitleText;
     private ImageView mSearch;
+    public static String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
