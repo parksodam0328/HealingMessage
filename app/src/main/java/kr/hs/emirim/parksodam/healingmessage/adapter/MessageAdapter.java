@@ -50,17 +50,13 @@ public class MessageAdapter extends BaseAdapter {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(R.layout.row_listview_message, null);
         }
-
         MessageItem messageItem = list_data_message.get(position);
         TextView msName = (TextView)convertView.findViewById(R.id.list_ms_name);
         TextView msContents = (TextView)convertView.findViewById(R.id.list_ms_contents);
 
 
-
-        Log.e("왜 null이뜨죠?", msContents.getText().toString());
-
-        msName.setText(messageItem.getMs_name());
-        msContents.setText(messageItem.getContents());
+        msName.setText(messageItem.name);
+        msContents.setText(messageItem.context);
 
 
 

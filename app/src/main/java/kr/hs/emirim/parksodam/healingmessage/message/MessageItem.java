@@ -5,29 +5,29 @@ package kr.hs.emirim.parksodam.healingmessage.message;
  */
 
 public class MessageItem {
-    private String ms_name;
-    private String contents;
+    public String name;
+    public String context;
 
     public MessageItem(){}
 
     public MessageItem(String ms_name, String contents){
-        this.ms_name = ms_name;
-        this.contents = contents;
+        this.name = ms_name;
+        this.context = contents;
     }
 
     public String getMs_name() {
-        return ms_name;
+        return name;
     }
 
     public void setMs_name(String name) {
-        this.ms_name = name;
+        this.name = name;
     }
 
     public String getContents() {
-        return contents;
+        return context;
     }
 
     public void setContents(String contents) {
-        this.contents = contents;
+        this.context = contents;
     }
 }

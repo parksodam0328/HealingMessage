@@ -1,4 +1,4 @@
-package kr.hs.emirim.parksodam.healingmessage;
+package kr.hs.emirim.parksodam.healingmessage.message;
 
 
 import android.content.Intent;
@@ -19,6 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
+import kr.hs.emirim.parksodam.healingmessage.R;
 import kr.hs.emirim.parksodam.healingmessage.adapter.MessageAdapter;
 import kr.hs.emirim.parksodam.healingmessage.message.MessageItem;
 
@@ -52,46 +54,32 @@ public class MessageFragment extends BaseFragment {
         } else Log.e("sorry"," null");
 
 
+/*
 
             Bundle bundle = getArguments();
             final String user = bundle.getString("id_re");
+*/
 
 
         View view = inflater.inflate(R.layout.fragment_message, container, false);
         list_data_message = new ArrayList<MessageItem>();
 
-
-
-<<<<<<< Updated upstream
-        databaseReference1 = FirebaseDatabase.getInstance().getReference("message").child(id);
-=======
+        databaseReference1 = FirebaseDatabase.getInstance().getReference("message");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        databaseReference1 = database.getReference("message");
->>>>>>> Stashed changes
+        //databaseReference1 = database.getReference("message");
         mAuth = FirebaseAuth.getInstance();
 
         databaseReference1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-<<<<<<< Updated upstream
                 list_data_message.clear();
                 Log.e("여기서 값을 넣습니다", id);
                 Log.e("TAG", String.valueOf(dataSnapshot.getValue()));
                 MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
-                list_data_message.add(value);
-//                m_adapter.notifyDataSetChanged();
-=======
-                String userName = dataSnapshot.getValue().toString();
-                String nn = (String) dataSnapshot.child(user).child("id").getValue();
-                Log.e("hihihi", "들어왔따!");
-                if(nn.equals(user)) {
-                    Log.e("hihihi!!!!!!", "들어왔따!");
-                    MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
+
                     list_data_message.add(value);
                     m_adapter.notifyDataSetChanged();
                 }
->>>>>>> Stashed changes
-            }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {

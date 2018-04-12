@@ -1,8 +1,6 @@
 
 package kr.hs.emirim.parksodam.healingmessage.user;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import kr.hs.emirim.parksodam.healingmessage.BarActivity;
-import kr.hs.emirim.parksodam.healingmessage.MessageFragment;
 import kr.hs.emirim.parksodam.healingmessage.R;
 
 
@@ -38,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
             "고마워", "사랑해", "너는 특별해"};
 
     private DatabaseReference databaseReference;
-    int word_random;
+    //int word_random;
     TextView word_text;
     Handler handler = new Handler();
     EditText checkId;
@@ -55,10 +52,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        word_text = (TextView) findViewById(R.id.word_text);
+//        word_text = (TextView) findViewById(R.id.word_text);
         checkId = (EditText) findViewById(R.id.checkId);
         checkPw = (EditText) findViewById(R.id.checkPw);
-        word_text.setText(word[word_random]);
+//        word_text.setText(word[word_random]);
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
@@ -128,55 +125,45 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< Updated upstream
-=======
-        final String id_re = checkId.getText().toString();
-        MessageFragment m_Fragment = new MessageFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("id_re", id_re);
-        m_Fragment.setArguments(bundle);
-
-
->>>>>>> Stashed changes
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.e(TAG,"들어옴");
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                for (;;) { //int i = 0; i < 3; i++
-                    word_random = (int) (Math.random() * 32);
-                    try {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                word_text.setText(word[word_random]);
-                                Log.e(TAG, word[word_random]);
-                                //word_text.setText("");
-                            }
-                        });
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        thread.setDaemon(true);
-        thread.start();
-    }
-
-    @Override public void onStop() {
-        super.onStop();
-
-        }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        Log.e(TAG,"들어옴");
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                for (;;) { //int i = 0; i < 3; i++
+//                    word_random = (int) (Math.random() * 32);
+//                    try {
+//                        handler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//
+//                                word_text.setText(word[word_random]);
+//                                Log.e(TAG, word[word_random]);
+//                                //word_text.setText("");
+//                            }
+//                        });
+//                        Thread.sleep(3000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//        thread.setDaemon(true);
+//        thread.start();
+//    }
+//
+//    @Override public void onStop() {
+//        super.onStop();
+//
+//        }
 
 
 }

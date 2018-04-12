@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import kr.hs.emirim.parksodam.healingmessage.adapter.FragmentPagerAdapter;
+import kr.hs.emirim.parksodam.healingmessage.message.MessageFragment;
 import kr.hs.emirim.parksodam.healingmessage.myprofile.MyProfileFragment;
 import kr.hs.emirim.parksodam.healingmessage.search.SearchActivity;
 
