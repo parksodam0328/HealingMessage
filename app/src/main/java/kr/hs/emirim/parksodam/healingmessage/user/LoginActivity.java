@@ -128,6 +128,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+<<<<<<< Updated upstream
+=======
+        final String id_re = checkId.getText().toString();
+        MessageFragment m_Fragment = new MessageFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("id_re", id_re);
+        m_Fragment.setArguments(bundle);
+
+
+>>>>>>> Stashed changes
     }
 
 
