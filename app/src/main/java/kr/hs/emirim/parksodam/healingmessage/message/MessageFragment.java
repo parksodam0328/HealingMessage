@@ -72,13 +72,16 @@ public class MessageFragment extends BaseFragment {
         databaseReference1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                list_data_message.clear();
-                Log.e("여기서 값을 넣습니다", id);
-                Log.e("TAG", String.valueOf(dataSnapshot.getValue()));
-                MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
+
+                if(id.equals(dataSnapshot.getKey())) {
+                    list_data_message.clear();
+                    Log.e("여기서 값을 넣습니다", id);
+                    Log.e("TAG", String.valueOf(dataSnapshot.getValue()));
+                    MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
 
                     list_data_message.add(value);
                     m_adapter.notifyDataSetChanged();
+                }
                 }
 
             @Override
