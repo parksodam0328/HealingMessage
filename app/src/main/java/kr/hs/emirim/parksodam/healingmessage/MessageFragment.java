@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -25,11 +26,11 @@ public class MessageFragment extends BaseFragment {
 
     ArrayList<MessageItem> list_data_message = new ArrayList<>();
     private DatabaseReference databaseReference1;
-    private DatabaseReference databaseReference2;
     private FirebaseAuth mAuth;
     ListView lv;
     private String id;
     MessageAdapter m_adapter;
+
 
 
     public MessageFragment() {
@@ -53,16 +54,18 @@ public class MessageFragment extends BaseFragment {
 
 
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        databaseReference1 = database.getReference("message");
+        databaseReference1 = FirebaseDatabase.getInstance().getReference("message").child(id);
         mAuth = FirebaseAuth.getInstance();
 
         databaseReference1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                list_data_message.clear();
+                Log.e("여기서 값을 넣습니다", id);
+                Log.e("TAG", String.valueOf(dataSnapshot.getValue()));
                 MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
                 list_data_message.add(value);
-                m_adapter.notifyDataSetChanged();
+//                m_adapter.notifyDataSetChanged();
             }
 
             @Override

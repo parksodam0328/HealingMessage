@@ -2,6 +2,7 @@ package kr.hs.emirim.parksodam.healingmessage.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,9 @@ public class MessageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+
         if(convertView == null){
+            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(R.layout.row_listview_message, null);
         }
 
@@ -53,8 +55,14 @@ public class MessageAdapter extends BaseAdapter {
         TextView msName = (TextView)convertView.findViewById(R.id.list_ms_name);
         TextView msContents = (TextView)convertView.findViewById(R.id.list_ms_contents);
 
+
+
+        Log.e("왜 null이뜨죠?", msContents.getText().toString());
+
         msName.setText(messageItem.getMs_name());
         msContents.setText(messageItem.getContents());
+
+
 
         return convertView;
     }
