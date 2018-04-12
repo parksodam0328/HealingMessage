@@ -9,6 +9,7 @@ public class User {
     public String id;
     public String pw;
     public String name;
+    public String fcmToken;
 
     public String getId() {
         return id;

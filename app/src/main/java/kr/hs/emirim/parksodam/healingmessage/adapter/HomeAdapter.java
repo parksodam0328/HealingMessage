@@ -61,6 +61,7 @@ public class HomeAdapter extends BaseAdapter {
         Button button1 = (Button) convertView.findViewById(R.id.list_btn_send);
         button1.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
 
                 alert.setTitle("응원하기");
@@ -72,7 +73,6 @@ public class HomeAdapter extends BaseAdapter {
 
                 alert.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        String username = name.getText().toString();
 
                     }
                 });

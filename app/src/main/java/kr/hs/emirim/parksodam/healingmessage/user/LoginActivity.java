@@ -13,12 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import kr.hs.emirim.parksodam.healingmessage.BarActivity;
 import kr.hs.emirim.parksodam.healingmessage.R;
@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Bundle bundle = new Bundle(); // 파라미터는 전달할 데이터 개수
                                         bundle.putString("userId", id); // key , value
                                         intent.putExtras(bundle);
-                                        //
+
                                         startActivity(intent);
                                         return;
                                     }
