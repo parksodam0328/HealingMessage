@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_name"
+                android:id="@+id/prof_name"
                 android:layout_marginTop="10dp"
                 android:textSize="15sp"
                 android:layout_gravity="center"
@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_feel"
+                android:id="@+id/prof_feel"
                 android:textSize="15sp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -67,11 +67,26 @@
             android:id="@+id/send_message"
             android:layout_height="48dp" />
 
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:id="@+id/fortune_cookie1"-->
+            <!--android:paddingTop="0dp"-->
+            <!--android:background="@drawable/message_send"/>-->
+
+        <!--<ImageButton-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="52dp"-->
+            <!--app:srcCompat="@drawable/message_send"-->
+            <!--android:id="@+id/fortune_cookie"-->
+            <!--android:onClick="onClick"/>-->
+
         <ImageView
             android:layout_width="wrap_content"
             app:srcCompat="@drawable/message_send"
             android:id="@+id/fortune_cookie"
-            android:layout_height="48dp" />
+            android:layout_height="48dp"
+            android:clickable="true"/>
 
     </LinearLayout>
 </FrameLayout>
