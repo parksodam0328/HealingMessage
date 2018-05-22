@@ -69,13 +69,10 @@ public class BarActivity extends AppCompatActivity {
                 getSupportActionBar().setTitle("힐링쪽지");
             }
             else if(i==2) {
-                layout.getTabAt(i).setText("내정보").setIcon(R.drawable.profile);
+                layout.getTabAt(i).setText("설정").setIcon(R.drawable.settings);
                 getSupportActionBar().setTitle("힐링쪽지");
             }
-            else if(i==3) {
-                layout.getTabAt(i).setText("도움말").setIcon(R.drawable.settings);
-                getSupportActionBar().setTitle("힐링쪽지");
-            }
+
         }
         vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
 
@@ -94,11 +91,9 @@ public class BarActivity extends AppCompatActivity {
                 }
                 else if (position == 2)
                 {
-                    myTitleText.setText("내정보");
+                    myTitleText.setText("설정");
                 }
-                else if (position == 3){
-                    myTitleText.setText("도움말");
-                }
+
             }
 
             @Override
@@ -123,15 +118,11 @@ public class BarActivity extends AppCompatActivity {
                     layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000076"));
                 }
                 else if(tab.getPosition()==2) {
-                    myTitleText.setText("내정보");
+                    myTitleText.setText("설정");
                     tab.setIcon(R.drawable.profile_click);
                     layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000076"));
                 }
-                else if(tab.getPosition()==3) {
-                    myTitleText.setText("도움말");
-                    tab.setIcon(R.drawable.settings_click);
-                    layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#000076"));
-                }
+
             }
 
             @Override
@@ -147,15 +138,11 @@ public class BarActivity extends AppCompatActivity {
                     layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#666666"));
                 }
                 else if(tab.getPosition()==2) {
-                    myTitleText.setText("내정보");
+                    myTitleText.setText("설정");
                     tab.setIcon(R.drawable.profile);
                     layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#666666"));
                 }
-                else if(tab.getPosition()==3) {
-                    myTitleText.setText("도움말");
-                    tab.setIcon(R.drawable.settings);
-                    layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#666666"));
-                }
+
             }
 
             @Override
@@ -180,8 +167,7 @@ public class BarActivity extends AppCompatActivity {
         FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(), "홈");
         adapter.addFragment(new MessageFragment(), "메세지");
-        adapter.addFragment(new MyProfileFragment(), "내정보");
-        adapter.addFragment(new SetFragment(), "도움말");
+        adapter.addFragment(new MyProfileFragment(), "설정");
         vp.setAdapter(adapter);
     }
 }

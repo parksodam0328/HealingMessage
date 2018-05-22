@@ -1,5 +1,7 @@
 package kr.hs.emirim.parksodam.healingmessage;
 
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -103,10 +105,17 @@ public class HomeFragment extends BaseFragment {
     private void setupSlider() {
         sliderView.setDurationScroll(800);
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(FragmentSlider.newInstance("http://www.menucool.com/slider/prod/image-slider-1.jpg"));
-        fragments.add(FragmentSlider.newInstance("http://www.menucool.com/slider/prod/image-slider-2.jpg"));
-        fragments.add(FragmentSlider.newInstance("http://www.menucool.com/slider/prod/image-slider-3.jpg"));
-        fragments.add(FragmentSlider.newInstance("http://www.menucool.com/slider/prod/image-slider-4.jpg"));
+
+
+        String re11 = "@drawable/s11";
+        String re12 = "@drawable/s12";
+
+        String packName = getActivity().getPackageName(); // 패키지명
+        int resID = getResources().getIdentifier(re11, "drawable", packName);
+
+        int re10 = getResources().getIdentifier("s10", "drawable", getActivity().getPackageName());
+        fragments.add(FragmentSlider.newInstance(re11));
+        fragments.add(FragmentSlider.newInstance(re12));
 
         mAdapter = new SliderPagerAdapter(getActivity().getSupportFragmentManager(), fragments);
         sliderView.setAdapter(mAdapter);

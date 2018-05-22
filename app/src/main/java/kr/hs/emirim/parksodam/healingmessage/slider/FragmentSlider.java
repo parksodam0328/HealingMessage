@@ -16,7 +16,7 @@ import kr.hs.emirim.parksodam.healingmessage.R;
 
 public class FragmentSlider extends Fragment {
 
-    private static final String ARG_PARAM1 = "params";
+    private static final String ARG_PARAM1 = "param";
 
     private String imageUrls;
 
@@ -34,12 +34,12 @@ public class FragmentSlider extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        imageUrls = getArguments().getString(ARG_PARAM1);
+        imageUrls = getArguments().toString();
         View view = inflater.inflate(R.layout.fragment_slider_item, container, false);
         ImageView img = (ImageView) view.findViewById(R.id.img);
         Glide.with(getActivity())
                 .load(imageUrls)
-                .placeholder(R.drawable.image_slider_1)
+                .placeholder(R.drawable.s11)
                 .into(img);
         return view;
     }
