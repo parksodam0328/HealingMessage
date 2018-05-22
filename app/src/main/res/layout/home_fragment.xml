@@ -34,10 +34,10 @@
     android:id="@+id/h_listView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:divider="#999999"
+        android:divider="#E6E6E6"
     android:layout_marginTop="199dp"
     android:layout_marginBottom="56dp"
-    android:dividerHeight="1dp"></ListView>
+    android:dividerHeight="2dp"></ListView>
 
 
 </FrameLayout>

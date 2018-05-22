@@ -103,8 +103,8 @@
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="441dp"
-            android:divider="#999999"
-            android:dividerHeight="1dp"></ListView>
+            android:divider="#E6E6E6"
+            android:dividerHeight="2dp"></ListView>
     </LinearLayout>
 
 </LinearLayout>
