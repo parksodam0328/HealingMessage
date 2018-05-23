@@ -39,7 +39,7 @@ public class FragmentSlider extends Fragment {
         ImageView img = (ImageView) view.findViewById(R.id.img);
         Glide.with(getActivity())
                 .load(imageUrls)
-                .placeholder(R.drawable.s11)
+                .placeholder(R.drawable.healing_01)
                 .into(img);
         return view;
     }

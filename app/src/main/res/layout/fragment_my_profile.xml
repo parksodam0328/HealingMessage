@@ -48,9 +48,10 @@
 
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="446dp"
         android:orientation="vertical"
         android:weightSum="1">
 
@@ -63,7 +64,7 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            app:srcCompat="@drawable/message_send"
+            app:srcCompat="@drawable/c_setting"
             android:id="@+id/send_message"
             android:layout_height="48dp" />
 
@@ -83,7 +84,7 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            app:srcCompat="@drawable/message_send"
+            app:srcCompat="@drawable/c_how"
             android:id="@+id/fortune_cookie"
             android:layout_height="48dp"
             android:clickable="true"/>

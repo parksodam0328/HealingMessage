@@ -49,7 +49,7 @@ public class MyProfileFragment extends BaseFragment {
             "힘내 너는 아름다우니까", "불안해 한다는 건 가능성이 있기 때문에 불안한거야 -민주리선생님", "넌 정말 소중한 존재야", "네가 가고자 하는 길은 꽃길일거야",
             "꽃길만 걷게 해 줄게요 -김세정", "너는 멋진 존재야", "난 용감해, 난 당당해, 난 내가 자랑스러워 이게 나야 -this is me", "내 앞에선 다 괜찮아 울어도 돼",
             "고마워", "사랑해", "너는 특별해", "손이 타버릴 듯 뜨거울 지라도, 담고싶은 태양이 있다면 절대로 놓지 말 것", "시작하는 모든 존재는 늘 아프고 불안하다. 하지만 기억하라 그대는 눈부시게 아름답다",
-            "나는 멋지다, 나는 멋지다, 나는 멋지다 - 스피릿핑거스"};
+            "나는 멋지다, 나는 멋지다, 나는 멋지다 - 스피릿핑거스", "때론 당신의 인생에서 엉뚱한 친절과 정신나간 선행을 실천해보라", "진정으로 나 자신의 것이 아닌 것은 과감하게 버려야 합니다"};
     int word_random;
     public MyProfileFragment() {
         // Required empty public constructor
@@ -101,6 +101,7 @@ public class MyProfileFragment extends BaseFragment {
                     }
                     Log.e("피치퍼펙트재밋다..", word[word_random]);
                     alert.setMessage(word[word_random]) // 좋은 말 띄우기
+                             .setIcon(R.drawable.home_click)
                         .setCancelable(false)
                         .setPositiveButton("확인",
                                 new DialogInterface.OnClickListener() {
