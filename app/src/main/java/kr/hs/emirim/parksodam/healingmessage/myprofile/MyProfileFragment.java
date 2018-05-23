@@ -34,10 +34,9 @@ import static kr.hs.emirim.parksodam.healingmessage.BarActivity.id;
 
 public class MyProfileFragment extends BaseFragment {
     private View view;
-    private ImageView received_message;
-    private ImageView send_message;
-    //private ImageView fortune_cookie;
     private ImageView fortune_cookie;
+    private ImageView setting;
+    private ImageView howto;
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
 
@@ -62,16 +61,17 @@ public class MyProfileFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_my_profile, container, false);
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
-        received_message = (ImageView)  view.findViewById(R.id.received_message);
-        send_message = (ImageView)  view.findViewById(R.id.send_message);
         fortune_cookie = (ImageView)  view.findViewById(R.id.fortune_cookie);
+        setting = (ImageView)  view.findViewById(R.id.setting);
+        howto = (ImageView)  view.findViewById(R.id.howto);
+
 
         Bundle bundle = getActivity().getIntent().getExtras(); // 액티비티에서 넘어오는 값 받기
         if (bundle != null) {
             id = bundle.getString("userId");
             Log.e("tag",id);
 
-            received_message.setOnClickListener(new View.OnClickListener() { // 받은 메세지함으로 이동
+            setting.setOnClickListener(new View.OnClickListener() { // 받은 메세지함으로 이동
             @Override
             public void onClick(View v) {
                 //onMyListener.onReceivedData(id);
@@ -80,7 +80,7 @@ public class MyProfileFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        send_message.setOnClickListener(new View.OnClickListener() { // 보낸 메세지함으로 이동
+            howto.setOnClickListener(new View.OnClickListener() { // 보낸 메세지함으로 이동
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SendMessage.class);
@@ -101,7 +101,7 @@ public class MyProfileFragment extends BaseFragment {
                     }
                     Log.e("피치퍼펙트재밋다..", word[word_random]);
                     alert.setMessage(word[word_random]) // 좋은 말 띄우기
-                             .setIcon(R.drawable.home_click)
+                             .setIcon(R.drawable.back_icon)
                         .setCancelable(false)
                         .setPositiveButton("확인",
                                 new DialogInterface.OnClickListener() {

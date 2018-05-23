@@ -9,17 +9,6 @@
     tools:context="kr.hs.emirim.parksodam.healingmessage.user.LoginActivity"
     android:background="@drawable/background_image">
 
-    <TextView
-        android:text="TextView"
-        android:id="@+id/word_text"
-        android:layout_height="40dp"
-        android:layout_above="@+id/imageButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="145dp"
-        android:gravity="center_horizontal"
-        android:layout_marginLeft="100dp"
-        android:layout_width="202dp" />
-
     <EditText
         android:layout_width="185dp"
         android:layout_height="wrap_content"
@@ -27,7 +16,7 @@
         android:hint="아이디"
         android:layout_marginLeft="98dp"
         android:id="@+id/checkId"
-        android:layout_marginTop="143dp"
+        android:layout_marginTop="325dp"
         android:textSize="13sp"/>
     <EditText
         android:layout_width="186dp"
