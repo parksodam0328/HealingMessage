@@ -2,32 +2,23 @@ package kr.hs.emirim.parksodam.healingmessage.myprofile;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-
 import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
-import kr.hs.emirim.parksodam.healingmessage.OnMyListener;
 import kr.hs.emirim.parksodam.healingmessage.R;
-import kr.hs.emirim.parksodam.healingmessage.adapter.HomeAdapter;
-import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
 
 import static kr.hs.emirim.parksodam.healingmessage.BarActivity.id;
 
@@ -37,6 +28,7 @@ public class MyProfileFragment extends BaseFragment {
     private ImageView fortune_cookie;
     private ImageView setting;
     private ImageView howto;
+    private ImageView profile;
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
 
@@ -64,7 +56,11 @@ public class MyProfileFragment extends BaseFragment {
         fortune_cookie = (ImageView)  view.findViewById(R.id.fortune_cookie);
         setting = (ImageView)  view.findViewById(R.id.setting);
         howto = (ImageView)  view.findViewById(R.id.howto);
-
+        profile = (ImageView) view.findViewById(R.id.profile_image);
+        profile.setBackground(new ShapeDrawable(new OvalShape()));
+        if(Build.VERSION.SDK_INT >= 21) {
+            profile.setClipToOutline(true);
+        }
 
         Bundle bundle = getActivity().getIntent().getExtras(); // 액티비티에서 넘어오는 값 받기
         if (bundle != null) {

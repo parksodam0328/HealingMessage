@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@android:color/white"
-        app:tabSelectedTextColor="#000076"
+        app:tabSelectedTextColor="@color/colorAccent"
         app:tabTextColor="#666666"
         app:tabMode="fixed"
         app:tabGravity="fill"
@@ -22,57 +22,48 @@
         android:layout_alignParentBottom="true">
     </android.support.design.widget.TabLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/my_toolbar"
-        android:layout_alignParentStart="true">
-
-
-    </android.support.v4.view.ViewPager>
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#000076"
         android:minHeight="48dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:background="#ffffff"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
             android:layout_alignParentStart="true">
-        <TextView
-            android:id="@+id/title"
+        <ImageView
+            android:id="@+id/imageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="18dp"
-            android:text=""
-            android:textSize="16sp"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_above="@+id/vp_main"
-            android:layout_toRightOf="@+id/logo"
-            android:layout_toEndOf="@+id/logo" />
+            app:srcCompat="@drawable/healing_message_image"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="15dp">
         <ImageView
             android:id="@+id/search"
-            android:layout_width="20dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="95dp"
             android:layout_gravity="left"
 
-            app:srcCompat="@drawable/search" />
+            app:srcCompat="@drawable/search_big" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+
+    </android.support.v4.view.ViewPager>
 </RelativeLayout>

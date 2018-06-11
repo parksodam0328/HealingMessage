@@ -5,15 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,8 +42,8 @@ public class LoginActivity extends AppCompatActivity {
     Handler handler = new Handler();
     EditText checkId;
     EditText checkPw;
-    Button login;
-    Button register;
+    ImageButton login;
+    ImageView register;
     String TAG = "Handler";
     String id;
 
@@ -55,28 +57,30 @@ public class LoginActivity extends AppCompatActivity {
 //        word_text = (TextView) findViewById(R.id.word_text);
         checkId = (EditText) findViewById(R.id.checkId);
         checkPw = (EditText) findViewById(R.id.checkPw);
+        register = (ImageView) findViewById(R.id.register);
 //        word_text.setText(word[word_random]);
-
+        checkPw.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD );
+        checkPw.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         mAuth = FirebaseAuth.getInstance();
 
-        login = (Button) findViewById(R.id.login);
+        login = (ImageButton) findViewById(R.id.login_btn);
             login.setOnClickListener(new View.OnClickListener() { // 로그인 버튼 클릭시
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v) { // 회원정보 체크
 
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) { // 회원정보 체크
+                        public void onDataChange(DataSnapshot dataSnapshot) {
                                 // dataSnapshot is the "issue" node with all children with id 0
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    if (checkId.getText().toString().equals("")) {
+                                    if (checkId.getText().toString().equals("")) { // 아이디 공백일 시
                                         Toast.makeText(getApplicationContext(), "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show();
                                         checkId.requestFocus();
                                         return;
                                     }
-                                    if (checkPw.getText().toString().equals("")) {
+                                    if (checkPw.getText().toString().equals("")) { // 비밀번호 공백일 시
                                         Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
                                         checkPw.requestFocus();
                                         return;
@@ -101,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                                         return;
                                     }
                                 }
-                            Toast.makeText(getApplicationContext(), "존재하지 않는 회원정보입니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "존재하지 않는 회원 정보입니다.", Toast.LENGTH_SHORT).show(); // 회원 정보가 없을 경우
                         }
 
 
@@ -115,10 +119,7 @@ public class LoginActivity extends AppCompatActivity {
 
             });
 
-
-
-        register = (Button)findViewById(R.id.register);
-        register.setOnClickListener(new View.OnClickListener() { // 화원이 아닐 시 회원가입 액티비티로 이동
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
@@ -127,44 +128,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        Log.e(TAG,"들어옴");
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                for (;;) { //int i = 0; i < 3; i++
-//                    word_random = (int) (Math.random() * 32);
-//                    try {
-//                        handler.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//
-//                                word_text.setText(word[word_random]);
-//                                Log.e(TAG, word[word_random]);
-//                                //word_text.setText("");
-//                            }
-//                        });
-//                        Thread.sleep(3000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-//        thread.setDaemon(true);
-//        thread.start();
-//    }
-//
-//    @Override public void onStop() {
-//        super.onStop();
-//
-//        }
 
 
 }

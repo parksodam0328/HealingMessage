@@ -1,7 +1,6 @@
 package kr.hs.emirim.parksodam.healingmessage.message;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,14 +14,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
 import kr.hs.emirim.parksodam.healingmessage.R;
 import kr.hs.emirim.parksodam.healingmessage.adapter.MessageAdapter;
-import kr.hs.emirim.parksodam.healingmessage.message.MessageItem;
 
 
 public class MessageFragment extends BaseFragment {
@@ -32,7 +29,9 @@ public class MessageFragment extends BaseFragment {
     private FirebaseAuth mAuth;
     ListView lv;
     private String id;
+    String i="mesaasge";
     MessageAdapter m_adapter;
+    int cnt=1;
 
 
 
@@ -64,7 +63,7 @@ public class MessageFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_message, container, false);
         list_data_message = new ArrayList<MessageItem>();
 
-        databaseReference1 = FirebaseDatabase.getInstance().getReference("message");
+        databaseReference1 = FirebaseDatabase.getInstance().getReference("message/"+id);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //databaseReference1 = database.getReference("message");
         mAuth = FirebaseAuth.getInstance();
@@ -72,17 +71,14 @@ public class MessageFragment extends BaseFragment {
         databaseReference1.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                if(id.equals(dataSnapshot.getKey())) {
+                    Log.e("TAG", String.valueOf(dataSnapshot.getValue()));
                     list_data_message.clear();
                     Log.e("여기서 값을 넣습니다", id);
-                    Log.e("TAG", String.valueOf(dataSnapshot.getValue()));
                     MessageItem value = dataSnapshot.getValue(MessageItem.class); // 괄호 안 : 꺼낼 자료 형태
-
                     list_data_message.add(value);
                     m_adapter.notifyDataSetChanged();
                 }
-                }
+
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {

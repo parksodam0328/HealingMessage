@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -59,7 +61,7 @@ public class SearchAdapter extends BaseAdapter {
         TextView tvFeel = (TextView) convertView.findViewById(R.id.list_text_feel);
 
         // 보내기 클릭 시 dialog띄우기
-        Button button1 = (Button) convertView.findViewById(R.id.list_btn_send);
+        ImageButton button1 = (ImageButton) convertView.findViewById(R.id.list_btn_send);
         button1.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);

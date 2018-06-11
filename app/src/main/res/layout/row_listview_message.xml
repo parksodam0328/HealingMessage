@@ -13,12 +13,12 @@
         android:layout_marginBottom="10dp">
 
         <ImageView
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:srcCompat="@drawable/proimage"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/frame"
             android:id="@+id/list_image" />
@@ -36,18 +36,28 @@
                 android:id="@+id/list_ms_name"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
-                android:textSize="13sp"
+                android:textColor="#FF7D11"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:hint="닉네임" />
 
             <TextView
                 android:layout_width="308dp"
                 android:layout_height="wrap_content"
+                android:id="@+id/list_ms_title"
+                android:textSize="13sp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:hint="제목" />
+
+            <TextView
+                android:layout_width="308dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/list_ms_contents"
                 android:textSize="13sp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginLeft="10dp"
-                android:hint="받은 메세지" />
+                android:hint="내용" />
 
         </LinearLayout>
 
