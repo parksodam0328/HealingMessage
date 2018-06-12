@@ -1,7 +1,9 @@
 package kr.hs.emirim.parksodam.healingmessage.message;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
 import kr.hs.emirim.parksodam.healingmessage.R;
 import kr.hs.emirim.parksodam.healingmessage.adapter.MessageAdapter;
+import kr.hs.emirim.parksodam.healingmessage.search.SearchActivity;
 
 
 public class MessageFragment extends BaseFragment {
@@ -62,6 +65,17 @@ public class MessageFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_message, container, false);
         list_data_message = new ArrayList<MessageItem>();
+
+        FloatingActionButton search_tab = (FloatingActionButton) view.findViewById(R.id.search_tab);
+
+        search_tab.setOnClickListener(new View.OnClickListener() { // 검색창으로 이동
+            @Override
+            public void onClick(View v) {
+                //onMyListener.onReceivedData(id);
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
 
         databaseReference1 = FirebaseDatabase.getInstance().getReference("message/"+id);
         FirebaseDatabase database = FirebaseDatabase.getInstance();

@@ -52,7 +52,6 @@
             android:layout_height="30dp"
             android:layout_marginLeft="95dp"
             android:layout_gravity="left"
-
             app:srcCompat="@drawable/search_big" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>

@@ -12,13 +12,16 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/my_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="#000076"
-            android:minHeight="48dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:weightSum="1"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@android:color/white"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="#666666"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabTextAppearance="@style/CustomTabWidgetText"
+            android:layout_alignParentBottom="true">
 
 
             <ImageView
@@ -26,15 +29,15 @@
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="left"
                 app:srcCompat="@drawable/back_icon"
-                android:layout_width="16dp"
+                android:layout_width="30dp"
                 android:layout_height="28dp" />
             <ImageView
                 android:id="@+id/search"
                 android:layout_marginLeft="12dp"
                 android:layout_gravity="left"
-                app:srcCompat="@drawable/search_letter"
-                android:layout_width="38dp"
-                android:layout_height="17dp" />
+                app:srcCompat="@drawable/search_image"
+                android:layout_width="100dp"
+                android:layout_height="40dp" />
 
         </android.support.v7.widget.Toolbar>
 
@@ -44,58 +47,75 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.33"
+            android:layout_height="52dp"
             android:id="@+id/re_id">
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"
-                android:layout_marginStart="12dp"
-                android:id="@+id/search_btn"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
-                android:onClick="onClick"/>
+                app:srcCompat="@drawable/search_happy"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:id="@+id/emo_btn1"
+                android:layout_toEndOf="@+id/search_btn"
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                android:layout_height="95dp"
+                android:layout_width="95dp"
+                android:layout_alignTop="@+id/search_btn" />
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/common_google_signin_btn_icon_disabled"
-                android:id="@+id/emo_btn1"
-                android:layout_alignBottom="@+id/search_btn"
+                app:srcCompat="@drawable/search_sad"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:id="@+id/emo_btn2"
+                android:layout_toEndOf="@+id/search_btn"
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                android:layout_marginLeft="76dp"
+                android:layout_height="95dp"
+                android:layout_width="95dp"
+                android:layout_alignTop="@+id/search_btn" />
+
+            <ImageButton
+                app:srcCompat="@drawable/search_angry"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:id="@+id/emo_btn4"
+                android:layout_toEndOf="@+id/search_btn"
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                android:layout_marginLeft="152dp"
+                android:layout_height="95dp"
+                android:layout_width="95dp"
+                android:layout_alignTop="@+id/search_btn" />
+
+            <ImageButton
+                app:srcCompat="@drawable/search_shyness"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:id="@+id/emo_btn3"
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                android:layout_height="95dp"
+                android:layout_width="95dp"
+                android:layout_alignTop="@+id/emo_btn1"
+                android:layout_marginLeft="228dp"
                 android:layout_toEndOf="@+id/search_btn" />
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/common_google_signin_btn_icon_disabled"
-                android:id="@+id/emo_btn2"
-                android:layout_alignTop="@+id/emo_btn1"
-                android:layout_toEndOf="@+id/emo_btn1"
-                android:layout_marginStart="14dp" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/common_google_signin_btn_icon_disabled"
-                android:layout_marginStart="13dp"
-                android:id="@+id/emo_btn3"
-                android:layout_alignTop="@+id/emo_btn2"
-                android:layout_toEndOf="@+id/emo_btn2" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/common_google_signin_btn_icon_disabled"
-                android:id="@+id/emo_btn4"
-                android:layout_marginStart="11dp"
-                android:layout_alignTop="@+id/emo_btn3"
-                android:layout_toEndOf="@+id/emo_btn3" />
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/search_btn"
+                android:background="@android:color/transparent"
+                android:id="@+id/search_btn"
+                android:onClick="onClick"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_width="30dp" />
 
         </RelativeLayout>
 
@@ -104,7 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="441dp"
             android:divider="#E6E6E6"
-            android:dividerHeight="2dp"></ListView>
+            android:dividerHeight="2dp"
+            android:layout_weight="0.94"></ListView>
     </LinearLayout>
 
 </LinearLayout>

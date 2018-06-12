@@ -1,8 +1,10 @@
 package kr.hs.emirim.parksodam.healingmessage;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,11 +27,15 @@ import java.util.List;
 
 import kr.hs.emirim.parksodam.healingmessage.adapter.HomeAdapter;
 import kr.hs.emirim.parksodam.healingmessage.adapter.SearchAdapter;
+import kr.hs.emirim.parksodam.healingmessage.myprofile.ReceivedMessage;
+import kr.hs.emirim.parksodam.healingmessage.search.SearchActivity;
 import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
 import kr.hs.emirim.parksodam.healingmessage.slider.FragmentSlider;
 import kr.hs.emirim.parksodam.healingmessage.slider.SliderIndicator;
 import kr.hs.emirim.parksodam.healingmessage.slider.SliderPagerAdapter;
 import kr.hs.emirim.parksodam.healingmessage.slider.SliderView;
+
+import static kr.hs.emirim.parksodam.healingmessage.BarActivity.id;
 
 public class HomeFragment extends BaseFragment {
 
@@ -65,6 +71,16 @@ public class HomeFragment extends BaseFragment {
 
         list_data_home = new ArrayList<SearchItem>();
 
+        FloatingActionButton search_tab = (FloatingActionButton) view.findViewById(R.id.search_tab);
+
+        search_tab.setOnClickListener(new View.OnClickListener() { // 검색창으로 이동
+            @Override
+            public void onClick(View v) {
+                //onMyListener.onReceivedData(id);
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
 
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -123,7 +139,6 @@ public class HomeFragment extends BaseFragment {
         mIndicator.setPageCount(fragments.size());
         mIndicator.show();
     }
-
 
 
     @Override

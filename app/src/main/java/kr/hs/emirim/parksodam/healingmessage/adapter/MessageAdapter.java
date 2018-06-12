@@ -49,6 +49,7 @@ public class MessageAdapter extends BaseAdapter {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(R.layout.row_listview_message, null);
         }
+
         MessageItem messageItem = list_data_message.get(position);
         TextView msName = (TextView)convertView.findViewById(R.id.list_ms_name);
         TextView msTitle = (TextView)convertView.findViewById(R.id.list_ms_title);

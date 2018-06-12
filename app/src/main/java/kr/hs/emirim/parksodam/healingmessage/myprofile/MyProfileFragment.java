@@ -12,25 +12,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
 import kr.hs.emirim.parksodam.healingmessage.R;
+import kr.hs.emirim.parksodam.healingmessage.message.MessageItem;
 
 import static kr.hs.emirim.parksodam.healingmessage.BarActivity.id;
 
 
 public class MyProfileFragment extends BaseFragment {
     private View view;
-    private ImageView fortune_cookie;
-    private ImageView setting;
-    private ImageView howto;
+    private ImageView fortune;
+    private ImageView fortune_t;
+    private ImageView send_message_t;
+    private ImageView settring_t;
+    private ImageView logout_t;
     private ImageView profile;
-    private DatabaseReference databaseReference;
+    private TextView prof_name;
+    private TextView prof_feel;
+    private DatabaseReference databaseReference1;
     private FirebaseAuth mAuth;
+    private String id;
 
     String[] word = {"삶이 있는 한 희망은 있어 -키케로", "잘했어", "오늘 하루도 수고했어", "힘내!", "오늘은 내일을 위한 첫걸음",
             "진정으로 웃으려면 고통을 참아야하며, 나아가 고통을 즐길 줄 알아야 해 -찰리 채플린", "피할 수 없으면 즐겨라!", "내일은 내일의 태양이 뜬다",
@@ -51,11 +61,12 @@ public class MyProfileFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_my_profile, container, false);
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
-        mAuth = FirebaseAuth.getInstance();
-        fortune_cookie = (ImageView)  view.findViewById(R.id.fortune_cookie);
+        /*fortune_cookie = (ImageView)  view.findViewById(R.id.fortune_cookie);
         setting = (ImageView)  view.findViewById(R.id.setting);
-        howto = (ImageView)  view.findViewById(R.id.howto);
+        howto = (ImageView)  view.findViewById(R.id.howto);*/
+
+        fortune = (ImageView)view.findViewById(R.id.fortune);
+        fortune_t = (ImageView)view.findViewById(R.id.fortune_t);
         profile = (ImageView) view.findViewById(R.id.profile_image);
         profile.setBackground(new ShapeDrawable(new OvalShape()));
         if(Build.VERSION.SDK_INT >= 21) {
@@ -67,59 +78,51 @@ public class MyProfileFragment extends BaseFragment {
             id = bundle.getString("userId");
             Log.e("tag",id);
 
-            setting.setOnClickListener(new View.OnClickListener() { // 받은 메세지함으로 이동
-            @Override
-            public void onClick(View v) {
-                //onMyListener.onReceivedData(id);
-                Intent intent = new Intent(getActivity(), ReceivedMessage.class);
-                intent.putExtra("userId",id);
-                startActivity(intent);
-            }
-        });
-            howto.setOnClickListener(new View.OnClickListener() { // 보낸 메세지함으로 이동
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SendMessage.class);
-                startActivity(intent);
-            }
-        });
+            databaseReference1 = FirebaseDatabase.getInstance().getReference("users/" + id + "/");
+
+            prof_name = (TextView)view.findViewById(R.id.prof_name);
+            prof_feel = (TextView)view.findViewById(R.id.prof_feel);
+
+
+            databaseReference1.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    MyProfileItem value = dataSnapshot.getValue(MyProfileItem.class); // 괄호 안 : 꺼낼 자료 형태
+                    Log.e("jhi", "Value is: " + value);
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
 
             //포춘쿠키 다이얼로그 띄우기
-            fortune_cookie.setOnClickListener(new Button.OnClickListener() {
+            fortune_t.setOnClickListener(new Button.OnClickListener() {
                 public void onClick(View v) {
-                    android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(getActivity());
-
-                    // 제목셋팅
-                    alert.setTitle("오늘의 포춘쿠키");
-
-                    for(int i = 0; i< word.length; i++){
-                        word_random = (int) (Math.random() * word.length);
-                    }
-                    Log.e("피치퍼펙트재밋다..", word[word_random]);
-                    alert.setMessage(word[word_random]) // 좋은 말 띄우기
-                             .setIcon(R.drawable.back_icon)
-                        .setCancelable(false)
-                        .setPositiveButton("확인",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(
-                                            DialogInterface dialog, int id) {
-                                        // 포춘쿠키 확인
-
-                                    }
-                                });
-
-
-                    alert .setNegativeButton("닫기",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(
-                                            DialogInterface dialog, int id) {
-                                        // 다이얼로그를 닫기한다
-                                        dialog.cancel();
-                                    }
-                                });
-
-                    alert.show();
-
+                    fortune_onclick();
+                }
+            });
+            //포춘쿠키 다이얼로그 띄우기
+            fortune.setOnClickListener(new Button.OnClickListener() {
+                public void onClick(View v) {
+                    fortune_onclick();
                 }
             });
 
@@ -142,6 +145,40 @@ public class MyProfileFragment extends BaseFragment {
         onMyListener=null;
     }*/
 
+    public void fortune_onclick(){
+        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(getActivity());
+
+        // 제목셋팅
+        alert.setTitle("오늘의 포춘쿠키");
+
+        for(int i = 0; i< word.length; i++){
+            word_random = (int) (Math.random() * word.length);
+        }
+        Log.e("피치퍼펙트재밋다..", word[word_random]);
+        alert.setMessage(word[word_random]) // 좋은 말 띄우기
+                .setIcon(R.drawable.fortune)
+                .setCancelable(false)
+                .setPositiveButton("확인",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                // 포춘쿠키 확인
+
+                            }
+                        });
+
+
+        alert .setNegativeButton("닫기",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(
+                            DialogInterface dialog, int id) {
+                        // 다이얼로그를 닫기한다
+                        dialog.cancel();
+                    }
+                });
+
+        alert.show();
+    }
     @Override
     public String getTitle() {
         return "내정보";

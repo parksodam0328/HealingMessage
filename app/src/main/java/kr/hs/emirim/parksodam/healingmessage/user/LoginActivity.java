@@ -1,7 +1,10 @@
 
 package kr.hs.emirim.parksodam.healingmessage.user;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import kr.hs.emirim.parksodam.healingmessage.BarActivity;
 import kr.hs.emirim.parksodam.healingmessage.R;
+import kr.hs.emirim.parksodam.healingmessage.search.SearchActivity;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -70,9 +74,12 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) { // 회원정보 체크
 
-                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                    boolean check = isNetWork();
+                    //네트워크에 연결이 되어있을 때 실행
+                    if(check == true) {
+                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
                                 // dataSnapshot is the "issue" node with all children with id 0
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                     if (checkId.getText().toString().equals("")) { // 아이디 공백일 시
@@ -89,14 +96,14 @@ public class LoginActivity extends AppCompatActivity {
                                     userPw = snapshot.child("pw").getValue().toString();
                                     if (userName.equals(checkId.getText().toString()) && userPw.equals(checkPw.getText().toString())) {
                                         id = checkId.getText().toString();
-                                        Log.e("TAG",userName);
-                                        Log.e("TAG",userPw);
+                                        Log.e("TAG", userName);
+                                        Log.e("TAG", userPw);
 
                                         Log.e("TAG", id);
                                         Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), BarActivity.class);
                                         //값 넘기기
-                                        intent.putExtra("id",userName);
+                                        intent.putExtra("id", userName);
                                         Bundle bundle = new Bundle(); // 파라미터는 전달할 데이터 개수
                                         bundle.putString("userId", id); // key , value
                                         intent.putExtras(bundle);
@@ -105,15 +112,20 @@ public class LoginActivity extends AppCompatActivity {
                                         return;
                                     }
                                 }
-                            Toast.makeText(getApplicationContext(), "존재하지 않는 회원 정보입니다.", Toast.LENGTH_SHORT).show(); // 회원 정보가 없을 경우
-                        }
+                                Toast.makeText(getApplicationContext(), "존재하지 않는 회원 정보입니다.", Toast.LENGTH_SHORT).show(); // 회원 정보가 없을 경우
+
+                            }
 
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
+                            }
+                        });
+                    }else{
+                        //네트워크에 연결되어있지 않을경우
+                        Toast.makeText(getApplicationContext(), "네트워크에 연결되어있지 않습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
 
@@ -127,6 +139,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+
+    //네트워크 연결 확인
+    private Boolean isNetWork(){
+        ConnectivityManager manager = (ConnectivityManager) getSystemService (Context.CONNECTIVITY_SERVICE);
+        boolean isMobileAvailable = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isAvailable();
+        boolean isMobileConnect = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+        boolean isWifiAvailable = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isAvailable();
+        boolean isWifiConnect = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+
+        if ((isWifiAvailable && isWifiConnect) || (isMobileAvailable && isMobileConnect)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

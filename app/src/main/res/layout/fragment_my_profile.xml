@@ -46,34 +46,88 @@
                 android:layout_marginTop="10dp"
                 android:hint="나의 기분" />
 
+
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="446dp"
-        android:orientation="vertical"
-        android:weightSum="1">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            app:srcCompat="@drawable/message_back"
-            android:id="@+id/fortune_cookie"
-            android:layout_marginTop="301dp"
-            android:layout_height="48dp" />
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="28dp"
+        app:srcCompat="@drawable/fortune"
+        android:id="@+id/fortune"
+        android:onClick="onClick"
+        android:layout_marginTop="320dp"
+        android:layout_marginLeft="15dp"
+        android:layout_weight="0.03" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            app:srcCompat="@drawable/c_setting"
-            android:id="@+id/setting"
-            android:layout_height="48dp" />
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/fortune_t"
+        android:id="@+id/fortune_t"
+        android:onClick="onClick"
+        android:layout_marginTop="325dp"
+        android:layout_marginLeft="65dp"
+        android:layout_weight="0.07" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            app:srcCompat="@drawable/c_how"
-            android:id="@+id/howto"
-            android:layout_height="48dp"
-            android:clickable="true"/>
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="28dp"
+        app:srcCompat="@drawable/message"
+        android:id="@+id/message"
+        android:onClick="onClick"
+        android:layout_marginTop="368dp"
+        android:layout_marginLeft="23dp"/>
 
-    </LinearLayout>
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/message_send"
+        android:id="@+id/message_send"
+        android:onClick="onClick"
+        android:layout_marginTop="373dp"
+        android:layout_marginLeft="75dp"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="28dp"
+        app:srcCompat="@drawable/profile"
+        android:id="@+id/profile"
+        android:onClick="onClick"
+        android:layout_marginTop="415dp"
+        android:layout_marginLeft="23dp"/>
+
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/setting"
+        android:id="@+id/setting"
+        android:onClick="onClick"
+        android:layout_marginTop="423dp"
+        android:layout_marginLeft="65dp"/>
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="28dp"
+        app:srcCompat="@drawable/logout"
+        android:id="@+id/logout"
+        android:onClick="onClick"
+        android:layout_marginTop="465dp"
+        android:layout_marginLeft="23dp"/>
+
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/logout_t"
+        android:id="@+id/logout_t"
+        android:onClick="onClick"
+        android:layout_marginTop="470dp"
+        android:layout_marginLeft="65dp"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </FrameLayout>

@@ -69,7 +69,6 @@ public class SearchAdapter extends BaseAdapter {
                 alert.setTitle("응원하기");
                 alert.setMessage("작은 응원의 한마디로 큰 힘이 되어주세요!");
 
-
                 final EditText name = new EditText(context);
                 alert.setView(name);
 
