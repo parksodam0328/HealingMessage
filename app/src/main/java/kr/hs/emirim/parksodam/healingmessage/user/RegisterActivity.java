@@ -52,15 +52,14 @@ public class RegisterActivity extends AppCompatActivity {
             check.setOnClickListener(new View.OnClickListener() {   //가입버튼누르면
                 @Override
                 public void onClick(View v) {
-                    if(editId.getText().toString().length()>8) {    //아이디 길이 판별
+                    if (editId.getText().toString().length() > 8) {    //아이디 길이 판별
                         Toast.makeText(RegisterActivity.this, "아이디 길이는 8자 이내입니다.", Toast.LENGTH_SHORT).show();
                         return;
-                    }
-                    else {
-                        if(editPw.getText().toString().length()>16){    //비밀번호 길이 판별
+                    } else {
+                        if (editPw.getText().toString().length() > 16) {    //비밀번호 길이 판별
                             Toast.makeText(RegisterActivity.this, "비밀번호 길이는 16자 이내입니다.", Toast.LENGTH_SHORT).show();
                             return;
-                        }else {
+                        } else {
                             if (!Pattern.matches("^[a-zA-Z][a-zA-Z0-9]*$", editId.getText().toString())) {  //아이디 형식 판별  //숫자가 아이디의 첫문자가 되면 안됌
                                 Toast.makeText(RegisterActivity.this, "아이디 형식을 지켜주세요.", Toast.LENGTH_SHORT).show();
                                 return;
@@ -68,19 +67,19 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (!Pattern.matches("^[a-zA-Z][a-zA-Z0-9]*$", editPw.getText().toString())) {  //비밀번호 형식 판별  //숫자가 비밀번호의 첫문자가 되면 안됌
                                     Toast.makeText(RegisterActivity.this, "비밀번호 형식을 지켜주세요.", Toast.LENGTH_SHORT).show();
                                     return;
-                                } else{
-                                        writeNewUser(editId.getText().toString(), editPw.getText().toString(), editName.getText().toString());     //회원가입 완료
-                                        //mDatabase.child("users").child().setValue(editPw);
-                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                        Toast.makeText(RegisterActivity.this, editName.getText().toString()+"님 회원가입되었습니다", Toast.LENGTH_SHORT).show();
-                                        startActivity(intent);
-                                    }
+                                } else {
+                                    writeNewUser(editId.getText().toString(), editPw.getText().toString(), editName.getText().toString());     //회원가입 완료
+                                    //mDatabase.child("users").child().setValue(editPw);
+                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                    Toast.makeText(RegisterActivity.this, editName.getText().toString() + "님 회원가입되었습니다", Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
                                 }
                             }
                         }
                     }
-            });
-        }
+                }
+                });
+            }
 
     private void writeNewUser(String userId, String pw, String name) {
         User user = new User(userId, pw, name);

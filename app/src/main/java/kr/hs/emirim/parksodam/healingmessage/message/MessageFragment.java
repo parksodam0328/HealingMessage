@@ -50,6 +50,7 @@ public class MessageFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Bundle bundle = getActivity().getIntent().getExtras();
+
         if (bundle != null) {
             id = bundle.getString("userId");
             Log.e("tag",id);

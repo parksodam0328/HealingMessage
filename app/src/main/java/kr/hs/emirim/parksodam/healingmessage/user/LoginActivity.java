@@ -101,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         Log.e("TAG", id);
                                         Toast.makeText(getApplicationContext(), "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
+
                                         Intent intent = new Intent(getApplicationContext(), BarActivity.class);
                                         //값 넘기기
                                         intent.putExtra("id", userName);
@@ -142,6 +143,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /*public boolean isNetworkConnected(Context context){
+        boolean isConnected = false;
+
+        ConnectivityManager manager =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        //https://m.blog.naver.com/kyechan99/220600129730
+    }*/
 
     //네트워크 연결 확인
     private Boolean isNetWork(){

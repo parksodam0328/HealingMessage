@@ -16,8 +16,6 @@ import kr.hs.emirim.parksodam.healingmessage.message.MessageFragment;
 import kr.hs.emirim.parksodam.healingmessage.myprofile.MyProfileFragment;
 import kr.hs.emirim.parksodam.healingmessage.search.SearchActivity;
 
-import static kr.hs.emirim.parksodam.healingmessage.R.drawable.healing_message_image;
-
 
 public class BarActivity extends AppCompatActivity {
 
@@ -36,20 +34,12 @@ public class BarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bar);
         //툴바 설정
         //FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager());
-        mTitle = (ImageView)findViewById(R.id.imageTitle) ;
 
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         mSearch = (ImageView)findViewById(R.id.search);
 
         setSupportActionBar(toolbar); //툴바를 액션바와 같게 만들어 준다.getSupportActionBar().setTitle("지도");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(intent);
-            }
-        });
 
         vp = (ViewPager) findViewById(R.id.vp_main);
         setupViewPager(vp);
@@ -62,15 +52,15 @@ public class BarActivity extends AppCompatActivity {
             Log.e("", String.valueOf(layout.getTabCount()));
             if(i==0) {
                 layout.getTabAt(i).setText("홈").setIcon(R.drawable.home_click);
-                mTitle.setImageResource(healing_message_image);
+
             }
             else if(i==1) {
                 layout.getTabAt(i).setText("메세지").setIcon(R.drawable.message_btn);
-                mTitle.setImageResource(R.drawable.message_image);
+
             }
             else if(i==2) {
                 layout.getTabAt(i).setText("내정보").setIcon(R.drawable.profile_btn);
-                mTitle.setImageResource(R.drawable.myprofile_image);
+
             }
 
         }
@@ -83,16 +73,6 @@ public class BarActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0) {
-                    mTitle.setImageResource(healing_message_image);
-                } else if (position == 1)
-                {
-                    mTitle.setImageResource(R.drawable.message_image);
-                }
-                else if (position == 2)
-                {
-                    mTitle.setImageResource(R.drawable.myprofile_image);
-                }
 
             }
 
@@ -107,18 +87,15 @@ public class BarActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
 
                 if(tab.getPosition()==0) {
-                    mTitle.setImageResource(R.drawable.healing_message_image);
                     tab.setIcon(R.drawable.home_click);
                     layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#EDBED3"));
                 }
 
                 else if(tab.getPosition()==1) {
-                    mTitle.setImageResource(R.drawable.message_image);
                     tab.setIcon(R.drawable.message_click);
                     layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#EDBED3"));
                 }
                 else if(tab.getPosition()==2) {
-                    mTitle.setImageResource(R.drawable.myprofile_image);
                     tab.setIcon(R.drawable.profile_click);
                     layout.setTabTextColors(Color.parseColor("#666666"), Color.parseColor("#EDBED3"));
                 }
@@ -128,17 +105,14 @@ public class BarActivity extends AppCompatActivity {
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 if(tab.getPosition()==0) {
-                    mTitle.setImageResource(healing_message_image);
                     tab.setIcon(R.drawable.home_btn);
                     layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#EDBED3"));
                 }
                 else if(tab.getPosition()==1) {
-                    mTitle.setImageResource(R.drawable.message_image);
                     tab.setIcon(R.drawable.message_btn);
                     layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#EDBED3"));
                 }
                 else if(tab.getPosition()==2) {
-                    mTitle.setImageResource(R.drawable.myprofile_image);
                     tab.setIcon(R.drawable.profile_btn);
                     layout.setTabTextColors(Color.parseColor("#000076"), Color.parseColor("#EDBED3"));
                 }
