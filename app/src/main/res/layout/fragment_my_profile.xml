@@ -1,10 +1,10 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="kr.hs.emirim.parksodam.healingmessage.myprofile.MyProfileFragment"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,10 +13,9 @@
         android:background="@drawable/myprofile_background">
 
         <ImageView
-            app:srcCompat="@drawable/pro_img"
             android:id="@+id/profile_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_marginTop="70dp"
             android:layout_marginRight="10dp"
@@ -52,115 +51,35 @@
 
 
         </LinearLayout>
+
     </LinearLayout>
 
-
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="300dp"
-        android:onClick="onClick"
-        android:id="@+id/lay_fortune">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="269dp">
 
         <ImageView
-            android:layout_width="31dp"
-            android:layout_height="34dp"
-            app:srcCompat="@drawable/fortune"
-            android:id="@+id/fortune_t"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="23dp"/>
-
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fortune"
+            android:layout_marginBottom="15dp"/>
         <ImageView
-            android:layout_width="99dp"
-            android:layout_height="18dp"
-            app:srcCompat="@drawable/fortune_t"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/fortune" />
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="350dp"
-        android:onClick="onClick">
-
-        <ImageView
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            app:srcCompat="@drawable/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/message"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="23dp"/>
-
+            android:layout_marginBottom="15dp"/>
 
         <ImageView
-            android:layout_width="99dp"
-            android:layout_height="18dp"
-            app:srcCompat="@drawable/message_send"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="24dp"
-            android:id="@+id/message_send" />
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="400dp"
-        android:onClick="onClick">
-
-        <ImageView
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            app:srcCompat="@drawable/profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/profile"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="23dp"/>
-
-
+            android:layout_marginBottom="15dp"/>
         <ImageView
-            android:layout_width="99dp"
-            android:layout_height="18dp"
-            app:srcCompat="@drawable/setting"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:id="@+id/setting" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/logout"/>
     </LinearLayout>
 
 
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="450dp"
-        android:onClick="onClick">
-
-        <ImageView
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            app:srcCompat="@drawable/logout"
-            android:id="@+id/logout"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="23dp"/>
-
-
-        <ImageView
-            android:layout_width="99dp"
-            android:layout_height="18dp"
-            app:srcCompat="@drawable/logout_t"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
-            android:id="@+id/logout_t" />
-    </LinearLayout>
-
-
-</FrameLayout>
+</LinearLayout>

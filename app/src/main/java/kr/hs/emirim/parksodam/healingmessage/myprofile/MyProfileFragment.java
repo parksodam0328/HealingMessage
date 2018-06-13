@@ -1,11 +1,6 @@
 package kr.hs.emirim.parksodam.healingmessage.myprofile;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
-import android.icu.text.StringSearch;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,20 +16,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
 import kr.hs.emirim.parksodam.healingmessage.R;
-import kr.hs.emirim.parksodam.healingmessage.message.MessageItem;
 
-import static kr.hs.emirim.parksodam.healingmessage.BarActivity.id;
+import static kr.hs.emirim.parksodam.healingmessage.R.drawable.pro_img;
 
 
 public class MyProfileFragment extends BaseFragment {
     private View view;
-    private LinearLayout fortune;
-    private ImageView send_message_t;
-    private ImageView settring_t;
-    private ImageView logout_t;
+    private ImageView fortune_img;
+    private ImageView send_message_img;
+    private ImageView setting_img;
+    private ImageView logout_img;
     private ImageView profile;
     private TextView prof_name;
     private TextView prof_feel;
@@ -68,11 +62,49 @@ public class MyProfileFragment extends BaseFragment {
         setting = (ImageView)  view.findViewById(R.id.setting);
         howto = (ImageView)  view.findViewById(R.id.howto);*/
 
-        fortune = (LinearLayout) view.findViewById(R.id.lay_fortune);
+        fortune_img = (ImageView) view.findViewById(R.id.fortune);
+        send_message_img = (ImageView) view.findViewById(R.id.message);
+        setting_img = (ImageView) view.findViewById(R.id.profile);
+        logout_img = (ImageView) view.findViewById(R.id.logout);
         profile = (ImageView) view.findViewById(R.id.profile_image);
-        profile.setBackground(new ShapeDrawable(new OvalShape()));
-        if(Build.VERSION.SDK_INT >= 21) {
-            profile.setClipToOutline(true);
+        try {
+            Picasso.with(getActivity())
+                    .load(pro_img)
+                    .placeholder(pro_img)
+                    .error(pro_img)
+                    .resize(410, 400)
+                    .centerCrop()
+                    .into(profile);
+            Picasso.with(getActivity())
+                    .load(R.drawable.fortune)
+                    .placeholder(R.drawable.fortune)
+                    .error(R.drawable.fortune)
+                    .resize(900, 150)
+                    .centerCrop()
+                    .into(fortune_img);
+            Picasso.with(getActivity())
+                    .load(R.drawable.message)
+                    .placeholder(R.drawable.message)
+                    .error(R.drawable.message)
+                    .resize(900, 150)
+                    .centerCrop()
+                    .into(send_message_img);
+            Picasso.with(getActivity())
+                    .load(R.drawable.profile)
+                    .placeholder(R.drawable.profile)
+                    .error(R.drawable.profile)
+                    .resize(900, 150)
+                    .centerCrop()
+                    .into(setting_img);
+            Picasso.with(getActivity())
+                    .load(R.drawable.logout)
+                    .placeholder(R.drawable.logout)
+                    .error(R.drawable.logout)
+                    .resize(900, 150)
+                    .centerCrop()
+                    .into(logout_img);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         if (bundle != null) {
@@ -123,7 +155,7 @@ public class MyProfileFragment extends BaseFragment {
 
 
             //포춘쿠키 다이얼로그 띄우기
-            fortune.setOnClickListener(new Button.OnClickListener() {
+            fortune_img.setOnClickListener(new Button.OnClickListener() {
                 public void onClick(View v) {
                     android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(getActivity());
 

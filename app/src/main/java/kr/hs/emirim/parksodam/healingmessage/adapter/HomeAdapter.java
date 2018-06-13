@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -57,9 +59,29 @@ public class HomeAdapter extends BaseAdapter {
         SearchItem searchItem = list_data.get(position);
         TextView tvName = (TextView) convertView.findViewById(R.id.list_text_name);
         TextView tvFeel = (TextView) convertView.findViewById(R.id.list_text_feel);
+        ImageView pro_img = (ImageView) convertView.findViewById(R.id.list_image);
 
         // 보내기 클릭 시 dialog띄우기
-        ImageButton button1 = (ImageButton) convertView.findViewById(R.id.list_btn_send);
+        ImageView button1 = (ImageView) convertView.findViewById(R.id.list_btn_send);
+
+        try {
+            Picasso.with(context)
+                    .load(R.drawable.send)
+                    .placeholder(R.drawable.send)
+                    .error(R.drawable.send)
+                    .resize(300, 120)
+                    .centerCrop()
+                    .into(button1);
+            Picasso.with(context)
+                    .load(R.drawable.pro_img)
+                    .placeholder(R.drawable.pro_img)
+                    .error(R.drawable.pro_img)
+                    .resize(210, 200)
+                    .centerCrop()
+                    .into(pro_img);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         button1.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);

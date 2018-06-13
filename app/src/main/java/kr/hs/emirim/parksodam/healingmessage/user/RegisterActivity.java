@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.regex.Pattern;
 
@@ -23,6 +25,8 @@ public class RegisterActivity extends AppCompatActivity {
         private EditText editId;
         private EditText editPw;
         private EditText editName;
+        private ImageView backimg;
+        private ImageView check;
 
 
     @Override
@@ -36,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //툴바 설정
         setSupportActionBar(toolbar); //툴바를 액션바와 같게 만들어 준다.
-        ImageView backimg = (ImageView) findViewById(R.id.back_icon);
+        backimg = (ImageView) findViewById(R.id.back_icon);
         backimg.setOnClickListener(new View.OnClickListener() { // 뒤로 가기
             @Override
             public void onClick(View v) {
@@ -48,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
             mDatabase = FirebaseDatabase.getInstance().getReference();
-            ImageView check = (ImageView) findViewById(R.id.submit);
+            check = (ImageView) findViewById(R.id.submit);
             check.setOnClickListener(new View.OnClickListener() {   //가입버튼누르면
                 @Override
                 public void onClick(View v) {
@@ -79,7 +83,25 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 }
                 });
-            }
+        try {
+            Log.i("tag","피카소 들어옴");
+            Picasso.with(this)
+                    .load(R.drawable.back_icon2)
+                    .placeholder(R.drawable.back_icon2)
+                    .error(R.drawable.back_icon2)
+                    .resize(50,70)
+                    .into(backimg);
+            Picasso.with(this)
+                    .load(R.drawable.signup_btn)
+                    .placeholder(R.drawable.signup_btn)
+                    .error(R.drawable.signup_btn)
+                    .resize(860,150)
+                    .into(check);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void writeNewUser(String userId, String pw, String name) {
         User user = new User(userId, pw, name);
