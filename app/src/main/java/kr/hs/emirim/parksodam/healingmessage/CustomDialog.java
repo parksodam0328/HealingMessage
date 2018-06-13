@@ -62,7 +62,6 @@ public class CustomDialog {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "포춘쿠키를 확인했습니다!", Toast.LENGTH_SHORT).show();
                 //커스텀 다이얼로그 종료
                 dlg.dismiss();
             }

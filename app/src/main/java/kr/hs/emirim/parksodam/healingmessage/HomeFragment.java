@@ -109,14 +109,13 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void setupSlider() {
-        sliderView.setDurationScroll(800);
+        sliderView.setDurationScroll(900);
         List<Fragment> fragments = new ArrayList<>();
+        fragments.add(FragmentSlider.newInstance(R.drawable.s1));
+        fragments.add(FragmentSlider.newInstance(R.drawable.s2));
         fragments.add(FragmentSlider.newInstance(R.drawable.s3));
-        fragments.add(FragmentSlider.newInstance(R.drawable.s10));
-        fragments.add(FragmentSlider.newInstance(R.drawable.s11));
-        fragments.add(FragmentSlider.newInstance(R.drawable.s8));
-        fragments.add(FragmentSlider.newInstance(R.drawable.s8));
-        fragments.add(FragmentSlider.newInstance(R.drawable.s8));
+        fragments.add(FragmentSlider.newInstance(R.drawable.s4));
+        fragments.add(FragmentSlider.newInstance(R.drawable.s5));
 
         mAdapter = new SliderPagerAdapter(getActivity().getSupportFragmentManager(), fragments);
         sliderView.setAdapter(mAdapter);

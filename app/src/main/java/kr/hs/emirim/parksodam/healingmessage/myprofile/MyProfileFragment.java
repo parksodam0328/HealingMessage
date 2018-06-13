@@ -1,37 +1,32 @@
 package kr.hs.emirim.parksodam.healingmessage.myprofile;
 
-<<<<<<< Updated upstream
-import android.content.DialogInterface;
-=======
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
-import android.os.Build;
->>>>>>> Stashed changes
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.content.DialogInterface;
+        import android.graphics.drawable.ShapeDrawable;
+        import android.graphics.drawable.shapes.OvalShape;
+        import android.os.Build;
+        import android.os.Bundle;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ImageView;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
+        import com.google.firebase.auth.FirebaseAuth;
+        import com.google.firebase.database.ChildEventListener;
+        import com.google.firebase.database.DataSnapshot;
+        import com.google.firebase.database.DatabaseError;
+        import com.google.firebase.database.DatabaseReference;
+        import com.google.firebase.database.FirebaseDatabase;
+        import com.squareup.picasso.Picasso;
 
-import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
-import kr.hs.emirim.parksodam.healingmessage.CustomDialog;
-import kr.hs.emirim.parksodam.healingmessage.R;
-<<<<<<< Updated upstream
+        import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
+        import kr.hs.emirim.parksodam.healingmessage.CustomDialog;
+        import kr.hs.emirim.parksodam.healingmessage.R;
 
-import static kr.hs.emirim.parksodam.healingmessage.R.drawable.pro_img;
-=======
->>>>>>> Stashed changes
+        import static kr.hs.emirim.parksodam.healingmessage.R.drawable.pro_img;
+
 
 
 public class MyProfileFragment extends BaseFragment {
@@ -68,6 +63,7 @@ public class MyProfileFragment extends BaseFragment {
         setting_img = (ImageView) view.findViewById(R.id.profile);
         logout_img = (ImageView) view.findViewById(R.id.logout);
         profile = (ImageView) view.findViewById(R.id.profile_image);
+
         try {
             Picasso.with(getActivity())
                     .load(pro_img)
@@ -118,6 +114,12 @@ public class MyProfileFragment extends BaseFragment {
             prof_feel = (TextView)view.findViewById(R.id.prof_feel);
 
 
+            databaseReference1 = FirebaseDatabase.getInstance().getReference("users/" + id);
+
+            prof_name = (TextView)view.findViewById(R.id.prof_name);
+            prof_feel = (TextView)view.findViewById(R.id.prof_feel);
+
+
             databaseReference1.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -130,7 +132,7 @@ public class MyProfileFragment extends BaseFragment {
                         prof_feel.setText(dataSnapshot.getValue().toString());
                         Log.e("프로필에 감정!", dataSnapshot.getValue().toString());
                     }
-                   // Log.e("jhi", "Value is: ");
+                    // Log.e("jhi", "Value is: ");
                 }
 
                 @Override
@@ -155,20 +157,10 @@ public class MyProfileFragment extends BaseFragment {
             });
 
 
-<<<<<<< Updated upstream
-            //포춘쿠키 다이얼로그 띄우기
-            fortune_img.setOnClickListener(new Button.OnClickListener() {
-                public void onClick(View v) {
-                    android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(getActivity());
-
-                    // 제목셋팅
-                    alert.setTitle("오늘의 포춘쿠키");
-=======
             count = 1;
->>>>>>> Stashed changes
 
             //포춘쿠키 커스텀 다이얼로그 띄우기
-            fortune.setOnClickListener(new View.OnClickListener() {
+            fortune_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //커스텀 다이얼로그를 생성,

@@ -11,14 +11,9 @@
         android:weightSum="1">
 
         <ImageView
-<<<<<<< Updated upstream
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-=======
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:srcCompat="@drawable/person_icon"
->>>>>>> Stashed changes
             android:layout_marginLeft="18dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"

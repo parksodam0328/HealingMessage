@@ -39,9 +39,8 @@ public class FragmentSlider extends Fragment {
         ImageView img = (ImageView) view.findViewById(R.id.img);
         Picasso.with(getActivity())
                 .load(imageUrls)
-                .placeholder(R.drawable.image_slider_1)
-                .resize(1000,400)
                 .placeholder(R.drawable.s1)
+                .resize(750,500)
                 .into(img);
         return view;
     }
