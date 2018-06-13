@@ -14,11 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_indicator"/>
-
         <LinearLayout
             android:id="@+id/pagesContainer"
             android:layout_width="match_parent"

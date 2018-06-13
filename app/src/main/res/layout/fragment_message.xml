@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="458dp"
         android:divider="#E6E6E6"
-        android:dividerHeight="2dp"/>
+        android:dividerHeight="1dp"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/search_tab"

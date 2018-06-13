@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import kr.hs.emirim.parksodam.healingmessage.R;
 /**
@@ -16,17 +16,17 @@ import kr.hs.emirim.parksodam.healingmessage.R;
 
 public class FragmentSlider extends Fragment {
 
-    private static final String ARG_PARAM1 = "param";
+    private static final String ARG_PARAM1 = "params";
 
-    private String imageUrls;
+    private int imageUrls;
 
     public FragmentSlider() {
     }
 
-    public static FragmentSlider newInstance(String params) {
+    public static FragmentSlider newInstance(int params) {
         FragmentSlider fragment = new FragmentSlider();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, params);
+        args.putInt(ARG_PARAM1, params);
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,12 +34,13 @@ public class FragmentSlider extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        imageUrls = getArguments().toString();
+        imageUrls = getArguments().getInt(ARG_PARAM1);
         View view = inflater.inflate(R.layout.fragment_slider_item, container, false);
         ImageView img = (ImageView) view.findViewById(R.id.img);
-        Glide.with(getActivity())
+        Picasso.with(getActivity())
                 .load(imageUrls)
-                .placeholder(R.drawable.healing_01)
+                .placeholder(R.drawable.image_slider_1)
+                .resize(1000,400)
                 .into(img);
         return view;
     }

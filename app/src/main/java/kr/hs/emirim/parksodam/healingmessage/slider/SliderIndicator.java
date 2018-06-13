@@ -23,7 +23,6 @@ import android.widget.LinearLayout;
  */
 
 public class SliderIndicator implements ViewPager.OnPageChangeListener {
-
     private Context mContext;
     private LinearLayout mContainer;
     private int mDrawable;

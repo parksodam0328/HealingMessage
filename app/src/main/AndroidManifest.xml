@@ -12,14 +12,14 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".user.LoginActivity">
+        <activity android:name=".BarActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BarActivity" />
+        <activity android:name=".user.LoginActivity" />
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".user.RegisterActivity" />
         <activity android:name=".myprofile.ReceivedMessage" />
