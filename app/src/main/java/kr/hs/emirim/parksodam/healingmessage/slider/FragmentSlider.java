@@ -41,6 +41,7 @@ public class FragmentSlider extends Fragment {
                 .load(imageUrls)
                 .placeholder(R.drawable.image_slider_1)
                 .resize(1000,400)
+                .placeholder(R.drawable.s1)
                 .into(img);
         return view;
     }
