@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import kr.hs.emirim.parksodam.healingmessage.CustomDialog_sendM;
 import kr.hs.emirim.parksodam.healingmessage.R;
 import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
 
@@ -82,7 +83,8 @@ public class HomeAdapter extends BaseAdapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        button1.setOnClickListener(new Button.OnClickListener() {
+
+       /* button1.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
 
@@ -109,6 +111,16 @@ public class HomeAdapter extends BaseAdapter {
 
                 alert.show();
 
+            }
+        });*/
+
+        //보내기 클릭시 커스텀 다이얼로그 띄우기
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //커스텀 다이얼로그를 생성,
+                CustomDialog_sendM customDialogM = new CustomDialog_sendM(context);
+                customDialogM.callDialog();
             }
         });
 

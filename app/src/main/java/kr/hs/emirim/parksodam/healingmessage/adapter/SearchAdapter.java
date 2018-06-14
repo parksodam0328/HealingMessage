@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import kr.hs.emirim.parksodam.healingmessage.CustomDialog_sendM;
 import kr.hs.emirim.parksodam.healingmessage.R;
 import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
 
@@ -60,7 +61,7 @@ public class SearchAdapter extends BaseAdapter {
         TextView tvName = (TextView) convertView.findViewById(R.id.list_text_name);
         TextView tvFeel = (TextView) convertView.findViewById(R.id.list_text_feel);
 
-        // 보내기 클릭 시 dialog띄우기
+/*        // 보내기 클릭 시 dialog띄우기
         ImageButton button1 = (ImageButton) convertView.findViewById(R.id.list_btn_send);
         button1.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -88,6 +89,18 @@ public class SearchAdapter extends BaseAdapter {
 
                 alert.show();
 
+            }
+        });*/
+
+        ImageButton button1 = (ImageButton) convertView.findViewById(R.id.list_btn_send);
+
+        //보내기 클릭시 커스텀 다이얼로그 띄우기
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //커스텀 다이얼로그를 생성,
+                CustomDialog_sendM customDialogM = new CustomDialog_sendM(context);
+                customDialogM.callDialog();
             }
         });
 

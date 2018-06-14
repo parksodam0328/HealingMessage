@@ -165,13 +165,15 @@ public class MyProfileFragment extends BaseFragment {
                 public void onClick(View view) {
                     //커스텀 다이얼로그를 생성,
                   CustomDialog customDialog = new CustomDialog(getActivity());
+                    customDialog.callDialog();
+                 /*   //한번만 호출가능
                 if(count == 1) {
                     //커스텀 다이얼로그 호출,
                     customDialog.callDialog();
                     count = 0;
                 }else if(count == 0){
                     Toast.makeText(getContext(), "오늘의 포춘쿠키를 확인하셨습니다!", Toast.LENGTH_SHORT).show();
-                }
+                }*/
                 }
             });
 
