@@ -16,7 +16,7 @@ import java.lang.reflect.Field;
 
 public class SliderView extends ViewPager {
 
-    public static final int DEFAULT_SCROLL_DURATION = 200;
+    public static final int DEFAULT_SCROLL_DURATION = 300;
 //    public static final int SLIDE_MODE_SCROLL_DURATION = 1000;
 
     public SliderView(Context context) {

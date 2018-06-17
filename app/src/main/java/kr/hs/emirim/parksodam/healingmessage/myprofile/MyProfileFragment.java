@@ -23,6 +23,7 @@ package kr.hs.emirim.parksodam.healingmessage.myprofile;
 
         import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
         import kr.hs.emirim.parksodam.healingmessage.CustomDialog;
+        import kr.hs.emirim.parksodam.healingmessage.CustomDialog_setting;
         import kr.hs.emirim.parksodam.healingmessage.R;
 
         import static kr.hs.emirim.parksodam.healingmessage.R.drawable.pro_img;
@@ -174,6 +175,17 @@ public class MyProfileFragment extends BaseFragment {
                 }else if(count == 0){
                     Toast.makeText(getContext(), "오늘의 포춘쿠키를 확인하셨습니다!", Toast.LENGTH_SHORT).show();
                 }*/
+                }
+            });
+
+            //정보설정 커스텀 다이얼로그 띄우기
+            setting_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //커스텀 다이얼로그를 생성,
+                    CustomDialog_setting customDialog_setting = new CustomDialog_setting(getActivity());
+                    customDialog_setting.callDialog(id);
+
                 }
             });
 
