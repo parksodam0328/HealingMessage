@@ -21,8 +21,10 @@ package kr.hs.emirim.parksodam.healingmessage.myprofile;
         import com.google.firebase.database.FirebaseDatabase;
         import com.squareup.picasso.Picasso;
 
+        import kr.hs.emirim.parksodam.healingmessage.BarActivity;
         import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
         import kr.hs.emirim.parksodam.healingmessage.CustomDialog;
+        import kr.hs.emirim.parksodam.healingmessage.CustomDialog_logout;
         import kr.hs.emirim.parksodam.healingmessage.CustomDialog_setting;
         import kr.hs.emirim.parksodam.healingmessage.R;
 
@@ -185,6 +187,16 @@ public class MyProfileFragment extends BaseFragment {
                     //커스텀 다이얼로그를 생성,
                     CustomDialog_setting customDialog_setting = new CustomDialog_setting(getActivity());
                     customDialog_setting.callDialog(id);
+
+                }
+            });
+
+            logout_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //커스텀 다이얼로그를 생성,
+                    CustomDialog_logout customDialog_logout = new CustomDialog_logout(getActivity());
+                    customDialog_logout.callDialog();
 
                 }
             });
