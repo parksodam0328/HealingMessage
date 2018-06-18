@@ -11,14 +11,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import kr.hs.emirim.parksodam.healingmessage.adapter.FragmentPagerAdapter;
 import kr.hs.emirim.parksodam.healingmessage.message.MessageFragment;
 import kr.hs.emirim.parksodam.healingmessage.myprofile.MyProfileFragment;
 import kr.hs.emirim.parksodam.healingmessage.search.SearchActivity;
+import kr.hs.emirim.parksodam.healingmessage.user.LoginActivity;
 
 
 public class BarActivity extends AppCompatActivity {
-
     public ViewPager vp;
     public TabLayout layout;
     //public FirebaseDatabase mDatabase;
@@ -27,6 +30,29 @@ public class BarActivity extends AppCompatActivity {
     private ImageView mTitle;
     private ImageView mSearch;
     public static String id;
+    private FirebaseAuth mAuth;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null){
+
+            sendToLogin();
+
+        }
+
+    }
+
+    private void sendToLogin() {
+        Intent loginIntent = new Intent(BarActivity.this, LoginActivity.class);
+        startActivity(loginIntent);
+        finish();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

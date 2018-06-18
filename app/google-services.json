@@ -15,12 +15,112 @@
       },
       "oauth_client": [
         {
+          "client_id": "307009565801-ptgi4lpl2tsdedg4rpk4gvo0172dj050.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.hs.emirim.parksodam.healingmessage",
+            "certificate_hash": "8d197787cc651bb4a4c0c8cebc7ecd2b1e696858"
+          }
+        },
+        {
+          "client_id": "307009565801-7v5an9cv5h72mck56dl0jlfotmsrfbc2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.hs.emirim.parksodam.healingmessage",
+            "certificate_hash": "0f58a444c6b23c4e681feddb5896271beb0c2c1a"
+          }
+        },
+        {
+          "client_id": "307009565801-48d1dtucfhngavbo0esgtlsf965b82a1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.hs.emirim.parksodam.healingmessage",
+            "certificate_hash": "4423fd108d4d705ae38e0d36a073c8a2c9a2d7b6"
+          }
+        },
+        {
           "client_id": "307009565801-tf65d6bpbnch4tv1r19p4kc08k4l79h7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "kr.hs.emirim.parksodam.healingmessage",
             "certificate_hash": "297aa0b2497df55f5e1110defc7a9536b57825df"
           }
+        },
+        {
+          "client_id": "307009565801-qo4cd3a8u26f2td3lbmo8igr8hfd0ll7.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "307009565801-qo4cd3a8u26f2td3lbmo8igr8hfd0ll7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDccxZteYEigsPBgIivB07sv61mKAJ6S7k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307009565801-qo4cd3a8u26f2td3lbmo8igr8hfd0ll7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307009565801:android:bde6cc8d1076ea09",
+        "android_client_info": {
+          "package_name": "kr.hs.emirim.parksodam.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307009565801-nrjmu335vlvq461nlede9oujid6tvcm9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.hs.emirim.parksodam.test",
+            "certificate_hash": "8d197787cc651bb4a4c0c8cebc7ecd2b1e696858"
+          }
+        },
+        {
+          "client_id": "307009565801-s052kk9evodmtqnepjen51at0fqa3t8k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.hs.emirim.parksodam.test",
+            "certificate_hash": "bad37df1962e7c79d6b8bcd390705a0c114191b0"
+          }
+        },
+        {
+          "client_id": "307009565801-o6bic6p09udvb1077rdci92ds90m6iq1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.hs.emirim.parksodam.test",
+            "certificate_hash": "0f58a444c6b23c4e681feddb5896271beb0c2c1a"
+          }
+        },
+        {
+          "client_id": "307009565801-61is7jjk79tc4dftr60avrlga371cilo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.hs.emirim.parksodam.test",
+            "certificate_hash": "297aa0b2497df55f5e1110defc7a9536b57825df"
+          }
+        },
+        {
+          "client_id": "307009565801-qo4cd3a8u26f2td3lbmo8igr8hfd0ll7.apps.googleusercontent.com",
+          "client_type": 3
         },
         {
           "client_id": "307009565801-qo4cd3a8u26f2td3lbmo8igr8hfd0ll7.apps.googleusercontent.com",
