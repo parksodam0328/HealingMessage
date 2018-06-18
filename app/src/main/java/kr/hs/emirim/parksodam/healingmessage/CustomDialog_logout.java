@@ -53,7 +53,6 @@ public class CustomDialog_logout {
         final Button cancelBtn = (Button) dlg.findViewById(R.id.cancelBtn);
 
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

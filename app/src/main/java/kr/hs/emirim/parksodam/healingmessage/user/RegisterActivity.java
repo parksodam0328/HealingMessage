@@ -2,11 +2,9 @@ package kr.hs.emirim.parksodam.healingmessage.user;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
@@ -14,43 +12,30 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import kr.hs.emirim.parksodam.healingmessage.R;
 
 public class RegisterActivity extends AppCompatActivity {
-    private DatabaseReference mDatabase;
-    private EditText editId;
-    private EditText editPw;
-    private EditText editName;
-    private ImageView backimg;
-    private ImageView check;
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore mFirestore;
+        private DatabaseReference mDatabase;
+        private EditText editId;
+        private EditText editPw;
+        private EditText editName;
+        private ImageView backimg;
+        private ImageView check;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-
-        mAuth = FirebaseAuth.getInstance();
-        mFirestore = FirebaseFirestore.getInstance();
-
-        editId = (EditText) findViewById(R.id.id);
-        editPw = (EditText) findViewById(R.id.pw);
-        editName = (EditText) findViewById(R.id.nickname);
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_register);
+            editId = (EditText)findViewById(R.id.id);
+            editPw = (EditText)findViewById(R.id.pw);
+            editName = (EditText)findViewById(R.id.nickname);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //툴바 설정
@@ -62,61 +47,66 @@ public class RegisterActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        editPw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        editPw.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD );
         editPw.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        check = (ImageView) findViewById(R.id.submit);
-        check.setOnClickListener(new View.OnClickListener() {   //가입버튼누르면
-            @Override
-            public void onClick(View v) {
-                final String name = editName.getText().toString();
-                String email = editId.getText().toString();
-                String password = editPw.getText().toString();
-                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> uploadTask) {
-                            if (uploadTask.isSuccessful()) {
-
-                                final String user_id = mAuth.getCurrentUser().getUid();
-                                String token_id = FirebaseInstanceId.getInstance().getToken();
-
-                                Map<String, Object> userMap = new HashMap<>();
-                                userMap.put("name", name);
-                                userMap.put("token_id", token_id);
-
-                                mFirestore.collection("Users").document(user_id).set(userMap);
-                                sendToMain();
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            check = (ImageView) findViewById(R.id.submit);
+            check.setOnClickListener(new View.OnClickListener() {   //가입버튼누르면
+                @Override
+                public void onClick(View v) {
+                    if (editId.getText().toString().length() > 8) {    //아이디 길이 판별
+                        Toast.makeText(RegisterActivity.this, "아이디 길이는 8자 이내입니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        if (editPw.getText().toString().length() > 16) {    //비밀번호 길이 판별
+                            Toast.makeText(RegisterActivity.this, "비밀번호 길이는 16자 이내입니다.", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else {
+                            if (!Pattern.matches("^[a-zA-Z][a-zA-Z0-9]*$", editId.getText().toString())) {  //아이디 형식 판별  //숫자가 아이디의 첫문자가 되면 안됌
+                                Toast.makeText(RegisterActivity.this, "아이디 형식을 지켜주세요.", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else {
+                                if (!Pattern.matches("^[a-zA-Z][a-zA-Z0-9]*$", editPw.getText().toString())) {  //비밀번호 형식 판별  //숫자가 비밀번호의 첫문자가 되면 안됌
+                                    Toast.makeText(RegisterActivity.this, "비밀번호 형식을 지켜주세요.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else {
+                                    writeNewUser(editId.getText().toString(), editPw.getText().toString(), editName.getText().toString());     //회원가입 완료
+                                    //mDatabase.child("users").child().setValue(editPw);
+                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                    Toast.makeText(RegisterActivity.this, editName.getText().toString() + "님 회원가입되었습니다", Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
+                                }
                             }
                         }
-                    });
+                    }
                 }
-            }
-        });
-
+                });
         try {
-            Log.i("tag", "피카소 들어옴");
+            Log.i("tag","피카소 들어옴");
             Picasso.with(this)
                     .load(R.drawable.back_icon2)
                     .placeholder(R.drawable.back_icon2)
                     .error(R.drawable.back_icon2)
-                    .resize(50, 70)
+                    .resize(50,70)
                     .into(backimg);
             Picasso.with(this)
                     .load(R.drawable.signup_btn)
                     .placeholder(R.drawable.signup_btn)
                     .error(R.drawable.signup_btn)
-                    .resize(860, 150)
+                    .resize(860,150)
                     .into(check);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private void sendToMain() {
-        Intent mainIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-        startActivity(mainIntent);
-        finish();
+
+
+    private void writeNewUser(String userId, String pw, String name) {
+        User user = new User(userId, pw, name);
+
+        mDatabase.child("users").child(userId).setValue(user);
     }
-}
+
+    }
