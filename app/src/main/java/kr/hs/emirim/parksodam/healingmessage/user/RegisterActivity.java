@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import kr.hs.emirim.parksodam.healingmessage.BarActivity;
 import kr.hs.emirim.parksodam.healingmessage.R;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -115,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
     private void sendToMain() {
-        Intent mainIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+        Intent mainIntent = new Intent(RegisterActivity.this, BarActivity.class);
         startActivity(mainIntent);
         finish();
     }

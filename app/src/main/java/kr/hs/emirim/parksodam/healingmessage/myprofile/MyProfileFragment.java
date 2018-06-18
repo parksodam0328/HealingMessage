@@ -13,12 +13,16 @@ package kr.hs.emirim.parksodam.healingmessage.myprofile;
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import com.bumptech.glide.Glide;
+        import com.google.android.gms.tasks.OnSuccessListener;
         import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.database.ChildEventListener;
         import com.google.firebase.database.DataSnapshot;
         import com.google.firebase.database.DatabaseError;
         import com.google.firebase.database.DatabaseReference;
         import com.google.firebase.database.FirebaseDatabase;
+        import com.google.firebase.firestore.DocumentSnapshot;
+        import com.google.firebase.firestore.FirebaseFirestore;
         import com.squareup.picasso.Picasso;
 
         import kr.hs.emirim.parksodam.healingmessage.BarActivity;
@@ -41,8 +45,8 @@ public class MyProfileFragment extends BaseFragment {
     private ImageView profile;
     private TextView prof_name;
     private TextView prof_feel;
-    private DatabaseReference databaseReference1;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
     private String id;
     private String name;
     private int count = 0;
@@ -56,7 +60,7 @@ public class MyProfileFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_my_profile, container, false);
-        Bundle bundle = getActivity().getIntent().getExtras(); // 액티비티에서 넘어오는 값 받기
+        //Bundle bundle = getActivity().getIntent().getExtras(); // 액티비티에서 넘어오는 값 받기
         /*fortune_cookie = (ImageView)  view.findViewById(R.id.fortune_cookie);
         setting = (ImageView)  view.findViewById(R.id.setting);
         howto = (ImageView)  view.findViewById(R.id.howto);*/
@@ -106,69 +110,35 @@ public class MyProfileFragment extends BaseFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+        prof_name = (TextView)view.findViewById(R.id.prof_name);
+        prof_feel = (TextView)view.findViewById(R.id.prof_feel);
 
-        if (bundle != null) {
-            id = bundle.getString("userId");
-            Log.e("여기는 프로필id입니다....",id);
+        id = mAuth.getCurrentUser().getUid();
+        mFirestore.collection("Users").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
 
-            databaseReference1 = FirebaseDatabase.getInstance().getReference("users/" + id);
+                String user_name = documentSnapshot.getString("name");
+                String feel = documentSnapshot.getString("feel");
 
-            prof_name = (TextView)view.findViewById(R.id.prof_name);
-            prof_feel = (TextView)view.findViewById(R.id.prof_feel);
+                prof_name.setText(user_name);
+                prof_feel.setText(feel);
 
-
-            databaseReference1 = FirebaseDatabase.getInstance().getReference("users/" + id);
-
-            prof_name = (TextView)view.findViewById(R.id.prof_name);
-            prof_feel = (TextView)view.findViewById(R.id.prof_feel);
-
-
-            databaseReference1.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    if(dataSnapshot.getKey().equals("name")){
-                        prof_name.setText(dataSnapshot.getValue().toString());
-                        Log.e("프로필에 닉네임이 들어갑니당", dataSnapshot.getValue().toString());
-                    }
-
-                    if(dataSnapshot.getKey().equals("feel")){
-                        prof_feel.setText(dataSnapshot.getValue().toString());
-                        Log.e("프로필에 감정!", dataSnapshot.getValue().toString());
-                    }
-                    // Log.e("jhi", "Value is: ");
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
+            }
+        });
 
 
-            count = 1;
+        count = 1;
 
-            //포춘쿠키 커스텀 다이얼로그 띄우기
-            fortune_img.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //커스텀 다이얼로그를 생성,
-                  CustomDialog customDialog = new CustomDialog(getActivity());
-                    customDialog.callDialog();
+        //포춘쿠키 커스텀 다이얼로그 띄우기
+        fortune_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //커스텀 다이얼로그를 생성,
+                CustomDialog customDialog = new CustomDialog(getActivity());
+                customDialog.callDialog();
                  /*   //한번만 호출가능
                 if(count == 1) {
                     //커스텀 다이얼로그 호출,
@@ -177,52 +147,35 @@ public class MyProfileFragment extends BaseFragment {
                 }else if(count == 0){
                     Toast.makeText(getContext(), "오늘의 포춘쿠키를 확인하셨습니다!", Toast.LENGTH_SHORT).show();
                 }*/
-                }
-            });
+            }
+        });
 
-            //정보설정 커스텀 다이얼로그 띄우기
-            setting_img.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //커스텀 다이얼로그를 생성,
-                    CustomDialog_setting customDialog_setting = new CustomDialog_setting(getActivity());
-                    customDialog_setting.callDialog(id);
+        //정보설정 커스텀 다이얼로그 띄우기
+        setting_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //커스텀 다이얼로그를 생성,
+                CustomDialog_setting customDialog_setting = new CustomDialog_setting(getActivity());
+                customDialog_setting.callDialog();
 
-                }
-            });
+            }
+        });
 
-            logout_img.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //커스텀 다이얼로그를 생성,
-                    CustomDialog_logout customDialog_logout = new CustomDialog_logout(getActivity());
-                    customDialog_logout.callDialog();
+        logout_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //커스텀 다이얼로그를 생성,
+                CustomDialog_logout customDialog_logout = new CustomDialog_logout(getActivity());
+                customDialog_logout.callDialog();
 
-                }
-            });
-
-    } else Log.e("sorry"," null");
+            }
+        });
         return view;
     }
-
-    /*@Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof OnMyListener){
-            onMyListener = (OnMyListener) context;
-        }else throw new RuntimeException(context+" must implements OnMyListenter");
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        onMyListener=null;
-    }*/
 
     @Override
     public String getTitle() {
         return "내정보";
     }
-
 }
+

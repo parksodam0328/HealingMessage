@@ -35,32 +35,24 @@ public class BarActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
         if(currentUser == null){
-
             sendToLogin();
-
         }
-
     }
-
     private void sendToLogin() {
         Intent loginIntent = new Intent(BarActivity.this, LoginActivity.class);
         startActivity(loginIntent);
         finish();
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar);
         //툴바 설정
         //FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager());
-
+        mAuth = FirebaseAuth.getInstance();
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         mSearch = (ImageView)findViewById(R.id.search);
 

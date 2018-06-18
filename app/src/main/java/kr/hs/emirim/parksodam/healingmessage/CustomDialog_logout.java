@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -13,9 +14,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import kr.hs.emirim.parksodam.healingmessage.user.LoginActivity;
 
@@ -26,8 +33,6 @@ import kr.hs.emirim.parksodam.healingmessage.user.LoginActivity;
 public class CustomDialog_logout {
 
     private Context context;
-    DatabaseReference databaseReference;
-
 
     public CustomDialog_logout(Context context){
         this.context = context;
@@ -53,18 +58,24 @@ public class CustomDialog_logout {
         final Button cancelBtn = (Button) dlg.findViewById(R.id.cancelBtn);
 
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        
+        final FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        final String mUserId = mAuth.getCurrentUser().getUid();
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    mAuth.signOut();
-                    Toast.makeText(context, "로그아웃했습니다!", Toast.LENGTH_SHORT).show();
-                    int pid = android.os.Process.myPid();
-                    android.os.Process.killProcess(pid);
-                } catch (Exception e) {
-                    Log.e("hoho", "onClick: Exception " + e.getMessage(), e);
-                }
+                Map<String, Object> tokenMapRemove = new HashMap<>();
+                tokenMapRemove.put("token_id", FieldValue.delete());
+
+                mFirestore.collection("Users").document(mUserId).update(tokenMapRemove).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        mAuth.signOut();
+                        dlg.dismiss();
+                        Intent loginIntent = new Intent(context.getApplicationContext(),LoginActivity.class);
+                        context.getApplicationContext().startActivity(loginIntent);
+
+                    }
+                });
             }
         });
 

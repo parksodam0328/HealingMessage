@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,16 +34,20 @@ import java.util.regex.Pattern;
 public class CustomDialog_setting {
 
     private Context context;
-    DatabaseReference databaseReference;
+    private FirebaseFirestore mFirestore;
+    private FirebaseAuth mAuth;
 
 
-    public CustomDialog_setting(Context context){
+    public CustomDialog_setting(Context context) {
         this.context = context;
     }
 
     //호출할 다이얼로그 함수를 정의
-    public void callDialog(final String id){
-        Log.e("idididididi", id);
+    public void callDialog() {
+        mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+
+        final String id = mAuth.getUid();
         //커스텀 다이얼로그의 정의하기 위해 Dialog 클래스를 생성
         final Dialog dlg = new Dialog(context);
 
@@ -56,14 +61,14 @@ public class CustomDialog_setting {
         dlg.show();
 
         //커스텀 다이얼로그의 각 위젯들을 정의
-        final TextView message = (TextView)dlg.findViewById(R.id.exp);
-        final EditText update_nick = (EditText)dlg.findViewById(R.id.update_nick);
-        final EditText update_pw = (EditText)dlg.findViewById(R.id.update_pw);
-        final ImageButton happy = (ImageButton)dlg.findViewById(R.id.emo_btn1);
-        final ImageButton sad = (ImageButton)dlg.findViewById(R.id.emo_btn2);
-        final ImageButton shyness = (ImageButton)dlg.findViewById(R.id.emo_btn3);
-        final ImageButton angry = (ImageButton)dlg.findViewById(R.id.emo_btn4);
-        final TextView ch_emo = (TextView)dlg.findViewById(R.id.ch_emo);
+        final TextView message = (TextView) dlg.findViewById(R.id.exp);
+        final EditText update_nick = (EditText) dlg.findViewById(R.id.update_nick);
+        final EditText update_pw = (EditText) dlg.findViewById(R.id.update_pw);
+        final ImageButton happy = (ImageButton) dlg.findViewById(R.id.emo_btn1);
+        final ImageButton sad = (ImageButton) dlg.findViewById(R.id.emo_btn2);
+        final ImageButton shyness = (ImageButton) dlg.findViewById(R.id.emo_btn3);
+        final ImageButton angry = (ImageButton) dlg.findViewById(R.id.emo_btn4);
+        final TextView ch_emo = (TextView) dlg.findViewById(R.id.ch_emo);
         final Button sendBtn = (Button) dlg.findViewById(R.id.sendBtn);
         final Button cancelBtn = (Button) dlg.findViewById(R.id.cancelBtn);
 
@@ -92,23 +97,22 @@ public class CustomDialog_setting {
             }
         });
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("users/");
+
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if(update_nick.getText().toString().equals("") || update_pw.getText().toString().equals("") || ch_emo.getText().toString().equals("")){
-                Toast.makeText(context, "변경할 정보를 입력해주세요!", Toast.LENGTH_SHORT).show();
-            }else{
-                Map<String, Object> taskMap = new HashMap<String, Object>();
-                        taskMap.put("name", update_nick.getText().toString());
-                        taskMap.put("pw", update_pw.getText().toString());
-                        taskMap.put("feel", ch_emo.getText().toString());
-                        Log.e("dddddd", id);
-                        databaseReference.child(id).updateChildren(taskMap);
-                        Toast.makeText(context, "정보를 변경했습니다", Toast.LENGTH_SHORT).show();
-                        dlg.dismiss();
-                    }
+                if (update_nick.getText().toString().equals("") || update_pw.getText().toString().equals("") || ch_emo.getText().toString().equals("")) {
+                    Toast.makeText(context, "변경할 정보를 입력해주세요!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Map<String, Object> taskMap = new HashMap<String, Object>();
+                    taskMap.put("name", update_nick.getText().toString());
+                    taskMap.put("pw", update_pw.getText().toString());
+                    taskMap.put("feel", ch_emo.getText().toString());
+                    mFirestore.collection("Users").document(id).update(taskMap);
+                    Toast.makeText(context, "정보를 변경했습니다", Toast.LENGTH_SHORT).show();
+                    dlg.dismiss();
                 }
+            }
         });
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
