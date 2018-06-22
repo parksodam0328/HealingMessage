@@ -2,9 +2,6 @@ package kr.hs.emirim.parksodam.healingmessage;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -14,17 +11,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * Created by Mirim on 2018-06-13.
@@ -34,6 +28,7 @@ public class CustomDialog_setting {
 
     private Context context;
     DatabaseReference databaseReference;
+    DatabaseReference databaseReference1;
 
 
     public CustomDialog_setting(Context context){
@@ -91,8 +86,44 @@ public class CustomDialog_setting {
                 ch_emo.setText("shyness");
             }
         });
-
         databaseReference = FirebaseDatabase.getInstance().getReference("users/");
+        databaseReference1 = FirebaseDatabase.getInstance().getReference("users/"+id);
+        databaseReference1.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if (dataSnapshot.getKey().equals("name")) {
+                    update_nick.setText(dataSnapshot.getValue().toString());
+                    Log.e("프로필에 닉네임이 들어갑니당", dataSnapshot.getValue().toString());
+                }
+
+                if (dataSnapshot.getKey().equals("pw")) {
+                    update_pw.setText(dataSnapshot.getValue().toString());
+                    Log.e("프로필에 감정!", dataSnapshot.getValue().toString());
+                }
+                // Log.e("jhi", "Value is: ");
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

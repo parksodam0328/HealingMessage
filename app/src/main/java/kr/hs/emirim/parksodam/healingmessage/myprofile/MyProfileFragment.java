@@ -1,43 +1,34 @@
 package kr.hs.emirim.parksodam.healingmessage.myprofile;
 
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.graphics.drawable.ShapeDrawable;
-        import android.graphics.drawable.shapes.OvalShape;
-        import android.os.Build;
         import android.os.Bundle;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ImageView;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.database.ChildEventListener;
-        import com.google.firebase.database.DataSnapshot;
-        import com.google.firebase.database.DatabaseError;
-        import com.google.firebase.database.DatabaseReference;
-        import com.google.firebase.database.FirebaseDatabase;
-        import com.squareup.picasso.Picasso;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
-        import kr.hs.emirim.parksodam.healingmessage.BarActivity;
-        import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
-        import kr.hs.emirim.parksodam.healingmessage.CustomDialog;
-        import kr.hs.emirim.parksodam.healingmessage.CustomDialog_logout;
-        import kr.hs.emirim.parksodam.healingmessage.CustomDialog_setting;
-        import kr.hs.emirim.parksodam.healingmessage.R;
-        import kr.hs.emirim.parksodam.healingmessage.message.*;
+import kr.hs.emirim.parksodam.healingmessage.BaseFragment;
+import kr.hs.emirim.parksodam.healingmessage.CustomDialog;
+import kr.hs.emirim.parksodam.healingmessage.CustomDialog_logout;
+import kr.hs.emirim.parksodam.healingmessage.CustomDialog_setting;
+import kr.hs.emirim.parksodam.healingmessage.R;
 
-        import static kr.hs.emirim.parksodam.healingmessage.R.drawable.pro_img;
+import static kr.hs.emirim.parksodam.healingmessage.R.drawable.pro_img;
 
 
 
 public class MyProfileFragment extends BaseFragment {
     private View view;
     private ImageView fortune_img;
-    private ImageView send_message_img;
     private ImageView setting_img;
     private ImageView logout_img;
     private ImageView profile;
@@ -64,7 +55,6 @@ public class MyProfileFragment extends BaseFragment {
         howto = (ImageView)  view.findViewById(R.id.howto);*/
 
         fortune_img = (ImageView) view.findViewById(R.id.fortune);
-        send_message_img = (ImageView) view.findViewById(R.id.message);
         setting_img = (ImageView) view.findViewById(R.id.profile);
         logout_img = (ImageView) view.findViewById(R.id.logout);
         profile = (ImageView) view.findViewById(R.id.profile_image);
@@ -84,13 +74,6 @@ public class MyProfileFragment extends BaseFragment {
                     .resize(900, 150)
                     .centerCrop()
                     .into(fortune_img);
-            Picasso.with(getActivity())
-                    .load(R.drawable.message)
-                    .placeholder(R.drawable.message)
-                    .error(R.drawable.message)
-                    .resize(900, 150)
-                    .centerCrop()
-                    .into(send_message_img);
             Picasso.with(getActivity())
                     .load(R.drawable.profile)
                     .placeholder(R.drawable.profile)
