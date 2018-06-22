@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/send_back"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@android:color/white"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="#666666"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabTextAppearance="@style/CustomTabWidgetText"
+            android:layout_alignParentBottom="true">
+
+
+            <ImageView
+                android:id="@+id/back_icon"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="left"
+                app:srcCompat="@drawable/back_icon"
+                android:layout_width="30dp"
+                android:layout_height="28dp" />
+            <ImageView
+                android:id="@+id/search"
+                android:layout_marginLeft="12dp"
+                android:layout_gravity="left"
+                app:srcCompat="@drawable/send_message"
+                android:layout_width="150dp"
+                android:layout_height="60dp" />
+
+        </android.support.v7.widget.Toolbar>
+
+
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="받는 사람"
+        android:textSize="7pt"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="65dp"
+        android:layout_marginLeft="55dp"
+        android:textColor="#ffffff"
+        android:ems="10"
+        android:id="@+id/receive_id"
+        android:focusableInTouchMode="false"
+        />
+
+    <EditText
+        android:inputType="textMultiLine"
+        android:scrollHorizontally="false"
+        android:hint="작은 응원 한 마디로 큰 힘이 되어주세요!"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="35dp"
+        android:maxWidth="30dp"
+        android:textSize="8pt"
+        android:ems="10"
+        android:id="@+id/input_message"
+        android:layout_weight="0.58"
+        android:layout_height="130dp"
+        android:layout_width="295dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="8dp">
+
+        <EditText
+            android:hint="보내는 사람"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="210dp"
+            android:textColor="#ffffffff"
+            android:background="@android:color/transparent"
+            android:textSize="7pt"
+            android:id="@+id/send_id" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="264dp"
+        android:layout_height="26dp"
+        app:srcCompat="@drawable/write_btn"
+        android:id="@+id/write_btn"
+        android:layout_gravity="center"
+        android:layout_weight="0.18" />
+
+
+</LinearLayout>
