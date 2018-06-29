@@ -1,17 +1,13 @@
 package kr.hs.emirim.parksodam.healingmessage.adapter;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +15,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import kr.hs.emirim.parksodam.healingmessage.CustomDialog_sendM;
 import kr.hs.emirim.parksodam.healingmessage.R;
 import kr.hs.emirim.parksodam.healingmessage.WriteMessageActivity;
 import kr.hs.emirim.parksodam.healingmessage.search.SearchItem;
@@ -78,13 +73,7 @@ public class HomeAdapter extends BaseAdapter {
                     .resize(300, 120)
                     .centerCrop()
                     .into(button1);
-            Picasso.with(context)
-                    .load(R.drawable.pro_img)
-                    .placeholder(R.drawable.pro_img)
-                    .error(R.drawable.pro_img)
-                    .resize(210, 200)
-                    .centerCrop()
-                    .into(pro_img);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -9,12 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 import kr.hs.emirim.parksodam.healingmessage.R;
-import kr.hs.emirim.parksodam.healingmessage.message.MessageItem;
 import kr.hs.emirim.parksodam.healingmessage.message.R_User;
 
 /**
@@ -60,17 +57,7 @@ public class MessageAdapter extends BaseAdapter {
         ImageView pro_img = (ImageView)convertView.findViewById(R.id.list_image);
         msName.setText(messageItem.name);
         msContents.setText(messageItem.context);
-        try {
-            Picasso.with(context)
-                    .load(R.drawable.pro_img)
-                    .placeholder(R.drawable.pro_img)
-                    .error(R.drawable.pro_img)
-                    .resize(260, 250)
-                    .centerCrop()
-                    .into(pro_img);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
         return convertView;
     }

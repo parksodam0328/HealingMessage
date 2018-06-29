@@ -13,9 +13,10 @@
     <ListView
         android:id="@+id/m_listView"
         android:layout_width="match_parent"
-        android:layout_height="458dp"
         android:divider="#E6E6E6"
-        android:dividerHeight="1dp"/>
+        android:dividerHeight="1dp"
+        android:layout_height="560dp">
+    </ListView>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/search_tab"

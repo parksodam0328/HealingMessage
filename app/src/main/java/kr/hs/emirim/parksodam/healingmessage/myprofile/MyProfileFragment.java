@@ -22,8 +22,6 @@ import kr.hs.emirim.parksodam.healingmessage.CustomDialog_logout;
 import kr.hs.emirim.parksodam.healingmessage.CustomDialog_setting;
 import kr.hs.emirim.parksodam.healingmessage.R;
 
-import static kr.hs.emirim.parksodam.healingmessage.R.drawable.pro_img;
-
 
 
 public class MyProfileFragment extends BaseFragment {
@@ -31,7 +29,6 @@ public class MyProfileFragment extends BaseFragment {
     private ImageView fortune_img;
     private ImageView setting_img;
     private ImageView logout_img;
-    private ImageView profile;
     private TextView prof_name;
     private TextView prof_feel;
     private DatabaseReference databaseReference1;
@@ -57,16 +54,8 @@ public class MyProfileFragment extends BaseFragment {
         fortune_img = (ImageView) view.findViewById(R.id.fortune);
         setting_img = (ImageView) view.findViewById(R.id.profile);
         logout_img = (ImageView) view.findViewById(R.id.logout);
-        profile = (ImageView) view.findViewById(R.id.profile_image);
-
         try {
-            Picasso.with(getActivity())
-                    .load(pro_img)
-                    .placeholder(pro_img)
-                    .error(pro_img)
-                    .resize(410, 400)
-                    .centerCrop()
-                    .into(profile);
+
             Picasso.with(getActivity())
                     .load(R.drawable.fortune)
                     .placeholder(R.drawable.fortune)

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,6 @@ public class HomeFragment extends BaseFragment {
         sliderView = (SliderView) view.findViewById(R.id.sliderView);
         mLinearLayout = (LinearLayout) view.findViewById(R.id.pagesContainer);
         setupSlider();
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("users");
         mAuth = FirebaseAuth.getInstance();
@@ -112,7 +110,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void setupSlider() {
-        sliderView.setDurationScroll(900);
+        sliderView.setDurationScroll(800);
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(FragmentSlider.newInstance(R.drawable.s1));
         fragments.add(FragmentSlider.newInstance(R.drawable.s2));
@@ -126,8 +124,6 @@ public class HomeFragment extends BaseFragment {
         mIndicator.setPageCount(fragments.size());
         mIndicator.show();
     }
-
-
     @Override
     public String getTitle() {
         return "홈";
